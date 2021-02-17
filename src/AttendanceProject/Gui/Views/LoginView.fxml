@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.LoginViewController">
+   <children>
+      <JFXTextField fx:id="username" alignment="CENTER" focusColor="#4390ff" layoutX="26.0" layoutY="134.0" prefHeight="47.0" prefWidth="289.0" promptText="Username">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="password" alignment="CENTER" focusColor="#4390ff" layoutX="26.0" layoutY="218.0" prefHeight="47.0" prefWidth="289.0" promptText="Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXButton fx:id="login" layoutX="136.0" layoutY="313.0" onAction="#LoginAction" style="-fx-background-color: #4390FF;" text="Login" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="84.0" layoutY="57.0" text="Attendance" textFill="#4390ff">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
