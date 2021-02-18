@@ -25,17 +25,31 @@ public class LoginViewController{
     public void LoginAction(javafx.event.ActionEvent actionEvent) throws Exception {
         String user = username.getText();
         String pass = password.getText();
-        if (user.equals("admin") && pass.equals("password")) {
-            Homepage();
+        if (user.equals("student") && pass.equals("password")) {
+            HomepageStudent();
+        } else
+            System.out.println("Not Poggers");
+
+        if (user.equals("teacher") && pass.equals("password")) {
+            HomepageTeacher();
         } else
             System.out.println("Not Poggers");
     }
 
 
 
-    public void Homepage() throws Exception {
+    public void HomepageStudent() throws Exception {
         Stage HomepageViewStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/AttendanceProject/Gui/Views/HomepageView.FXML"));
+        Parent root = FXMLLoader.load(getClass().getResource("/AttendanceProject/Gui/Views/StudentHomepageView.fxml"));
+        HomepageViewStage.setTitle("Attendance Checker");
+        HomepageViewStage.setScene(new Scene(root));
+        HomepageViewStage.setResizable(false);
+        HomepageViewStage.show();
+    }
+
+    public void HomepageTeacher() throws Exception {
+        Stage HomepageViewStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/AttendanceProject/Gui/Views/TeacherHomepageView.fxml"));
         HomepageViewStage.setTitle("Attendance Checker");
         HomepageViewStage.setScene(new Scene(root));
         HomepageViewStage.setResizable(false);

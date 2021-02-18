@@ -1,4 +1,4 @@
 package AttendanceProject.Gui.Controllers;
 
-public class HomepageViewController {
+public class TeacherHomepageViewController {
 }
