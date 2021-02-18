@@ -2,9 +2,14 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.StudentHomepageViewController">
    <children>
-      <Label layoutX="149.0" layoutY="27.0" text="Student" />
+      <Label layoutX="111.0" layoutY="14.0" text="Student" textFill="#4390ff">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

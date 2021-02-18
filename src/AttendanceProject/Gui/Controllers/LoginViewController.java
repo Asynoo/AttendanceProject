@@ -1,6 +1,5 @@
 package AttendanceProject.Gui.Controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -19,10 +18,7 @@ public class LoginViewController{
     private JFXPasswordField password;
 
     @FXML
-    private JFXButton login;
-
-    @FXML
-    public void LoginAction(javafx.event.ActionEvent actionEvent) throws Exception {
+    public void LoginAction() throws Exception {
         String user = username.getText();
         String pass = password.getText();
         if (user.equals("student") && pass.equals("password")) {
