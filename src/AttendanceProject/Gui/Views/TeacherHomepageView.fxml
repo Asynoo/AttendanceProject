@@ -1,16 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="500.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.TeacherHomepageViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="564.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="111.0" layoutY="14.0" text="Teacher" textFill="#4390ff">
-         <font>
-            <Font size="34.0" />
-         </font>
-      </Label>
+      <BorderPane prefHeight="32.0" prefWidth="600.0">
+         <top>
+            <Label alignment="TOP_CENTER" text="Teacher name" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Apple Braille Outline 6 Dot" size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </top>
+      </BorderPane>
+      <HBox prefHeight="360.0" prefWidth="600.0">
+         <opaqueInsets>
+            <Insets top="30.0" />
+         </opaqueInsets>
+         <children>
+            <VBox prefHeight="360.0" prefWidth="223.0">
+               <children>
+                  <JFXButton buttonType="RAISED" minWidth="120.0" style="-fx-background-color: #E6E6FA#E6E6FA;" text="Class attendance">
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" minWidth="120.0" style="-fx-background-color: #E6E6FA#E6E6FA;" text="Summary">
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" minWidth="120.0" ripplerFill="WHITE" style="-fx-background-color: #E6E6FA#E6E6FA;" text="Student">
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets top="30.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="330.0" prefWidth="342.0">
+               <children>
+                  <BorderPane prefHeight="37.0" prefWidth="378.0">
+                     <top>
+                        <Label text="Class summary" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                     </top>
+                  </BorderPane>
+                  <ScrollPane prefHeight="260.0" prefWidth="364.0">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                     <content>
+                        <TilePane prefColumns="3" prefHeight="242.0" prefRows="10" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="331.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../Desktop/facetry.png" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets left="16.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="117.0" text="Name Surname">
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </TilePane>
+                     </content>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </ScrollPane>
+               </children>
+               <HBox.margin>
+                  <Insets top="30.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>
