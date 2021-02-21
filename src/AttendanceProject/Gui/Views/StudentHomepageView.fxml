@@ -17,7 +17,7 @@
 
 <BorderPane prefHeight="361.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.StudentHomepageViewController">
    <top>
-      <Label alignment="CENTER" text="student_name" textAlignment="CENTER" textFill="#4390ff" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" text="Danylo Boshagora" textAlignment="CENTER" textFill="#4390ff" BorderPane.alignment="CENTER">
          <font>
             <Font size="34.0" />
          </font>
@@ -28,9 +28,9 @@
          <children>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="89.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="statusBtn" onAction="#showStatus" prefHeight="49.0" prefWidth="150.0" ripplerFill="WHITE" text="Today's status">
+                  <JFXButton fx:id="statusBtn" buttonType="RAISED" onAction="#showStatus" prefHeight="49.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="Todays Status" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                      </font>
                   </JFXButton>
                   <ImageView fx:id="statusIcon" fitHeight="40.0" fitWidth="48.0" preserveRatio="true">
@@ -45,9 +45,9 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="statisticsBtn" onAction="#showStatistics" prefHeight="49.0" prefWidth="150.0" ripplerFill="WHITE" text="Statistics">
+                  <JFXButton fx:id="statisticsBtn" buttonType="RAISED" onAction="#showStatistics" prefHeight="49.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="Statistics" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                      </font>
                   </JFXButton>
                   <ImageView fx:id="statisticsIcon" fitHeight="40.0" fitWidth="47.0" preserveRatio="true">
@@ -62,12 +62,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="168.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="historyBtn" onAction="#showHistory" prefHeight="50.0" prefWidth="150.0" ripplerFill="WHITE" text="History">
+                  <JFXButton fx:id="historyBtn" buttonType="RAISED" onAction="#showHistory" prefHeight="50.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="History" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                      </font>
                   </JFXButton>
-                  <ImageView fx:id="historyIcon" fitHeight="40.0" fitWidth="54.0" preserveRatio="true">
+                  <ImageView fx:id="historyIcon" fitHeight="40.0" fitWidth="54.0" preserveRatio="true" style="-fx-image: #4390ff;">
                      <image>
                         <Image url="@assets/icons/history.png" />
                      </image>
@@ -165,9 +165,9 @@
                   </JFXButton>
                </left>
                <center>
-                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="282.0" text="day,week,month" BorderPane.alignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="282.0" text="Calendar Overview" textFill="#4390ff" BorderPane.alignment="CENTER">
                      <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
                </center>
