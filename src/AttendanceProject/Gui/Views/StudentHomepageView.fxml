@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane prefHeight="554.0" prefWidth="734.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.StudentHomepageViewController">
+<BorderPane prefHeight="361.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.StudentHomepageViewController">
    <top>
       <Label alignment="CENTER" text="student_name" textAlignment="CENTER" textFill="#4390ff" BorderPane.alignment="CENTER">
          <font>
@@ -25,16 +24,16 @@
       </Label>
    </top>
    <left>
-      <VBox prefHeight="471.0" prefWidth="203.0" spacing="50.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="471.0" prefWidth="203.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="89.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="statusBtn" prefHeight="49.0" prefWidth="150.0" ripplerFill="WHITE" text="Today's status">
+                  <JFXButton fx:id="statusBtn" onAction="#showStatus" prefHeight="49.0" prefWidth="150.0" ripplerFill="WHITE" text="Today's status">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </JFXButton>
-                  <ImageView fitHeight="40.0" fitWidth="48.0" preserveRatio="true">
+                  <ImageView fx:id="statusIcon" fitHeight="40.0" fitWidth="48.0" preserveRatio="true">
                      <image>
                         <Image url="@assets/icons/undefined.png" />
                      </image>
@@ -46,12 +45,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="statisticsBtn" prefHeight="49.0" prefWidth="150.0" ripplerFill="WHITE" text="Statistics">
+                  <JFXButton fx:id="statisticsBtn" onAction="#showStatistics" prefHeight="49.0" prefWidth="150.0" ripplerFill="WHITE" text="Statistics">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </JFXButton>
-                  <ImageView fitHeight="40.0" fitWidth="47.0" preserveRatio="true">
+                  <ImageView fx:id="statisticsIcon" fitHeight="40.0" fitWidth="47.0" preserveRatio="true">
                      <image>
                         <Image url="@assets/icons/statistics.png" />
                      </image>
@@ -63,12 +62,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="168.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="historyBtn1" prefHeight="50.0" prefWidth="150.0" ripplerFill="WHITE" text="History">
+                  <JFXButton fx:id="historyBtn" onAction="#showHistory" prefHeight="50.0" prefWidth="150.0" ripplerFill="WHITE" text="History">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </JFXButton>
-                  <ImageView fx:id="historyIcon1" fitHeight="40.0" fitWidth="54.0" preserveRatio="true">
+                  <ImageView fx:id="historyIcon" fitHeight="40.0" fitWidth="54.0" preserveRatio="true">
                      <image>
                         <Image url="@assets/icons/history.png" />
                      </image>
@@ -76,6 +75,9 @@
                </children>
             </HBox>
          </children>
+         <padding>
+            <Insets bottom="100.0" top="30.0" />
+         </padding>
       </VBox>
    </left>
    <padding>
@@ -84,7 +86,7 @@
    <center>
       <StackPane fx:id="stackPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane>
+            <BorderPane fx:id="calendarPane" visible="false">
                <bottom>
                   <GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="333.0" prefWidth="152.0" BorderPane.alignment="CENTER">
                     <columnConstraints>
@@ -170,12 +172,12 @@
                   </Label>
                </center>
             </BorderPane>
-            <HBox prefHeight="100.0" prefWidth="200.0" visible="false">
+            <HBox fx:id="chartPane" prefHeight="100.0" prefWidth="200.0" visible="false">
                <children>
                   <PieChart prefHeight="280.0" prefWidth="267.0" />
                </children>
             </HBox>
-            <HBox fx:id="statusBox" alignment="CENTER" focusTraversable="true" prefHeight="100.0" prefWidth="200.0" spacing="30.0" visible="false">
+            <HBox fx:id="statusPane" alignment="CENTER" focusTraversable="true" prefHeight="100.0" prefWidth="200.0" spacing="30.0" visible="false">
                <children>
                   <ImageView fitHeight="110.0" fitWidth="128.0" preserveRatio="true">
                      <image>
