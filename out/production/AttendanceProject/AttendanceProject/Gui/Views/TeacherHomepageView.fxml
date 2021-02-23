@@ -5,6 +5,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
@@ -14,39 +16,90 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.TeacherHomepageViewController">
    <children>
       <BorderPane prefHeight="32.0" prefWidth="600.0">
-         <top>
-            <Label alignment="TOP_CENTER" text="Teacher name" textFill="#4390ff" BorderPane.alignment="CENTER">
+         <bottom>
+            <Label alignment="TOP_CENTER" text="Jeppe Moritz Led" textFill="#4390ff" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="Apple Braille Outline 6 Dot" size="30.0" />
+                  <Font size="34.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-         </top>
+         </bottom>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
       </BorderPane>
       <HBox prefHeight="360.0" prefWidth="600.0">
          <opaqueInsets>
             <Insets top="30.0" />
          </opaqueInsets>
          <children>
-            <VBox prefHeight="360.0" prefWidth="223.0">
+            <VBox prefHeight="330.0" prefWidth="236.0">
                <children>
-                  <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showClassAttendance" style="-fx-background-color: #4390ff;" text="Class attendance" textFill="WHITE">
+                  <HBox>
                      <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
+                        <Insets left="20.0" top="60.0" />
                      </VBox.margin>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" minWidth="120.0" style="-fx-background-color: #4390ff;" text="Summary" textFill="WHITE">
+                     <children>
+                        <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showClassAttendance" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #4390ff;" text="Class attendance" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fx:id="statusIcon" fitHeight="40.0" fitWidth="48.0" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/icons/undefined.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox>
                      <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
+                        <Insets left="20.0" top="60.0" />
                      </VBox.margin>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" minWidth="120.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="Student" textFill="WHITE">
+                     <children>
+                        <JFXButton buttonType="RAISED" minWidth="120.0" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #4390ff;" text="Summary" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fx:id="statisticsIcon" fitHeight="40.0" fitWidth="47.0" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/icons/statistics.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox>
                      <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
+                        <Insets left="20.0" top="60.0" />
                      </VBox.margin>
-                  </JFXButton>
+                     <children>
+                        <JFXButton buttonType="RAISED" minWidth="120.0" prefHeight="40.0" prefWidth="160.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="Student" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fx:id="historyIcon" fitHeight="40.0" fitWidth="54.0" preserveRatio="true" style="-fx-image: #4390ff;">
+                           <image>
+                              <Image url="@assets/icons/history.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="1.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -57,29 +110,35 @@
             </VBox>
             <VBox prefHeight="335.0" prefWidth="395.0">
                <children>
-                  <BorderPane prefHeight="37.0" prefWidth="378.0">
-                     <top>
+                  <BorderPane prefHeight="60.0" prefWidth="382.0">
+                     <center>
                         <Label text="Class summary" textFill="#4390ff" BorderPane.alignment="CENTER">
                            <font>
-                              <Font size="25.0" />
+                              <Font size="18.0" />
                            </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <BorderPane.margin>
+                              <Insets top="33.0" />
+                           </BorderPane.margin>
                         </Label>
-                     </top>
+                     </center>
                   </BorderPane>
                   <ScrollPane prefHeight="321.0" prefWidth="369.0">
                      <VBox.margin>
-                        <Insets top="40.0" />
+                        <Insets top="5.0" />
                      </VBox.margin>
                      <content>
-                        <TilePane fx:id="classSummary" prefColumns="0" prefHeight="242.0" prefRows="0" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="331.0" visible="false" />
+                        <TilePane fx:id="classSummary" prefColumns="0" prefHeight="267.0" prefRows="0" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="370.0" visible="false">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding></TilePane>
                      </content>
-                     <padding>
-                        <Insets right="20.0" />
-                     </padding>
                   </ScrollPane>
                </children>
                <HBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="25.0" />
                </HBox.margin>
                <padding>
                   <Insets right="10.0" />
