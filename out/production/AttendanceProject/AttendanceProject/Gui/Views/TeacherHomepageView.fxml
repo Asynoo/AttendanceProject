@@ -5,15 +5,13 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="564.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.TeacherHomepageViewController">
    <children>
       <BorderPane prefHeight="32.0" prefWidth="600.0">
          <top>
@@ -34,7 +32,7 @@
          <children>
             <VBox prefHeight="360.0" prefWidth="223.0">
                <children>
-                  <JFXButton buttonType="RAISED" minWidth="120.0" style="-fx-background-color: #4390ff;" text="Class attendance" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showClassAttendance" style="-fx-background-color: #4390ff;" text="Class attendance" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </VBox.margin>
@@ -57,7 +55,7 @@
                   <Insets top="30.0" />
                </HBox.margin>
             </VBox>
-            <VBox prefHeight="330.0" prefWidth="342.0">
+            <VBox prefHeight="335.0" prefWidth="395.0">
                <children>
                   <BorderPane prefHeight="37.0" prefWidth="378.0">
                      <top>
@@ -68,32 +66,12 @@
                         </Label>
                      </top>
                   </BorderPane>
-                  <ScrollPane prefHeight="260.0" prefWidth="364.0">
+                  <ScrollPane prefHeight="321.0" prefWidth="369.0">
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>
                      <content>
-                        <TilePane prefColumns="3" prefHeight="242.0" prefRows="10" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="331.0">
-                           <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../../../../Desktop/facetry.png" />
-                                       </image>
-                                       <VBox.margin>
-                                          <Insets left="16.0" />
-                                       </VBox.margin>
-                                    </ImageView>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="117.0" text="Name Surname">
-                                       <VBox.margin>
-                                          <Insets top="7.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </TilePane>
+                        <TilePane fx:id="classSummary" prefColumns="0" prefHeight="242.0" prefRows="0" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="331.0" visible="false" />
                      </content>
                      <padding>
                         <Insets right="20.0" />
