@@ -9,10 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
-import java.sql.Time;
 import java.util.Calendar;
-import java.util.Date;
 
 public class StudentHomepageViewController {
 
@@ -21,7 +18,7 @@ public class StudentHomepageViewController {
     @FXML
     private ImageView historyIcon;
     @FXML
-    private JFXButton statusBtn;
+    public JFXButton statusBtn;
     @FXML
     private JFXButton statisticsBtn;
     @FXML
@@ -52,8 +49,9 @@ public class StudentHomepageViewController {
     else{
         System.out.println("You have been submitted as Not Attending");
     }
-    isNotAttending.setVisible(false);
 
+    calendarGrid.add(new Label("Attending"),1,1);
+    isNotAttending.setVisible(false);
 
     }
 
@@ -69,6 +67,7 @@ public class StudentHomepageViewController {
             System.out.println("You have been submitted as Attending");
         }
      isAttending.setVisible(false);
+    calendarGrid.add(new Label("Not Attending"),1,1);
     }
 
 
@@ -96,6 +95,5 @@ public class StudentHomepageViewController {
 
     public void setupCalendar() {
         System.out.println(Calendar.getInstance().getTime());
-        calendarGrid.add(new Label("cock"),1,1);
     }
 }
