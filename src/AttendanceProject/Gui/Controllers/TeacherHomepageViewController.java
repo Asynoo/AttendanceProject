@@ -35,9 +35,7 @@ public class TeacherHomepageViewController {
         }else {
             classSummary.setVisible(false);
         }
-
-
-
+        
     }
 
     final String lexicon = "ABEHIMOSTUY";

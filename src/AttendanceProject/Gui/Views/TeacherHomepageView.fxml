@@ -95,7 +95,7 @@
                               <Image url="@assets/icons/history.png" />
                            </image>
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets left="1.0" />
                            </HBox.margin>
                         </ImageView>
                      </children>
