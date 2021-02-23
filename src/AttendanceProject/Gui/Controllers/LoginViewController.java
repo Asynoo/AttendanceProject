@@ -41,7 +41,7 @@ public class LoginViewController{
     public void HomepageStudent() throws Exception {
         Stage HomepageViewStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/AttendanceProject/Gui/Views/StudentHomepageView.fxml"));
-        HomepageViewStage.setTitle("Attendance Checker");
+        HomepageViewStage.setTitle("Student AC");
         HomepageViewStage.setScene(new Scene(root));
         HomepageViewStage.setResizable(false);
         HomepageViewStage.show();
@@ -50,7 +50,7 @@ public class LoginViewController{
     public void HomepageTeacher() throws Exception {
         Stage HomepageViewStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/AttendanceProject/Gui/Views/TeacherHomepageView.fxml"));
-        HomepageViewStage.setTitle("Attendance Checker");
+        HomepageViewStage.setTitle("Teacher AC");
         HomepageViewStage.setScene(new Scene(root));
         HomepageViewStage.setResizable(false);
         HomepageViewStage.show();
