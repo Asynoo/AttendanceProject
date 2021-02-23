@@ -13,12 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="564.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="32.0" prefWidth="600.0">
          <top>
-            <Label alignment="TOP_CENTER" text="Teacher name" BorderPane.alignment="CENTER">
+            <Label alignment="TOP_CENTER" text="Teacher name" textFill="#4390ff" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Apple Braille Outline 6 Dot" size="30.0" />
                </font>
@@ -35,17 +34,17 @@
          <children>
             <VBox prefHeight="360.0" prefWidth="223.0">
                <children>
-                  <JFXButton buttonType="RAISED" minWidth="120.0" style="-fx-background-color: #E6E6FA#E6E6FA;" text="Class attendance">
+                  <JFXButton buttonType="RAISED" minWidth="120.0" style="-fx-background-color: #4390ff;" text="Class attendance" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" minWidth="120.0" style="-fx-background-color: #E6E6FA#E6E6FA;" text="Summary">
+                  <JFXButton buttonType="RAISED" minWidth="120.0" style="-fx-background-color: #4390ff;" text="Summary" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" minWidth="120.0" ripplerFill="WHITE" style="-fx-background-color: #E6E6FA#E6E6FA;" text="Student">
+                  <JFXButton buttonType="RAISED" minWidth="120.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="Student" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </VBox.margin>
@@ -62,7 +61,7 @@
                <children>
                   <BorderPane prefHeight="37.0" prefWidth="378.0">
                      <top>
-                        <Label text="Class summary" BorderPane.alignment="CENTER">
+                        <Label text="Class summary" textFill="#4390ff" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="25.0" />
                            </font>
