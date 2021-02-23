@@ -1,28 +1,31 @@
 package AttendanceProject.Gui.Controllers;
 
+import AttendanceProject.Bll.CalendarManager;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import java.util.Calendar;
+
 
 public class StudentHomepageViewController {
+    CalendarManager calendarManager = new CalendarManager();
 
     @FXML
     private JFXButton historyBtn;
     @FXML
     private ImageView historyIcon;
     @FXML
-    public JFXButton statusBtn;
+    private JFXButton statusBtn;
     @FXML
     private JFXButton statisticsBtn;
     @FXML
     private BorderPane calendarPane;
+    @FXML
+    private Label calendarInfoLbl;
     @FXML
     private GridPane calendarGrid;
 
@@ -49,9 +52,8 @@ public class StudentHomepageViewController {
     else{
         System.out.println("You have been submitted as Not Attending");
     }
-
-    calendarGrid.add(new Label("Attending"),1,1);
     isNotAttending.setVisible(false);
+
 
     }
 
@@ -67,7 +69,6 @@ public class StudentHomepageViewController {
             System.out.println("You have been submitted as Attending");
         }
      isAttending.setVisible(false);
-    calendarGrid.add(new Label("Not Attending"),1,1);
     }
 
 
@@ -94,6 +95,9 @@ public class StudentHomepageViewController {
     }
 
     public void setupCalendar() {
-        System.out.println(Calendar.getInstance().getTime());
+
+
+        calendarInfoLbl.setText(calendarManager.getCurrentMonthName());
+        calendarGrid.add(new Label("" + calendarManager.getCurrentDate()),1,1);
     }
 }

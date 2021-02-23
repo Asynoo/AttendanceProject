@@ -142,7 +142,7 @@
                   </JFXButton>
                </left>
                <center>
-                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="282.0" text="Calendar Overview" textFill="#4390ff" BorderPane.alignment="CENTER">
+                  <Label fx:id="calendarInfoLbl" alignment="CENTER" prefHeight="35.0" prefWidth="282.0" text="Calendar Overview" textFill="#4390ff" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
