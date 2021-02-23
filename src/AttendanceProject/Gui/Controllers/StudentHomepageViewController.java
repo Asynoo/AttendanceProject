@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -29,17 +28,34 @@ public class StudentHomepageViewController {
     @FXML
     private JFXButton isNotAttending;
 
+    private boolean attendance;
 
     @FXML
     void isAttendingAction(ActionEvent actionEvent) {
-    System.out.println("You have been submitted as Attending");
+
+    boolean attendance = true;
+    if (attendance==true){
+        System.out.println("You have been submitted as Attending");
     }
+    else{
+        System.out.println("You have been submitted as Not Attending");
+    }
+    }
+
 
     @FXML
     void isNotAttendingAction(ActionEvent actionEven) {
-    System.out.println("You have been submitted as Not Attending");
+
+    boolean attendance = false;
+    if(attendance==false) {
+        System.out.println("You have been submitted as Not Attending");
     }
-    
+        else{
+            System.out.println("You have been submitted as Attending");
+        }
+    }
+
+
     public void showStatistics(ActionEvent actionEvent) {
         chartPane.setVisible(true);
         statusPane.setVisible(false);
