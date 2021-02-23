@@ -16,16 +16,22 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.TeacherHomepageViewController">
    <children>
       <BorderPane prefHeight="32.0" prefWidth="600.0">
-         <top>
-            <Label alignment="TOP_CENTER" text="Teacher name" textFill="#4390ff" BorderPane.alignment="CENTER">
+         <bottom>
+            <Label alignment="TOP_CENTER" text="Jeppe Moritz Led" textFill="#4390ff" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="Apple Braille Outline 6 Dot" size="30.0" />
+                  <Font size="34.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-         </top>
+         </bottom>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
       </BorderPane>
       <HBox prefHeight="360.0" prefWidth="600.0">
          <opaqueInsets>
@@ -49,7 +55,7 @@
                               <Image url="@assets/icons/undefined.png" />
                            </image>
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="5.0" />
                            </HBox.margin>
                         </ImageView>
                      </children>
@@ -69,7 +75,7 @@
                               <Image url="@assets/icons/statistics.png" />
                            </image>
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="5.0" />
                            </HBox.margin>
                         </ImageView>
                      </children>
@@ -89,7 +95,7 @@
                               <Image url="@assets/icons/history.png" />
                            </image>
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="5.0" />
                            </HBox.margin>
                         </ImageView>
                      </children>
@@ -104,21 +110,27 @@
             </VBox>
             <VBox prefHeight="335.0" prefWidth="395.0">
                <children>
-                  <BorderPane prefHeight="37.0" prefWidth="378.0">
-                     <top>
+                  <BorderPane prefHeight="60.0" prefWidth="382.0">
+                     <center>
                         <Label text="Class summary" textFill="#4390ff" BorderPane.alignment="CENTER">
                            <font>
-                              <Font size="25.0" />
+                              <Font size="18.0" />
                            </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <BorderPane.margin>
+                              <Insets top="33.0" />
+                           </BorderPane.margin>
                         </Label>
-                     </top>
+                     </center>
                   </BorderPane>
                   <ScrollPane prefHeight="321.0" prefWidth="369.0">
                      <VBox.margin>
-                        <Insets top="40.0" />
+                        <Insets top="5.0" />
                      </VBox.margin>
                      <content>
-                        <TilePane fx:id="classSummary" prefColumns="0" prefHeight="242.0" prefRows="0" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="355.0" visible="false">
+                        <TilePane fx:id="classSummary" prefColumns="0" prefHeight="267.0" prefRows="0" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="370.0" visible="false">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding></TilePane>
@@ -126,7 +138,7 @@
                   </ScrollPane>
                </children>
                <HBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="25.0" />
                </HBox.margin>
                <padding>
                   <Insets right="10.0" />
