@@ -46,7 +46,7 @@ public class StudentHomepageViewController {
     void isAttendingAction(ActionEvent actionEvent) {
 
     boolean attendance = true;
-    if (attendance==true){
+    if (attendance){
         System.out.println("You have been submitted as Attending");
     }
     else{
@@ -62,7 +62,7 @@ public class StudentHomepageViewController {
     void isNotAttendingAction(ActionEvent actionEven) {
 
     boolean attendance = false;
-    if(attendance==false) {
+    if(!attendance) {
         System.out.println("You have been submitted as Not Attending");
     }
         else{
