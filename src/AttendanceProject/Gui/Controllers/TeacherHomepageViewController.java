@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -19,24 +20,25 @@ import java.util.Set;
 
 public class TeacherHomepageViewController {
     @FXML
-    public TilePane classSummary;
-    
+    //private TilePane classSummary;
+    private ScrollPane scrollPane;
+
     private Boolean studentsFilled = false;
+    private TilePane tilePaneClass = new TilePane();
+    private TilePane individualStudentTiles = new TilePane();
+
 
     public void showClassAttendance(ActionEvent actionEvent) {
+        if(studentsFilled){
+            tilePaneClass.setVisible(false);
+        }
 
         if (!studentsFilled){
-            fillStudents();
+            fillStudentsClass();
         }
-
-        if(!classSummary.isVisible()){
-
-            classSummary.setVisible(true);
-        }else {
-            classSummary.setVisible(false);
-        }
-        
     }
+        
+
 
     final String lexicon = "ABEHIMOSTUY";
 
@@ -57,13 +59,21 @@ public class TeacherHomepageViewController {
         }
         return builder.toString();
     }
+    public void showStudentSummary(ActionEvent actionEvent) {
+        fillStudentsIndividually();
+    }
 
-
-    private void fillStudents() {
+        private void fillStudentsClass() {
 
         studentsFilled = true;
 
-        for (int i = 0; i < 30; i++) {
+
+        tilePaneClass.setPrefTileHeight(110);
+        tilePaneClass.setPrefTileWidth(110);
+        tilePaneClass.setPrefSize(351, 253);
+
+        int numberOfStudents = 30;
+        for (int i = 0; i < numberOfStudents; i++) {
 
             int tmp = (int) ( Math.random() * 2 + 1);
 
@@ -82,7 +92,8 @@ public class TeacherHomepageViewController {
                 vbox.getChildren().add(imgView);
                 vbox.getChildren().add(lblContent);
 
-                classSummary.getChildren().add(vbox);
+                tilePaneClass.getChildren().add(vbox);
+
             }else {
                 File file = new File("src/AttendanceProject/resources/images/faceRedtry.png");
                 Image img = new Image(file.toURI().toString());
@@ -97,10 +108,17 @@ public class TeacherHomepageViewController {
                 vbox.getChildren().add(imgView);
                 vbox.getChildren().add(lblContent);
 
-                classSummary.getChildren().add(vbox);
+                tilePaneClass.getChildren().add(vbox);
+
             }
 
-
         }
+        scrollPane.setContent(tilePaneClass);
     }
+
+    private void fillStudentsIndividually() {
+        individualStudentTiles.setPrefTileWidth(341);
+        individualStudentTiles.getPrefColumns();
+    }
+
 }
