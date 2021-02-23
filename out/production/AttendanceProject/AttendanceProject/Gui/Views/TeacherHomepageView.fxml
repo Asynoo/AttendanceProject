@@ -5,6 +5,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
@@ -30,23 +32,68 @@
             <Insets top="30.0" />
          </opaqueInsets>
          <children>
-            <VBox prefHeight="360.0" prefWidth="223.0">
+            <VBox prefHeight="330.0" prefWidth="236.0">
                <children>
-                  <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showClassAttendance" style="-fx-background-color: #4390ff;" text="Class attendance" textFill="WHITE">
+                  <HBox>
                      <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
+                        <Insets left="20.0" top="60.0" />
                      </VBox.margin>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" minWidth="120.0" style="-fx-background-color: #4390ff;" text="Summary" textFill="WHITE">
+                     <children>
+                        <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showClassAttendance" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #4390ff;" text="Class attendance" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fx:id="statusIcon" fitHeight="40.0" fitWidth="48.0" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/icons/undefined.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox>
                      <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
+                        <Insets left="20.0" top="60.0" />
                      </VBox.margin>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" minWidth="120.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="Student" textFill="WHITE">
+                     <children>
+                        <JFXButton buttonType="RAISED" minWidth="120.0" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #4390ff;" text="Summary" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fx:id="statisticsIcon" fitHeight="40.0" fitWidth="47.0" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/icons/statistics.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox>
                      <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
+                        <Insets left="20.0" top="60.0" />
                      </VBox.margin>
-                  </JFXButton>
+                     <children>
+                        <JFXButton buttonType="RAISED" minWidth="120.0" prefHeight="40.0" prefWidth="160.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="Student" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fx:id="historyIcon" fitHeight="40.0" fitWidth="54.0" preserveRatio="true" style="-fx-image: #4390ff;">
+                           <image>
+                              <Image url="@assets/icons/history.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -71,11 +118,11 @@
                         <Insets top="40.0" />
                      </VBox.margin>
                      <content>
-                        <TilePane fx:id="classSummary" prefColumns="0" prefHeight="242.0" prefRows="0" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="331.0" visible="false" />
+                        <TilePane fx:id="classSummary" prefColumns="0" prefHeight="242.0" prefRows="0" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="355.0" visible="false">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding></TilePane>
                      </content>
-                     <padding>
-                        <Insets right="20.0" />
-                     </padding>
                   </ScrollPane>
                </children>
                <HBox.margin>

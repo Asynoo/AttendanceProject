@@ -52,7 +52,7 @@ public class LoginViewController{
         Parent root = FXMLLoader.load(getClass().getResource("/AttendanceProject/Gui/Views/TeacherHomepageView.fxml"));
         HomepageViewStage.setTitle("Attendance Checker");
         HomepageViewStage.setScene(new Scene(root));
-        HomepageViewStage.setResizable(true);
+        HomepageViewStage.setResizable(false);
         HomepageViewStage.show();
     }
 
