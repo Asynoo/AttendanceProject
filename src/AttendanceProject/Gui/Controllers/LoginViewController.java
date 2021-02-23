@@ -8,6 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+
 public class LoginViewController{
 
 
@@ -21,6 +24,7 @@ public class LoginViewController{
     public void LoginAction() throws Exception {
         String user = username.getText();
         String pass = password.getText();
+
         if (user.equals("student") && pass.equals("password")) {
             HomepageStudent();
         } else
@@ -51,5 +55,6 @@ public class LoginViewController{
         HomepageViewStage.setResizable(false);
         HomepageViewStage.show();
     }
+
 
 }

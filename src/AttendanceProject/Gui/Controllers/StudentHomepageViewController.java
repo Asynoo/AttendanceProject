@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -17,15 +18,28 @@ public class StudentHomepageViewController {
     private JFXButton statusBtn;
     @FXML
     private JFXButton statisticsBtn;
-
     @FXML
     private BorderPane calendarPane;
     @FXML
     private HBox chartPane;
     @FXML
     private HBox statusPane;
+    @FXML
+    private JFXButton isAttending;
+    @FXML
+    private JFXButton isNotAttending;
 
 
+    @FXML
+    void isAttendingAction(ActionEvent actionEvent) {
+    System.out.println("You have been submitted as Attending");
+    }
+
+    @FXML
+    void isNotAttendingAction(ActionEvent actionEven) {
+    System.out.println("You have been submitted as Not Attending");
+    }
+    
     public void showStatistics(ActionEvent actionEvent) {
         chartPane.setVisible(true);
         statusPane.setVisible(false);
@@ -43,4 +57,5 @@ public class StudentHomepageViewController {
         statusPane.setVisible(false);
         calendarPane.setVisible(true);
     }
+
 }

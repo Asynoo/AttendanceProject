@@ -179,16 +179,24 @@
             </HBox>
             <HBox fx:id="statusPane" alignment="CENTER" focusTraversable="true" prefHeight="100.0" prefWidth="200.0" spacing="30.0" visible="false">
                <children>
-                  <ImageView fitHeight="110.0" fitWidth="128.0" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/icons/present.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="115.0" fitWidth="110.0" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/icons/absent.png" />
-                     </image>
-                  </ImageView>
+                  <JFXButton fx:id="isAttending" onAction="#isAttendingAction" prefHeight="118.0" prefWidth="166.0">
+                     <graphic>
+                        <ImageView fitHeight="110.0" fitWidth="128.0" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/icons/present.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="isNotAttending" onAction="#isNotAttendingAction">
+                     <graphic>
+                        <ImageView fitHeight="115.0" fitWidth="110.0" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/icons/absent.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                </children>
             </HBox>
          </children>
