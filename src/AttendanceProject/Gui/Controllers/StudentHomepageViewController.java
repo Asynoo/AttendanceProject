@@ -27,8 +27,10 @@ public class StudentHomepageViewController {
     private JFXButton isAttending;
     @FXML
     private JFXButton isNotAttending;
+    @FXML
+    private ImageView statusIcon;
 
-    private boolean attendance;
+    public boolean attendance;
 
     @FXML
     void isAttendingAction(ActionEvent actionEvent) {
@@ -40,6 +42,9 @@ public class StudentHomepageViewController {
     else{
         System.out.println("You have been submitted as Not Attending");
     }
+    isNotAttending.setVisible(false);
+
+    
     }
 
 
@@ -53,6 +58,7 @@ public class StudentHomepageViewController {
         else{
             System.out.println("You have been submitted as Attending");
         }
+     isAttending.setVisible(false);
     }
 
 
