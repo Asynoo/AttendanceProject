@@ -3,9 +3,16 @@ package AttendanceProject.Gui.Controllers;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
 
 public class StudentHomepageViewController {
 
@@ -19,6 +26,9 @@ public class StudentHomepageViewController {
     private JFXButton statisticsBtn;
     @FXML
     private BorderPane calendarPane;
+    @FXML
+    private GridPane calendarGrid;
+
     @FXML
     private HBox chartPane;
     @FXML
@@ -44,7 +54,7 @@ public class StudentHomepageViewController {
     }
     isNotAttending.setVisible(false);
 
-    
+
     }
 
 
@@ -80,4 +90,12 @@ public class StudentHomepageViewController {
         calendarPane.setVisible(true);
     }
 
+    public void initialize() {
+        setupCalendar();
+    }
+
+    public void setupCalendar() {
+        System.out.println(Calendar.getInstance().getTime());
+        calendarGrid.add(new Label("cock"),1,1);
+    }
 }
