@@ -10,6 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+import java.util.Calendar;
+
 
 public class StudentHomepageViewController {
     CalendarManager calendarManager = new CalendarManager();
@@ -95,9 +97,16 @@ public class StudentHomepageViewController {
     }
 
     public void setupCalendar() {
-
-
         calendarInfoLbl.setText(calendarManager.getCurrentMonthName());
-        calendarGrid.add(new Label("" + calendarManager.getCurrentDate()),1,1);
+        calendarManager.dateToFirstWeekMonthDay();
+        for(int y = 0;y < 6;y++){
+            for(int x=0;x < 7;x++){
+                calendarGrid.add(new Label("" + calendarManager.getCurrentDate()),x,y);
+                calendarManager.cycleDayUp();
+            }
+        }
+
+        System.out.println(calendarManager.getCurrentMonthName());
+
     }
 }
