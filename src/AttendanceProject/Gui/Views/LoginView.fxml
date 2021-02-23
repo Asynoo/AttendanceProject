@@ -9,17 +9,17 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.LoginViewController">
    <children>
-      <JFXTextField fx:id="username" alignment="CENTER" focusColor="#4390ff" layoutX="26.0" layoutY="134.0" prefHeight="47.0" prefWidth="289.0" promptText="Username">
+      <JFXTextField fx:id="username" alignment="CENTER" focusColor="#4390ff" layoutX="64.0" layoutY="158.0" prefHeight="47.0" prefWidth="212.0" promptText="Username">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField fx:id="password" alignment="CENTER" focusColor="#4390ff" layoutX="26.0" layoutY="218.0" prefHeight="47.0" prefWidth="289.0" promptText="Password">
+      <JFXPasswordField fx:id="password" alignment="CENTER" focusColor="#4390ff" layoutX="64.0" layoutY="226.0" prefHeight="47.0" prefWidth="212.0" promptText="Password">
          <font>
             <Font size="18.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton fx:id="login" layoutX="136.0" layoutY="313.0" onAction="#LoginAction" style="-fx-background-color: #4390FF;" text="Login" textFill="WHITE">
+      <JFXButton fx:id="login" layoutX="136.0" layoutY="333.0" onAction="#LoginAction" style="-fx-background-color: #4390FF;" text="Login" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
