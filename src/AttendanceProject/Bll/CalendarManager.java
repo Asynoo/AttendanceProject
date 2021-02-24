@@ -19,6 +19,8 @@ public class CalendarManager {
         return calendar.get(Calendar.MONTH)+1;
     }
 
+    public int getCurrentYear(){ return calendar.get(Calendar.YEAR);}
+
     public String getCurrentMonthName(){
         switch (getCurrentMonth()){
             case 1: return "January";
@@ -38,7 +40,7 @@ public class CalendarManager {
     }
 
     public int getFirstWeekDay(){
-        return (getCurrentDate()-7*(calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH)-1))-(calendar.get(Calendar.DAY_OF_WEEK)-2);
+        return (getCurrentDate()-7*(calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH)))-(calendar.get(Calendar.DAY_OF_WEEK)-2);
     }
 
     public void dateToFirstWeekMonthDay(){
@@ -51,7 +53,7 @@ public class CalendarManager {
     public void cycleDayUp() {
         if (getCurrentDate() == calendar.getActualMaximum(Calendar.DATE)) {
             calendar.roll(Calendar.DATE, true);
-            calendar.roll(Calendar.MONTH, true);
+            cycleMonthUp();
         }
         else {
             calendar.roll(Calendar.DATE, true);
@@ -59,14 +61,29 @@ public class CalendarManager {
     }
     public void cycleDayDown(){
         if (getCurrentDate() == 1) {
-            calendar.roll(Calendar.MONTH, false);
+            cycleMonthDown();
         }
         calendar.roll(Calendar.DATE, false);
     }
     public void cycleMonthUp(){
-        calendar.roll(Calendar.MONTH, true);
+        if (getCurrentMonth() == 12) {
+            calendar.roll(Calendar.MONTH, true);
+            cycleYearUp();
+        }
+        else {
+            calendar.roll(Calendar.MONTH, true);
+        }
     }
     public void cycleMonthDown(){
+        if (getCurrentMonth() == 1) {
+            cycleYearDown();
+        }
         calendar.roll(Calendar.MONTH, false);
+    }
+    public void cycleYearUp(){
+        calendar.roll(Calendar.YEAR,true);
+    }
+    public void cycleYearDown(){
+        calendar.roll(Calendar.YEAR,false);
     }
 }

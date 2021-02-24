@@ -36,8 +36,6 @@ public class LoginViewController{
             System.out.println("Not Poggers");
     }
 
-
-
     public void HomepageStudent() throws Exception {
         Stage HomepageViewStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/AttendanceProject/Gui/Views/StudentHomepageView.fxml"));

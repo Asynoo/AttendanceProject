@@ -123,7 +123,7 @@
                   </GridPane>
                </bottom>
                <right>
-                  <JFXButton text="&gt;" BorderPane.alignment="CENTER">
+                  <JFXButton onAction="#actionMonthForward" text="&gt;" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -133,7 +133,7 @@
                   </JFXButton>
                </right>
                <left>
-                  <JFXButton text="&lt;" BorderPane.alignment="CENTER">
+                  <JFXButton onAction="#actionMonthBack" text="&lt;" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
