@@ -2,13 +2,20 @@ package AttendanceProject.Gui.Controllers;
 
 import AttendanceProject.Bll.CalendarManager;
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.util.Calendar;
 
@@ -30,7 +37,6 @@ public class StudentHomepageViewController {
     private Label calendarInfoLbl;
     @FXML
     private GridPane calendarGrid;
-
     @FXML
     private HBox chartPane;
     @FXML
@@ -41,6 +47,9 @@ public class StudentHomepageViewController {
     private JFXButton isNotAttending;
     @FXML
     private ImageView statusIcon;
+    @FXML
+    private PieChart chart;
+
 
     public boolean attendance;
 
@@ -55,8 +64,6 @@ public class StudentHomepageViewController {
         System.out.println("You have been submitted as Not Attending");
     }
     isNotAttending.setVisible(false);
-
-
     }
 
 
@@ -73,11 +80,15 @@ public class StudentHomepageViewController {
      isAttending.setVisible(false);
     }
 
-
-    public void showStatistics(ActionEvent actionEvent) {
+        public void showStatistics(ActionEvent actionEvent) {
         chartPane.setVisible(true);
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
+            ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
+                    new PieChart.Data("Attending", 67),
+                    new PieChart.Data("Not Attending", 331)
+            );
+            chart.setData(pieData);
     }
 
     public void showStatus(ActionEvent actionEvent) {
