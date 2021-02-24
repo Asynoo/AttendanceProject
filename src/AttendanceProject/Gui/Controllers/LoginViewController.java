@@ -1,7 +1,9 @@
 package AttendanceProject.Gui.Controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.tools.javac.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,8 +17,9 @@ public class LoginViewController{
 
 
     @FXML
+    private javafx.scene.control.Button login;
+    @FXML
     private JFXTextField username;
-
     @FXML
     private JFXPasswordField password;
 
@@ -27,13 +30,22 @@ public class LoginViewController{
 
         if (user.equals("student") && pass.equals("password")) {
             HomepageStudent();
+            closeButtonAction();
+
         } else
             System.out.println("Not Poggers");
 
         if (user.equals("teacher") && pass.equals("password")) {
             HomepageTeacher();
+            closeButtonAction();
         } else
             System.out.println("Not Poggers");
+    }
+
+    @FXML
+    private void closeButtonAction(){
+        Stage stage = (Stage) login.getScene().getWindow();
+        stage.close();
     }
 
     public void HomepageStudent() throws Exception {

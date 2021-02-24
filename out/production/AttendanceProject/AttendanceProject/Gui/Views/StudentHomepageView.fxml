@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
@@ -86,7 +87,7 @@
    <center>
       <StackPane fx:id="stackPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="statusPane" alignment="CENTER" focusTraversable="true" prefHeight="100.0" prefWidth="200.0" spacing="30.0" visible="false">
+            <HBox alignment="CENTER" focusTraversable="true" prefHeight="100.0" prefWidth="200.0" spacing="30.0" visible="false">
                <children>
                   <ImageView fx:id="presentBtn" fitHeight="110.0" fitWidth="128.0" preserveRatio="true">
                      <image>
@@ -152,7 +153,11 @@
             </BorderPane>
             <HBox fx:id="chartPane" prefHeight="100.0" prefWidth="200.0" visible="false">
                <children>
-                  <PieChart prefHeight="280.0" prefWidth="267.0" />
+                  <PieChart fx:id="chart" prefHeight="390.0" prefWidth="406.0" stylesheets="@Css/piechart.css">
+                     <styleClass>
+                        <String fx:value="default-color0" />
+                        <String fx:value="default-color1" />
+                     </styleClass></PieChart>
                </children>
             </HBox>
             <HBox fx:id="statusPane" alignment="CENTER" focusTraversable="true" prefHeight="100.0" prefWidth="200.0" spacing="30.0" visible="false">

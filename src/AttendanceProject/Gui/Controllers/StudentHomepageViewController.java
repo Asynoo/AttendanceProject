@@ -2,18 +2,24 @@ package AttendanceProject.Gui.Controllers;
 
 import AttendanceProject.Bll.CalendarManager;
 import com.jfoenix.controls.JFXButton;
-import com.sun.javafx.fxml.builder.JavaFXSceneBuilder;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
@@ -51,6 +57,9 @@ public class StudentHomepageViewController {
     private JFXButton isNotAttending;
     @FXML
     private ImageView statusIcon;
+    @FXML
+    private PieChart chart;
+
 
     List<ArrayList<Label>> columnList;
     int displayedMonth;
@@ -60,14 +69,14 @@ public class StudentHomepageViewController {
     @FXML
     void isAttendingAction(ActionEvent actionEvent) {
 
-        boolean attendance = true;
-        if (attendance){
-            System.out.println("You have been submitted as Attending");
-        }
-        else{
-            System.out.println("You have been submitted as Not Attending");
-        }
-        isNotAttending.setVisible(false);
+    boolean attendance = true;
+    if (attendance){
+        System.out.println("You have been submitted as Attending");
+    }
+    else{
+        System.out.println("You have been submitted as Not Attending");
+    }
+    isNotAttending.setVisible(false);
     }
 
 
@@ -75,20 +84,24 @@ public class StudentHomepageViewController {
     void isNotAttendingAction(ActionEvent actionEven) {
 
     boolean attendance = false;
-        if(!attendance) {
-            System.out.println("You have been submitted as Not Attending");
-        }
-            else{
+    if(!attendance) {
+        System.out.println("You have been submitted as Not Attending");
+    }
+        else{
             System.out.println("You have been submitted as Attending");
         }
-         isAttending.setVisible(false);
+     isAttending.setVisible(false);
     }
 
-
-    public void showStatistics(ActionEvent actionEvent) {
+        public void showStatistics(ActionEvent actionEvent) {
         chartPane.setVisible(true);
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
+            ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
+                    new PieChart.Data("Attending", 67),
+                    new PieChart.Data("Not Attending", 331)
+            );
+            chart.setData(pieData);
     }
 
     public void showStatus(ActionEvent actionEvent) {
