@@ -1,5 +1,6 @@
 package AttendanceProject.Gui.Controllers;
 
+import AttendanceProject.Be.CalendarButton;
 import AttendanceProject.Bll.CalendarManager;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
@@ -15,18 +16,12 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 
 public class StudentHomepageViewController {
@@ -61,10 +56,24 @@ public class StudentHomepageViewController {
     private PieChart chart;
 
 
-    List<ArrayList<Label>> columnList;
+    List<ArrayList<CalendarButton>> columnList;
     int displayedMonth;
 
+    //Calendar colors
+    static String weekendBgColor = "#999999";
+    static String weekendTxtColor = "#FFFFFF";
+    static String weekdayPresentBgColor = "#4390ff";
+    static String weekdayAbsentBgColor = "#81b3f9";
+    static String weekdayPresentTxtColor = "#FFFFFF";
+    static String weekdayAbsentTxtColor = "#FFFFFF";
+    static String unsetBgColor = "#FFFFFF";
+    static String unsetTxtColor = "#000000";
+    //Mock data settings
+    static int absencePercentage = 90;
+
     public boolean attendance;
+
+    Date today;
 
     @FXML
     void isAttendingAction(ActionEvent actionEvent) {
@@ -117,24 +126,23 @@ public class StudentHomepageViewController {
     }
 
     public void initialize() {
+        today = calendarManager.getCurrentDate();
         setupCalendar();
         calendarFillDates();
     }
 
     public void setupCalendar() {
-        columnList = new ArrayList<ArrayList<Label>>();
+        columnList = new ArrayList<ArrayList<CalendarButton>>();
         for(int y = 0;y < 6;y++){
-            columnList.add(new ArrayList<Label>());
+            columnList.add(new ArrayList<CalendarButton>());
             for(int x=0;x < 7;x++){
-                Label label = new Label(":)");
-                label.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-                label.setAlignment(Pos.CENTER);
-                label.setFont(Font.font(21));
-                if(x>4){
-                    label.setStyle("-fx-background-color:#999999;-fx-text-fill:#FFFFFF");
-                }
-                columnList.get(y).add(label);
-                calendarGrid.add(label,x,y);
+                CalendarButton calendarButton = new CalendarButton(":)");
+                calendarButton.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+                calendarButton.setAlignment(Pos.CENTER);
+                calendarButton.setFont(Font.font(21));
+                calendarButton.;
+                columnList.get(y).add(calendarButton);
+                calendarGrid.add(calendarButton,x,y);
             }
         }
     }
@@ -143,9 +151,27 @@ public class StudentHomepageViewController {
         displayedMonth = calendarManager.getCurrentMonth();
         calendarInfoLbl.setText(calendarManager.getCurrentMonthName()+ " " + calendarManager.getCurrentYear());
         calendarManager.dateToFirstWeekMonthDay();
-        for (ArrayList<Label> rowList:columnList) {
-            for (Label dateLabel:rowList) {
-                dateLabel.setText(calendarManager.getCurrentDate() + "");
+        for (ArrayList<CalendarButton> rowList:columnList) {
+            for (CalendarButton calendarButton:rowList) {
+                calendarButton.setText(calendarManager.getCurrentDay() + "");
+
+                if(Math.random()*100 < absencePercentage) calendarButton.setPresent(true);
+                else calendarButton.setPresent(false);
+                if(calendarManager.getCurrentMonth() != displayedMonth){
+                    calendarButton.setOpacity(0.7);
+                }
+                if(calendarManager.getCurrentWeekday() == 1 || calendarManager.getCurrentWeekday() == 7){
+                    calendarButton.setStyle("-fx-background-color:"+ weekendBgColor + ";-fx-text-fill:" + weekendTxtColor);
+                }
+                else if(calendarManager.getCurrentDate().before(today)){
+                    if(calendarButton.isPresent()){
+                        calendarButton.setStyle("-fx-background-color:"+ weekdayPresentBgColor + ";-fx-text-fill:" + weekdayPresentTxtColor);
+                    }
+                    else {
+                        calendarButton.setStyle("-fx-background-color:" + weekdayAbsentBgColor + ";-fx-text-fill:" + weekdayAbsentTxtColor);
+                    }
+                }
+                else calendarButton.setStyle("-fx-background-color:"+ unsetBgColor + ";-fx-text-fill:" + unsetTxtColor);
                 calendarManager.cycleDayUp();
             }
         }

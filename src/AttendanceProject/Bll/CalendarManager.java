@@ -1,6 +1,8 @@
 package AttendanceProject.Bll;
 
+import java.time.Instant;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -11,8 +13,12 @@ public class CalendarManager {
         calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+1:00"), Locale.GERMAN);
     }
 
-    public int getCurrentDate(){
+    public int getCurrentDay(){
         return calendar.get(Calendar.DATE);
+    }
+
+    public int getCurrentWeekday(){
+        return calendar.get(Calendar.DAY_OF_WEEK);
     }
 
     public int getCurrentMonth(){
@@ -40,18 +46,18 @@ public class CalendarManager {
     }
 
     public int getFirstWeekDay(){
-        return (getCurrentDate()-7*(calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH)))-(calendar.get(Calendar.DAY_OF_WEEK)-2);
+        return (getCurrentDay()-7*(calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH)))-(calendar.get(Calendar.DAY_OF_WEEK)-2);
     }
 
     public void dateToFirstWeekMonthDay(){
-        int daysToFirstWMD = Math.abs(getFirstWeekDay()-getCurrentDate());
+        int daysToFirstWMD = Math.abs(getFirstWeekDay()-getCurrentDay());
         for (int i = 1; i <= daysToFirstWMD;i++) {
             cycleDayDown();
         }
     }
 
     public void cycleDayUp() {
-        if (getCurrentDate() == calendar.getActualMaximum(Calendar.DATE)) {
+        if (getCurrentDay() == calendar.getActualMaximum(Calendar.DATE)) {
             calendar.roll(Calendar.DATE, true);
             cycleMonthUp();
         }
@@ -60,7 +66,7 @@ public class CalendarManager {
         }
     }
     public void cycleDayDown(){
-        if (getCurrentDate() == 1) {
+        if (getCurrentDay() == 1) {
             cycleMonthDown();
         }
         calendar.roll(Calendar.DATE, false);
@@ -85,5 +91,13 @@ public class CalendarManager {
     }
     public void cycleYearDown(){
         calendar.roll(Calendar.YEAR,false);
+    }
+
+    public void setDateToday(){
+        calendar.setTime(Date.from(Instant.now()));
+    }
+
+    public Date getCurrentDate(){
+        return calendar.getTime();
     }
 }
