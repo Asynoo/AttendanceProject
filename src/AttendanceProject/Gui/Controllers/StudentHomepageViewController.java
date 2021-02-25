@@ -140,7 +140,6 @@ public class StudentHomepageViewController {
                 calendarButton.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
                 calendarButton.setAlignment(Pos.CENTER);
                 calendarButton.setFont(Font.font(21));
-                calendarButton.;
                 columnList.get(y).add(calendarButton);
                 calendarGrid.add(calendarButton,x,y);
             }
