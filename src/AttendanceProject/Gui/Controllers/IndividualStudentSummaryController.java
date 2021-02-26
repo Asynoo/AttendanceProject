@@ -1,5 +1,6 @@
 package AttendanceProject.Gui.Controllers;
 
+import AttendanceProject.Bll.AttendanceManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -21,10 +23,13 @@ public class IndividualStudentSummaryController implements Initializable {
     @FXML
     private ImageView absenceBar;
 
+    AttendanceManager attendanceManager;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        studentName.setText(randomIdentifier());
+        attendanceManager = new AttendanceManager();
+        studentName.setText(attendanceManager.getAllStudents1().get(new Random().nextInt(10)).getName());
 
         Image imHead = new Image("images/faceYellow.png");
         headPicture.setImage(imHead);

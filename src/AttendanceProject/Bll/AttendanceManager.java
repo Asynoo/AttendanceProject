@@ -9,8 +9,11 @@ public class AttendanceManager {
     private DAOAttendance daoAttendance = new DAOAttendance();
 
 
-    public ObservableList<Attendance> getAllStudents(){
+    public ObservableList<Attendance> getAllStudents1(){
         return daoAttendance.getStudentData();
+    }
+    public ObservableList<Attendance> getAllStudentsTwo(){
+        return daoAttendance.getStudentDataTwo();
     }
 
 }
