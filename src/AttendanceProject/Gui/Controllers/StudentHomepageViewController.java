@@ -5,22 +5,15 @@ import AttendanceProject.Bll.CalendarManager;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -71,38 +64,30 @@ public class StudentHomepageViewController {
     //Mock data settings
     static int absencePercentage = 90;
 
-    public boolean attendance;
+    private boolean attendance;
+    private boolean attendanceSet;
 
-    Date today;
+    LocalDate today;
 
     @FXML
-    void isAttendingAction(ActionEvent actionEvent) {
-
-    boolean attendance = true;
-    if (attendance){
+    private void isAttendingAction() {
+        attendance = true;
+        attendanceSet = true;
         System.out.println("You have been submitted as Attending");
+        isNotAttending.setVisible(false);
+        calendarFillDates();
     }
-    else{
-        System.out.println("You have been submitted as Not Attending");
-    }
-    isNotAttending.setVisible(false);
-    }
-
 
     @FXML
-    void isNotAttendingAction(ActionEvent actionEven) {
-
-    boolean attendance = false;
-    if(!attendance) {
+    private void isNotAttendingAction() {
+        attendance = false;
+        attendanceSet = true;
         System.out.println("You have been submitted as Not Attending");
-    }
-        else{
-            System.out.println("You have been submitted as Attending");
-        }
-     isAttending.setVisible(false);
+        isAttending.setVisible(false);
+        calendarFillDates();
     }
 
-        public void showStatistics(ActionEvent actionEvent) {
+        public void showStatistics() {
         chartPane.setVisible(true);
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
@@ -113,22 +98,23 @@ public class StudentHomepageViewController {
             chart.setData(pieData);
     }
 
-    public void showStatus(ActionEvent actionEvent) {
+    public void showStatus() {
         chartPane.setVisible(false);
         statusPane.setVisible(true);
         calendarPane.setVisible(false);
     }
 
-    public void showHistory(ActionEvent actionEvent) {
+    public void showHistory() {
         chartPane.setVisible(false);
         statusPane.setVisible(false);
         calendarPane.setVisible(true);
     }
 
     public void initialize() {
-        today = calendarManager.getCurrentDate();
+        today = LocalDate.now();
         setupCalendar();
         calendarFillDates();
+        calendarManager.setDateToday();
     }
 
     public void setupCalendar() {
@@ -136,7 +122,7 @@ public class StudentHomepageViewController {
         for(int y = 0;y < 6;y++){
             columnList.add(new ArrayList<CalendarButton>());
             for(int x=0;x < 7;x++){
-                CalendarButton calendarButton = new CalendarButton(":)");
+                CalendarButton calendarButton = new CalendarButton(":)",today);
                 calendarButton.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
                 calendarButton.setAlignment(Pos.CENTER);
                 calendarButton.setFont(Font.font(21));
@@ -153,16 +139,21 @@ public class StudentHomepageViewController {
         for (ArrayList<CalendarButton> rowList:columnList) {
             for (CalendarButton calendarButton:rowList) {
                 calendarButton.setText(calendarManager.getCurrentDay() + "");
-
+                calendarButton.setLocalDate(LocalDate.of(calendarManager.getCurrentYear(),calendarManager.getCurrentMonth(),calendarManager.getCurrentDay()));
+                //Generate mock values for the calendar
                 if(Math.random()*100 < absencePercentage) calendarButton.setPresent(true);
                 else calendarButton.setPresent(false);
+                setCalendarButtonToday();
+                //Opacity for days not in current month
                 if(calendarManager.getCurrentMonth() != displayedMonth){
                     calendarButton.setOpacity(0.7);
                 }
+                else calendarButton.setOpacity(1);
+                //Coloring days in the calendar
                 if(calendarManager.getCurrentWeekday() == 1 || calendarManager.getCurrentWeekday() == 7){
                     calendarButton.setStyle("-fx-background-color:"+ weekendBgColor + ";-fx-text-fill:" + weekendTxtColor);
                 }
-                else if(calendarManager.getCurrentDate().before(today)){
+                else if(today.compareTo(LocalDate.of(calendarManager.getCurrentYear(),calendarManager.getCurrentMonth(),calendarManager.getCurrentDay())) > 0 || (today.compareTo(LocalDate.of(calendarManager.getCurrentYear(),calendarManager.getCurrentMonth(),calendarManager.getCurrentDay())) == 0 && attendanceSet)){
                     if(calendarButton.isPresent()){
                         calendarButton.setStyle("-fx-background-color:"+ weekdayPresentBgColor + ";-fx-text-fill:" + weekdayPresentTxtColor);
                     }
@@ -185,5 +176,15 @@ public class StudentHomepageViewController {
         if(calendarManager.getCurrentMonth() != displayedMonth-1)calendarManager.cycleMonthDown();
         calendarManager.cycleMonthDown();
         calendarFillDates();
+    }
+
+    public void setCalendarButtonToday() {
+        for (ArrayList<CalendarButton> rowList:columnList) {
+            for (CalendarButton calendarButton:rowList) {
+                if(calendarButton.getLocalDate().isEqual(today)){
+                    calendarButton.setPresent(attendance);
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
 package AttendanceProject.Bll;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -94,10 +96,6 @@ public class CalendarManager {
     }
 
     public void setDateToday(){
-        calendar.setTime(Date.from(Instant.now()));
-    }
-
-    public Date getCurrentDate(){
-        return calendar.getTime();
+        calendar.setTime(new Date());
     }
 }
