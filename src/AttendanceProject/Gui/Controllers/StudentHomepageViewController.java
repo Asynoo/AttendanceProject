@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -74,7 +75,8 @@ public class StudentHomepageViewController {
         attendance = true;
         attendanceSet = true;
         System.out.println("You have been submitted as Attending");
-        isNotAttending.setVisible(false);
+        isNotAttending.setOpacity(0.6);
+        isAttending.setOpacity(1);
         calendarFillDates();
     }
 
@@ -83,7 +85,8 @@ public class StudentHomepageViewController {
         attendance = false;
         attendanceSet = true;
         System.out.println("You have been submitted as Not Attending");
-        isAttending.setVisible(false);
+        isAttending.setOpacity(0.6);
+        isNotAttending.setOpacity(1);
         calendarFillDates();
     }
 
