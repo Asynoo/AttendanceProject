@@ -1,17 +1,12 @@
 package AttendanceProject.Gui.Controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.sun.tools.javac.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import javax.swing.*;
-import java.awt.event.KeyEvent;
 
 public class LoginViewController{
 

@@ -9,26 +9,20 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 public class StudentHomepageViewController {
     CalendarManager calendarManager = new CalendarManager();
 
-    @FXML
-    private JFXButton historyBtn;
-    @FXML
-    private ImageView historyIcon;
-    @FXML
-    private JFXButton statusBtn;
-    @FXML
-    private JFXButton statisticsBtn;
     @FXML
     private BorderPane calendarPane;
     @FXML
@@ -44,8 +38,6 @@ public class StudentHomepageViewController {
     private JFXButton isAttending;
     @FXML
     private JFXButton isNotAttending;
-    @FXML
-    private ImageView statusIcon;
     @FXML
     private PieChart chart;
 
@@ -124,9 +116,9 @@ public class StudentHomepageViewController {
     }
 
     public void setupCalendar() {
-        columnList = new ArrayList<ArrayList<CalendarButton>>();
+        columnList = new ArrayList<>();
         for(int y = 0;y < 6;y++){
-            columnList.add(new ArrayList<CalendarButton>());
+            columnList.add(new ArrayList<>());
             for(int x=0;x < 7;x++){
                 CalendarButton calendarButton = new CalendarButton(":)",today);
                 calendarButton.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
@@ -147,8 +139,7 @@ public class StudentHomepageViewController {
                 calendarButton.setText(calendarManager.getCurrentDay() + "");
                 calendarButton.setLocalDate(LocalDate.of(calendarManager.getCurrentYear(),calendarManager.getCurrentMonth(),calendarManager.getCurrentDay()));
                 //Generate mock values for the calendar
-                if(Math.random()*100 < absencePercentage) calendarButton.setPresent(true);
-                else calendarButton.setPresent(false);
+                calendarButton.setPresent(Math.random() * 100 < absencePercentage);
                 setCalendarButtonToday();
                 //Opacity for days not in current month
                 if(calendarManager.getCurrentMonth() != displayedMonth){

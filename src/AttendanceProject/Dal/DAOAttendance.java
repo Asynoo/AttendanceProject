@@ -4,44 +4,38 @@ import AttendanceProject.Be.Attendance;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.Random;
-
 public class DAOAttendance {
 
     public ObservableList<Attendance> getStudentData(){
-        Random r = new Random();
 
-        ObservableList<Attendance> studentData1 = FXCollections.observableArrayList(
+        return FXCollections.observableArrayList(
 
-                new Attendance("Marco", r.nextInt(10)),
-                new Attendance("Danylo", r.nextInt(10)),
-                new Attendance("Tomas",  r.nextInt(10)),
-                new Attendance("Wojciech", r.nextInt(10)),
-                new Attendance("Oliver",  r.nextInt(10)),
-                new Attendance("Rolf",  r.nextInt(10)),
-                new Attendance("Jeppe",  r.nextInt(10)),
-                new Attendance("Jakub",  r.nextInt(10)),
-                new Attendance("Kamila",  r.nextInt(10)),
-                new Attendance("Ivan",  r.nextInt(10))
+                new Attendance("Marco"),
+                new Attendance("Danylo"),
+                new Attendance("Tomas"),
+                new Attendance("Wojciech"),
+                new Attendance("Oliver"),
+                new Attendance("Rolf"),
+                new Attendance("Jeppe"),
+                new Attendance("Jakub"),
+                new Attendance("Kamila"),
+                new Attendance("Ivan")
         );
-        return studentData1;
     }
     public ObservableList<Attendance> getStudentDataTwo(){
-        Random r = new Random();
 
-        ObservableList<Attendance> studentDataTwo = FXCollections.observableArrayList(
+        return FXCollections.observableArrayList(
 
-                new Attendance("Augustin",  r.nextInt(10)),
-                new Attendance("Kenneth",  r.nextInt(10)),
-                new Attendance("Ricky",  r.nextInt(10)),
-                new Attendance("Mikkel",  r.nextInt(10)),
-                new Attendance("Kjell",  r.nextInt(10)),
-                new Attendance("Faustas",  r.nextInt(10)),
-                new Attendance("Adam",  r.nextInt(10)),
-                new Attendance("Mantas",  r.nextInt(10)),
-                new Attendance("Darius",  r.nextInt(10))
+                new Attendance("Augustin"),
+                new Attendance("Kenneth"),
+                new Attendance("Ricky"),
+                new Attendance("Mikkel"),
+                new Attendance("Kjell"),
+                new Attendance("Faustas"),
+                new Attendance("Adam"),
+                new Attendance("Mantas"),
+                new Attendance("Darius")
         );
-        return studentDataTwo;
     }
 
 

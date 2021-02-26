@@ -1,8 +1,5 @@
 package AttendanceProject.Bll;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -30,21 +27,21 @@ public class CalendarManager {
     public int getCurrentYear(){ return calendar.get(Calendar.YEAR);}
 
     public String getCurrentMonthName(){
-        switch (getCurrentMonth()){
-            case 1: return "January";
-            case 2: return "February";
-            case 3: return "March";
-            case 4: return "April";
-            case 5: return "May";
-            case 6: return "June";
-            case 7: return "July";
-            case 8: return "August";
-            case 9: return "September";
-            case 10: return "October";
-            case 11: return "November";
-            case 12: return "December";
-            default: return "¯\\_(ツ)_/¯";
-        }
+        return switch (getCurrentMonth()) {
+            case 1 -> "January";
+            case 2 -> "February";
+            case 3 -> "March";
+            case 4 -> "April";
+            case 5 -> "May";
+            case 6 -> "June";
+            case 7 -> "July";
+            case 8 -> "August";
+            case 9 -> "September";
+            case 10 -> "October";
+            case 11 -> "November";
+            case 12 -> "December";
+            default -> "¯\\_(ツ)_/¯";
+        };
     }
 
     public int getFirstWeekDay(){

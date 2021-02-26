@@ -1,28 +1,17 @@
 package AttendanceProject.Gui.Controllers;
 
 import AttendanceProject.Bll.AttendanceManager;
-import com.jfoenix.controls.JFXButton;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class TeacherHomepageViewController {
     AttendanceManager attendanceManager;
@@ -31,16 +20,14 @@ public class TeacherHomepageViewController {
     private ScrollPane scrollPane;
 
     private Boolean studentsFilled = false;
-    private TilePane tilePaneClass = new TilePane();
-    private TilePane individualStudentTiles = new TilePane();
-    private int numberOfStudents = 19;
+    private final TilePane tilePaneClass = new TilePane();
+    private final TilePane individualStudentTiles = new TilePane();
+    private final int numberOfStudents = 19;
 
 
-    public void showClassAttendance(ActionEvent actionEvent) {
+    public void showClassAttendance() {
         if(studentsFilled){
-            System.out.println("setting not visible");
             tilePaneClass.setVisible(false);
-            System.out.println("setting student value to FALSE");
             studentsFilled = false;
         }else{
             fillStudentsClass();
@@ -49,7 +36,7 @@ public class TeacherHomepageViewController {
     }
         
 
-    public void showStudentSummary(ActionEvent actionEvent) throws IOException {
+    public void showStudentSummary() throws IOException {
         fillStudentsIndividually();
     }
 
@@ -86,7 +73,7 @@ public class TeacherHomepageViewController {
                     imgView.setFitHeight(75);
                     imgView.setFitWidth(75);
 
-                    Label lblContent = new Label(attendanceManager.getAllStudentsTwo().get(new Random().nextInt(9)).getName());;
+                    Label lblContent = new Label(attendanceManager.getAllStudentsTwo().get(new Random().nextInt(9)).getName());
 
                     VBox vbox = new VBox();
                     vbox.getChildren().add(imgView);

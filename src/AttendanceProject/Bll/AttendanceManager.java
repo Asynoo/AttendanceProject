@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 
 public class AttendanceManager {
 
-    private DAOAttendance daoAttendance = new DAOAttendance();
+    private final DAOAttendance daoAttendance = new DAOAttendance();
 
 
     public ObservableList<Attendance> getAllStudents1(){

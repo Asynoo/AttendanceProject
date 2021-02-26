@@ -14,12 +14,6 @@ public class CalendarButton extends JFXButton {
         this.date = date;
     }
 
-    public CalendarButton(String text, boolean present, LocalDate date){
-        super(text);
-        this.present = present;
-        this.date = date;
-    }
-
     public void setPresent(boolean present) {
         this.present = present;
     }
