@@ -153,7 +153,7 @@ public class StudentHomepageViewController {
                 if(calendarManager.getCurrentWeekday() == 1 || calendarManager.getCurrentWeekday() == 7){
                     calendarButton.setStyle("-fx-background-color:"+ weekendBgColor + ";-fx-text-fill:" + weekendTxtColor);
                 }
-                else if(today.compareTo(LocalDate.of(calendarManager.getCurrentYear(),calendarManager.getCurrentMonth(),calendarManager.getCurrentDay())) > 0 || (today.compareTo(LocalDate.of(calendarManager.getCurrentYear(),calendarManager.getCurrentMonth(),calendarManager.getCurrentDay())) == 0 && attendanceSet)){
+                else if(today.compareTo(calendarButton.getLocalDate()) > 0 || (today.compareTo(calendarButton.getLocalDate()) == 0 && attendanceSet)){
                     if(calendarButton.isPresent()){
                         calendarButton.setStyle("-fx-background-color:"+ weekdayPresentBgColor + ";-fx-text-fill:" + weekdayPresentTxtColor);
                     }
