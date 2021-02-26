@@ -3,10 +3,13 @@ package AttendanceProject.Gui.Controllers;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
@@ -15,27 +18,31 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class TeacherHomepageViewController {
+
     @FXML
-    //private TilePane classSummary;
     private ScrollPane scrollPane;
 
     private Boolean studentsFilled = false;
     private TilePane tilePaneClass = new TilePane();
     private TilePane individualStudentTiles = new TilePane();
+    private int numberOfStudents = 30;
 
 
     public void showClassAttendance(ActionEvent actionEvent) {
         if(studentsFilled){
+            System.out.println("setting not visible");
             tilePaneClass.setVisible(false);
-        }
-
-        if (!studentsFilled){
+            System.out.println("setting student value to FALSE");
+            studentsFilled = false;
+        }else{
             fillStudentsClass();
         }
+
     }
         
 
@@ -59,66 +66,78 @@ public class TeacherHomepageViewController {
         }
         return builder.toString();
     }
-    public void showStudentSummary(ActionEvent actionEvent) {
+    public void showStudentSummary(ActionEvent actionEvent) throws IOException {
         fillStudentsIndividually();
     }
 
         private void fillStudentsClass() {
 
-        studentsFilled = true;
+        if(tilePaneClass.isVisible()){
+            studentsFilled = true;
 
 
-        tilePaneClass.setPrefTileHeight(110);
-        tilePaneClass.setPrefTileWidth(110);
-        tilePaneClass.setPrefSize(351, 253);
+            tilePaneClass.setPrefTileHeight(110);
+            tilePaneClass.setPrefTileWidth(110);
+            tilePaneClass.setPrefSize(351, 253);
 
-        int numberOfStudents = 30;
-        for (int i = 0; i < numberOfStudents; i++) {
 
-            int tmp = (int) ( Math.random() * 2 + 1);
+            for (int i = 0; i < numberOfStudents; i++) {
 
-            //System.out.println(tmp);
+                int tmp = (int) ( Math.random() * 2 + 1);
 
-            if (tmp == 1){
-                File file = new File("src/AttendanceProject/resources/images/facetry.png");
-                Image img = new Image(file.toURI().toString());
-                ImageView imgView = new ImageView();
-                imgView.setImage(img);
-                imgView.setFitHeight(75);
-                imgView.setFitWidth(75);
-                Label lblContent = new Label(randomIdentifier());
+                if (tmp == 1){
 
-                VBox vbox = new VBox();
-                vbox.getChildren().add(imgView);
-                vbox.getChildren().add(lblContent);
+                    ImageView imgView = new ImageView("images/facetry.png");
+                    imgView.setFitHeight(75);
+                    imgView.setFitWidth(75);
+                    Label lblContent = new Label(randomIdentifier());
+                    VBox vbox = new VBox();
+                    vbox.getChildren().add(imgView);
+                    vbox.getChildren().add(lblContent);
 
-                tilePaneClass.getChildren().add(vbox);
+                    tilePaneClass.getChildren().add(vbox);
 
-            }else {
-                File file = new File("src/AttendanceProject/resources/images/faceRedtry.png");
-                Image img = new Image(file.toURI().toString());
-                ImageView imgView = new ImageView();
-                imgView.setImage(img);
-                imgView.setFitHeight(75);
-                imgView.setFitWidth(75);
+                }else {
 
-                Label lblContent = new Label(randomIdentifier());
+                    ImageView imgView = new ImageView("images/faceRedtry.png");
+                    imgView.setFitHeight(75);
+                    imgView.setFitWidth(75);
 
-                VBox vbox = new VBox();
-                vbox.getChildren().add(imgView);
-                vbox.getChildren().add(lblContent);
+                    Label lblContent = new Label(randomIdentifier());
 
-                tilePaneClass.getChildren().add(vbox);
+                    VBox vbox = new VBox();
+                    vbox.getChildren().add(imgView);
+                    vbox.getChildren().add(lblContent);
+
+                    tilePaneClass.getChildren().add(vbox);
+
+                }
 
             }
-
+            scrollPane.setContent(tilePaneClass);
+        }else{
+            tilePaneClass.setVisible(true);
+            studentsFilled = true;
         }
-        scrollPane.setContent(tilePaneClass);
+
+
     }
 
-    private void fillStudentsIndividually() {
-        individualStudentTiles.setPrefTileWidth(341);
-        individualStudentTiles.getPrefColumns();
+    private void fillStudentsIndividually() throws IOException {
+        individualStudentTiles.setPrefTileWidth(340);
+        individualStudentTiles.setPrefColumns(1);
+
+
+        scrollPane.setContent(individualStudentTiles);
+
+        for (int i = 0; i <numberOfStudents ; i++) {
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudentSummary.fxml"));
+            HBox hb = loader.load();
+            individualStudentTiles.getChildren().add(hb);
+        }
+
+
+
     }
 
 }
