@@ -54,9 +54,9 @@ public class StudentHomepageViewController {
 
     //Calendar colors
     static String weekendBgColor = "#999999";
-    static String weekendTxtColor = "#FFFFFF";
-    static String weekdayPresentBgColor = "#4390ff";
-    static String weekdayAbsentBgColor = "#81b3f9";
+    static String weekendTxtColor = "#bfbfbf";
+    static String weekdayPresentBgColor = "#85e085";
+    static String weekdayAbsentBgColor = "#ff6666";
     static String weekdayPresentTxtColor = "#FFFFFF";
     static String weekdayAbsentTxtColor = "#FFFFFF";
     static String unsetBgColor = "#FFFFFF";
@@ -91,9 +91,12 @@ public class StudentHomepageViewController {
         chartPane.setVisible(true);
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
+        Random rand = new Random();
+        int rand_int1 = rand.nextInt(60);
+        int rand_int2 = rand.nextInt(40);
             ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                    new PieChart.Data("Attending", 67),
-                    new PieChart.Data("Not Attending", 331)
+                    new PieChart.Data("Attending", rand_int1),
+                    new PieChart.Data("Not Attending", rand_int2)
             );
             chart.setData(pieData);
     }
