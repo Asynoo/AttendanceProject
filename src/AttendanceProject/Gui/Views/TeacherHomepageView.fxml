@@ -7,8 +7,10 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -65,7 +67,7 @@
                         <Insets left="20.0" top="60.0" />
                      </VBox.margin>
                      <children>
-                        <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showStudentSummary" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #4390ff;" text="Summary" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showStudentSummary" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #4390ff;" text="Student Summary" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -125,21 +127,24 @@
                         </Label>
                      </center>
                   </BorderPane>
-                  <ScrollPane fx:id="scrollPane" prefHeight="255.0" prefWidth="282.0">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" top="10.0" />
-                     </VBox.margin>
-                     <content>
-                        <TilePane fx:id="classSummary" alignment="CENTER" prefColumns="0" prefHeight="222.0" prefRows="0" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="324.0" visible="false" />
-                     </content>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </ScrollPane>
+                  <StackPane prefHeight="360.0" prefWidth="392.0">
+                     <children>
+                        <ScrollPane fx:id="scrollStudentSummary" prefHeight="200.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
+                        <ScrollPane fx:id="scrollClassAttendance" prefHeight="255.0" prefWidth="282.0">
+                           <content>
+                              <TilePane fx:id="classSummary" alignment="CENTER" prefColumns="0" prefHeight="222.0" prefRows="0" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="324.0" visible="false" />
+                           </content>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </ScrollPane>
+                     </children>
+                  </StackPane>
                </children>
-               <HBox.margin>
-                  <Insets top="25.0" />
-               </HBox.margin>
                <padding>
                   <Insets right="10.0" />
                </padding>
