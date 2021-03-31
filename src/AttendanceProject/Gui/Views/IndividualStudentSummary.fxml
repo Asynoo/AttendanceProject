@@ -6,25 +6,36 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="340.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.IndividualStudentSummaryController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.IndividualStudentSummaryController">
    <children>
-      <ImageView fx:id="headPicture" fitHeight="59.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-         <HBox.margin>
-            <Insets left="14.0" top="10.0" />
-         </HBox.margin></ImageView>
-      <VBox prefHeight="80.0" prefWidth="254.0">
-         <HBox.margin>
-            <Insets left="14.0" />
-         </HBox.margin>
+      <HBox fx:id="backgroundFill" onMouseClicked="#chooseStudent" prefHeight="80.0" prefWidth="335.0" style="-fx-background-color: #C8C8C8; -fx-background-radius: 20;">
          <children>
-            <Label fx:id="studentName" alignment="CENTER" prefHeight="41.0" prefWidth="254.0" text="Marco Gabel" />
-            <ImageView fx:id="absenceBar" fitHeight="18.0" fitWidth="254.0" pickOnBounds="true" preserveRatio="true">
-
-               <VBox.margin>
-                  <Insets left="25.0" />
-               </VBox.margin>
+            <ImageView fx:id="headPicture" fitHeight="59.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
             </ImageView>
+            <VBox prefHeight="80.0" prefWidth="247.0">
+               <HBox.margin>
+                  <Insets left="14.0" />
+               </HBox.margin>
+               <children>
+                  <Label fx:id="studentName" alignment="CENTER" prefHeight="41.0" prefWidth="254.0" text="Marco Gabel" />
+                  <ImageView fx:id="absenceBar" fitHeight="18.0" fitWidth="254.0" pickOnBounds="true" preserveRatio="true">
+      
+                           <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
 </HBox>

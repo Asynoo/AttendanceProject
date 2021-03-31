@@ -7,7 +7,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.TeacherHomepageViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.TeacherHomepageViewController">
    <children>
       <BorderPane prefHeight="32.0" prefWidth="600.0">
          <bottom>
@@ -47,7 +46,7 @@
                         <Insets left="20.0" top="70.0" />
                      </VBox.margin>
                      <children>
-                        <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showClassAttendance" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #4390ff;" text="Class attendance" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showClassAttendance" prefHeight="40.0" prefWidth="160.0" ripplerFill="RED" style="-fx-background-color: #4390ff;" text="Class attendance" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -67,7 +66,7 @@
                         <Insets left="20.0" top="60.0" />
                      </VBox.margin>
                      <children>
-                        <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showStudentSummary" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #4390ff;" text="Student Summary" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" minWidth="120.0" onAction="#showStudentSummary" prefHeight="40.0" prefWidth="160.0" ripplerFill="RED" style="-fx-background-color: #4390ff;" text="Student Summary" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -87,7 +86,7 @@
                         <Insets left="20.0" top="60.0" />
                      </VBox.margin>
                      <children>
-                        <JFXButton buttonType="RAISED" minWidth="120.0" prefHeight="40.0" prefWidth="160.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="Student" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" minWidth="120.0" prefHeight="40.0" prefWidth="160.0" ripplerFill="RED" style="-fx-background-color: #4390ff;" text="Student" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -114,7 +113,7 @@
                <children>
                   <BorderPane prefHeight="60.0" prefWidth="382.0">
                      <center>
-                        <Label text="Class summary" textFill="#4390ff" BorderPane.alignment="CENTER">
+                        <Label fx:id="paneDescription" prefHeight="23.0" prefWidth="136.0" text="Class summary" textFill="#4390ff" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -122,26 +121,23 @@
                               <Insets />
                            </opaqueInsets>
                            <BorderPane.margin>
-                              <Insets top="33.0" />
+                              <Insets bottom="10.0" top="33.0" />
                            </BorderPane.margin>
                         </Label>
                      </center>
                   </BorderPane>
-                  <StackPane prefHeight="360.0" prefWidth="392.0">
+                  <StackPane prefHeight="294.0" prefWidth="382.0">
                      <children>
-                        <ScrollPane fx:id="scrollStudentSummary" prefHeight="200.0" prefWidth="200.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                          </content>
-                        </ScrollPane>
-                        <ScrollPane fx:id="scrollClassAttendance" prefHeight="255.0" prefWidth="282.0">
+                        <ScrollPane fx:id="scrollStudentSummary" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" />
+                        <ScrollPane fx:id="scrollClassAttendance" prefHeight="294.0" prefWidth="367.0">
                            <content>
                               <TilePane fx:id="classSummary" alignment="CENTER" prefColumns="0" prefHeight="222.0" prefRows="0" prefTileHeight="110.0" prefTileWidth="110.0" prefWidth="324.0" visible="false" />
                            </content>
                            <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                              <Insets bottom="15.0" left="20.0" right="15.0" top="15.0" />
                            </padding>
                         </ScrollPane>
+                        <VBox fx:id="individualStudentPane" prefHeight="200.0" prefWidth="100.0" />
                      </children>
                   </StackPane>
                </children>
@@ -151,5 +147,6 @@
             </VBox>
          </children>
       </HBox>
+      <Label fx:id="testLabel" prefHeight="17.0" prefWidth="123.0" text="Student Selected" visible="false" />
    </children>
 </VBox>

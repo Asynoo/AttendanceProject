@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.Random;
@@ -13,7 +15,8 @@ import java.util.ResourceBundle;
 
 public class IndividualStudentSummaryController implements Initializable {
 
-
+    @FXML
+    private HBox backgroundFill;
     @FXML
     private ImageView headPicture;
     @FXML
@@ -48,5 +51,10 @@ public class IndividualStudentSummaryController implements Initializable {
                 absenceBar.setImage(imBar2);
             }
         }
+    }
+
+    public void chooseStudent(MouseEvent mouseEvent) {
+        backgroundFill.setStyle("-fx-background-color: RED; -fx-background-radius: 20");
+
     }
 }

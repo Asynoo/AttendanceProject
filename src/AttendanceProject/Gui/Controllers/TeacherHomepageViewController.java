@@ -1,23 +1,32 @@
 package AttendanceProject.Gui.Controllers;
 
 import AttendanceProject.Bll.AttendanceManager;
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.EventListener;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 public class TeacherHomepageViewController implements Initializable {
+    public Label testLabel;
+    @FXML
+    private VBox individualStudentPane;
     AttendanceManager attendanceManager;
+    @FXML
+    private Label paneDescription;
     @FXML
     private ScrollPane scrollStudentSummary;
     @FXML
@@ -35,6 +44,8 @@ public class TeacherHomepageViewController implements Initializable {
         fillStudentsIndividually();
         scrollClassAttendance.setVisible(false);
         scrollStudentSummary.setVisible(false);
+        individualStudentPane.setVisible(false);
+        paneDescription.setText("");
     }
 
     public void showClassAttendance() {
@@ -42,9 +53,11 @@ public class TeacherHomepageViewController implements Initializable {
             scrollClassAttendance.setVisible(true);
             scrollStudentSummary.setVisible(false);
             studentsClassVisible = true;
+            paneDescription.setText("Class attendance");
         }else {
             scrollClassAttendance.setVisible(false);
             studentsClassVisible = false;
+
         }
     }
         
@@ -54,6 +67,7 @@ public class TeacherHomepageViewController implements Initializable {
             scrollStudentSummary.setVisible(true);
             scrollClassAttendance.setVisible(false);
             studentsSummaryVisible = true;
+            paneDescription.setText("Student Summary");
         }else{
             scrollStudentSummary.setVisible(false);
             studentsSummaryVisible = false;
@@ -97,19 +111,33 @@ public class TeacherHomepageViewController implements Initializable {
                     vbox.getChildren().add(lblContent);
 
                     tilePaneClass.getChildren().add(vbox);
+                    String random = "bruh";
+                    imgView.setOnMouseClicked(e -> showInividualStudent(random));
 
                 }
 
             }
             scrollClassAttendance.setContent(tilePaneClass);
+
+
+    }
+
+    private void showInividualStudent(String s){
+        System.out.println("called it");
+        scrollClassAttendance.setVisible(false);
+        scrollStudentSummary.setVisible(false);
+        testLabel.setVisible(true);
+        Label studentName = new Label(s);
+        individualStudentPane.getChildren().add(studentName);
+
     }
 
     private void fillStudentsIndividually() {
-        individualStudentTiles.setPrefTileWidth(340);
+        individualStudentTiles.setPrefTileWidth(375);
         individualStudentTiles.setPrefColumns(1);
-
-
+        individualStudentTiles.setPadding(new Insets(10,0,0,0));
         scrollStudentSummary.setContent(individualStudentTiles);
+        scrollStudentSummary.setPannable(false);
 
         for (int i = 0; i <numberOfStudents ; i++) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudentSummary.fxml"));
@@ -122,6 +150,7 @@ public class TeacherHomepageViewController implements Initializable {
             individualStudentTiles.getChildren().add(hb);
         }
     }
+
 
 
 }
