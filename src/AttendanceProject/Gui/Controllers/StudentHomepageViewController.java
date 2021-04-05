@@ -14,7 +14,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,7 +45,7 @@ public class StudentHomepageViewController {
 
 
     List<ArrayList<CalendarButton>> columnList;
-    int displayedMonth;
+    Month displayedMonth;
 
     //Calendar colors
     static String weekendBgColor = "#999999";
@@ -147,7 +149,7 @@ public class StudentHomepageViewController {
                 }
                 else calendarButton.setOpacity(1);
                 //Coloring days in the calendar
-                if(calendarManager.getCurrentWeekday() == 1 || calendarManager.getCurrentWeekday() == 7){
+                if(calendarManager.getCurrentWeekday() == DayOfWeek.SATURDAY || calendarManager.getCurrentWeekday() == DayOfWeek.SUNDAY){
                     calendarButton.setStyle("-fx-background-color:"+ weekendBgColor + ";-fx-text-fill:" + weekendTxtColor);
                 }
                 else if(today.compareTo(calendarButton.getLocalDate()) > 0 || (today.compareTo(calendarButton.getLocalDate()) == 0 && attendanceSet)){
@@ -162,15 +164,16 @@ public class StudentHomepageViewController {
                 calendarManager.cycleDayUp();
             }
         }
+
     }
 
     public void actionMonthForward() {
-        if(calendarManager.getCurrentMonth() != displayedMonth+1)calendarManager.cycleMonthUp();
+        if(calendarManager.getCurrentMonth() == displayedMonth)calendarManager.cycleMonthUp();
         calendarFillDates();
     }
 
     public void actionMonthBack() {
-        if(calendarManager.getCurrentMonth() != displayedMonth-1)calendarManager.cycleMonthDown();
+        if(calendarManager.getCurrentMonth() == displayedMonth.plus(1))calendarManager.cycleMonthDown();
         calendarManager.cycleMonthDown();
         calendarFillDates();
     }
