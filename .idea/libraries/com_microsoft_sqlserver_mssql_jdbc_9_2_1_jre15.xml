@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="com.microsoft.sqlserver:mssql-jdbc:9.2.1.jre15" type="repository">
+    <properties maven-id="com.microsoft.sqlserver:mssql-jdbc:9.2.1.jre15" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/mssql-jdbc-9.2.1.jre15.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

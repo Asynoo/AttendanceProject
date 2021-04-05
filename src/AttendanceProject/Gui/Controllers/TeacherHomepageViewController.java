@@ -1,6 +1,8 @@
 package AttendanceProject.Gui.Controllers;
 
+import AttendanceProject.Be.Student;
 import AttendanceProject.Bll.AttendanceManager;
+import AttendanceProject.Gui.Models.StudentModel;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,9 +39,11 @@ public class TeacherHomepageViewController implements Initializable {
     private final TilePane tilePaneClass = new TilePane();
     private final TilePane individualStudentTiles = new TilePane();
     private final int numberOfStudents = 19;
+    StudentModel studentModel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        studentModel = new StudentModel();
         fillStudentsClass();
         fillStudentsIndividually();
         scrollClassAttendance.setVisible(false);
@@ -77,46 +81,63 @@ public class TeacherHomepageViewController implements Initializable {
         private void fillStudentsClass() {
             attendanceManager = new AttendanceManager();
 
+            studentModel.getListOfStudents();
+
+            for (Student student: studentModel.getListOfStudents()) {
+                ImageView imgView = new ImageView("images/facetry.png");
+                imgView.setFitHeight(75);
+                imgView.setFitWidth(75);
+                Label lblContent = new Label(student.getFirstName() + student.getLastName());
+                VBox vbox = new VBox();
+                vbox.getChildren().add(imgView);
+                vbox.getChildren().add(lblContent);
+
+                tilePaneClass.getChildren().add(vbox);
+            }
+
             tilePaneClass.setPrefTileHeight(110);
             tilePaneClass.setPrefTileWidth(110);
             tilePaneClass.setPrefSize(351, 253);
 
 
-            for (int i = 0; i < numberOfStudents; i++) {
 
-                int tmp = (int) ( Math.random() * 2 + 1);
+            /** Here is logic for adding students randomly with randomly assigned attendance resembled by different color of icon */
 
-                if (tmp == 1){
-
-                    ImageView imgView = new ImageView("images/facetry.png");
-                    imgView.setFitHeight(75);
-                    imgView.setFitWidth(75);
-                    Label lblContent = new Label(attendanceManager.getAllStudents1().get(new Random().nextInt(10)).getName());
-                    VBox vbox = new VBox();
-                    vbox.getChildren().add(imgView);
-                    vbox.getChildren().add(lblContent);
-
-                    tilePaneClass.getChildren().add(vbox);
-
-                }else {
-
-                    ImageView imgView = new ImageView("images/faceRedtry.png");
-                    imgView.setFitHeight(75);
-                    imgView.setFitWidth(75);
-
-                    Label lblContent = new Label(attendanceManager.getAllStudentsTwo().get(new Random().nextInt(9)).getName());
-
-                    VBox vbox = new VBox();
-                    vbox.getChildren().add(imgView);
-                    vbox.getChildren().add(lblContent);
-
-                    tilePaneClass.getChildren().add(vbox);
-                    String random = "bruh";
-                    imgView.setOnMouseClicked(e -> showInividualStudent(random));
-
-                }
-
-            }
+//            for (int i = 0; i < numberOfStudents; i++) {
+//
+//                int tmp = (int) ( Math.random() * 2 + 1);
+//
+//                if (tmp == 1){
+//
+//                    ImageView imgView = new ImageView("images/facetry.png");
+//                    imgView.setFitHeight(75);
+//                    imgView.setFitWidth(75);
+//                    Label lblContent = new Label(attendanceManager.getAllStudents1().get(new Random().nextInt(10)).getName());
+//                    VBox vbox = new VBox();
+//                    vbox.getChildren().add(imgView);
+//                    vbox.getChildren().add(lblContent);
+//
+//                    tilePaneClass.getChildren().add(vbox);
+//
+//                }else {
+//
+//                    ImageView imgView = new ImageView("images/faceRedtry.png");
+//                    imgView.setFitHeight(75);
+//                    imgView.setFitWidth(75);
+//
+//                    Label lblContent = new Label(attendanceManager.getAllStudentsTwo().get(new Random().nextInt(9)).getName());
+//
+//                    VBox vbox = new VBox();
+//                    vbox.getChildren().add(imgView);
+//                    vbox.getChildren().add(lblContent);
+//
+//                    tilePaneClass.getChildren().add(vbox);
+//                    String random = "bruh";
+//                    imgView.setOnMouseClicked(e -> showInividualStudent(random));
+//
+//                }
+//
+//            }
             scrollClassAttendance.setContent(tilePaneClass);
 
 
