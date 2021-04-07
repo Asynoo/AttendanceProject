@@ -1,19 +1,19 @@
 package AttendanceProject.Bll;
 
 import AttendanceProject.Be.Student;
-import AttendanceProject.Dal.DaoStudent;
+import AttendanceProject.Dal.DAOStudentDB;
 
 import java.util.List;
 
 public class StudentManager {
-    DaoStudent daoStudent;
+    DAOStudentDB DAOStudentDB;
 
     public StudentManager(){
-        daoStudent = new DaoStudent();
+        DAOStudentDB = new DAOStudentDB();
     }
 
     public List<Student> getStudents(){
-        return daoStudent.getStudents();
+        return DAOStudentDB.getStudents();
     }
 
 

@@ -1,5 +1,10 @@
 package AttendanceProject.Gui.Controllers;
 
+import AttendanceProject.Be.Student;
+import AttendanceProject.Be.Teacher;
+import AttendanceProject.Bll.StudentManager;
+import AttendanceProject.Gui.Models.StudentModel;
+import AttendanceProject.Gui.Models.TeacherModel;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -8,8 +13,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class LoginViewController{
+import java.util.List;
 
+public class LoginViewController{
+    private StudentModel studentModel;
+    private TeacherModel teacherModel;
+
+    private List<Student> students;
+    private List<Teacher> teachers;
 
     @FXML
     private javafx.scene.control.Button login;
@@ -23,18 +34,19 @@ public class LoginViewController{
         String user = username.getText();
         String pass = password.getText();
 
-        if (user.equals("student") && pass.equals("password")) {
-            HomepageStudent();
-            closeButtonAction();
+        for (Student s: students) {
+            if(s.getUsername().equals(user) && s.getPassword().equals(pass)){
+                HomepageStudent(s);
+                closeButtonAction();
+            }
+        }
 
-        } else
-            System.out.println("Not Poggers");
-
-        if (user.equals("teacher") && pass.equals("password")) {
-            HomepageTeacher();
-            closeButtonAction();
-        } else
-            System.out.println("Not Poggers");
+        for (Teacher t: teachers) {
+            if(t.getUsername().equals(user) && t.getPassword().equals(pass)){
+                HomepageTeacher(t);
+                closeButtonAction();
+            }
+        }
     }
 
     @FXML
@@ -43,19 +55,31 @@ public class LoginViewController{
         stage.close();
     }
 
-    public void HomepageStudent() throws Exception {
+    public void initialize(){
+        studentModel = new StudentModel();
+        teacherModel = new TeacherModel();
+        students = studentModel.getListOfStudents();
+        teachers = teacherModel.getListOfTeachers();
+    }
+
+    public void HomepageStudent(Student student) throws Exception {
         Stage HomepageViewStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/AttendanceProject/Gui/Views/StudentHomepageView.fxml"));
-        HomepageViewStage.setTitle("Student AC");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AttendanceProject/Gui/Views/StudentHomepageView.fxml"));
+        Parent root = loader.load();
+        ((StudentHomepageViewController)loader.getController()).setUser(student);
+        HomepageViewStage.setTitle(student.getFirstName() + student.getLastName());
         HomepageViewStage.setScene(new Scene(root));
         HomepageViewStage.setResizable(false);
         HomepageViewStage.show();
     }
 
-    public void HomepageTeacher() throws Exception {
+    public void HomepageTeacher(Teacher teacher) throws Exception {
         Stage HomepageViewStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/AttendanceProject/Gui/Views/TeacherHomepageView.fxml"));
-        HomepageViewStage.setTitle("Teacher AC");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AttendanceProject/Gui/Views/TeacherHomepageView.fxml"));
+        Parent root = loader.load();
+        ((TeacherHomepageViewController)loader.getController()).setStudentModel(studentModel);
+        ((TeacherHomepageViewController)loader.getController()).setUser(teacher);
+        HomepageViewStage.setTitle(teacher.getFirstName() + teacher.getLastName());
         HomepageViewStage.setScene(new Scene(root));
         HomepageViewStage.setResizable(true);
         HomepageViewStage.show();

@@ -30,31 +30,5 @@ public class IndividualStudentSummaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         attendanceManager = new AttendanceManager();
-        studentName.setText(attendanceManager.getAllStudents1().get(new Random().nextInt(10)).getName());
-
-        Image imHead = new Image("images/faceYellow.png");
-        headPicture.setImage(imHead);
-
-
-        int tmp = (int) ( Math.random() * 3 + 1);
-        switch (tmp) {
-            case 1 -> {
-                Image imBar = new Image("images/Group 17.png");
-                absenceBar.setImage(imBar);
-            }
-            case 2 -> {
-                Image imBar1 = new Image("images/Group 18.png");
-                absenceBar.setImage(imBar1);
-            }
-            case 3 -> {
-                Image imBar2 = new Image("images/Group 19.png");
-                absenceBar.setImage(imBar2);
-            }
-        }
-    }
-
-    public void chooseStudent(MouseEvent mouseEvent) {
-        backgroundFill.setStyle("-fx-background-color: RED; -fx-background-radius: 20");
-
     }
 }

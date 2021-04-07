@@ -1,6 +1,7 @@
 package AttendanceProject.Gui.Controllers;
 
 import AttendanceProject.Be.CalendarButton;
+import AttendanceProject.Be.Student;
 import AttendanceProject.Bll.CalendarManager;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
@@ -26,12 +27,13 @@ public class StudentHomepageViewController {
     CalendarManager calendarManager = new CalendarManager();
 
     @FXML
+    private Label userLbl;
+    @FXML
     private BorderPane calendarPane;
     @FXML
     private Label calendarInfoLbl;
     @FXML
     private GridPane calendarGrid;
-
     @FXML
     private HBox chartPane;
     @FXML
@@ -43,6 +45,7 @@ public class StudentHomepageViewController {
     @FXML
     private PieChart chart;
 
+    Student user;
 
     List<ArrayList<CalendarButton>> columnList;
     Month displayedMonth;
@@ -84,7 +87,12 @@ public class StudentHomepageViewController {
         calendarFillDates();
     }
 
-        public void showStatistics() {
+    public void setUser(Student user) {
+        this.user = user;
+        userLbl.setText(user.getFirstName() + " " + user.getLastName());
+    }
+
+    public void showStatistics() {
         chartPane.setVisible(true);
         statusPane.setVisible(false);
         calendarPane.setVisible(false);

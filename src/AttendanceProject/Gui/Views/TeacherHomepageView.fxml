@@ -18,7 +18,7 @@
    <children>
       <BorderPane prefHeight="32.0" prefWidth="600.0">
          <bottom>
-            <Label alignment="TOP_CENTER" text="Jeppe Moritz Led" textFill="#4390ff" BorderPane.alignment="CENTER">
+            <Label fx:id="userLabel" alignment="TOP_CENTER" text="teacher_name" textFill="#4390ff" BorderPane.alignment="CENTER">
                <font>
                   <Font size="34.0" />
                </font>

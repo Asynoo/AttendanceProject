@@ -1,6 +1,7 @@
 package AttendanceProject.Gui.Controllers;
 
 import AttendanceProject.Be.Student;
+import AttendanceProject.Be.Teacher;
 import AttendanceProject.Bll.AttendanceManager;
 import AttendanceProject.Gui.Models.StudentModel;
 import com.jfoenix.controls.JFXButton;
@@ -25,8 +26,9 @@ import java.util.ResourceBundle;
 public class TeacherHomepageViewController implements Initializable {
     public Label testLabel;
     @FXML
+    private Label userLabel;
+    @FXML
     private VBox individualStudentPane;
-    AttendanceManager attendanceManager;
     @FXML
     private Label paneDescription;
     @FXML
@@ -39,17 +41,28 @@ public class TeacherHomepageViewController implements Initializable {
     private final TilePane tilePaneClass = new TilePane();
     private final TilePane individualStudentTiles = new TilePane();
     private final int numberOfStudents = 19;
-    StudentModel studentModel;
+
+    private StudentModel studentModel;
+
+    private Teacher user;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        studentModel = new StudentModel();
-        fillStudentsClass();
-        fillStudentsIndividually();
         scrollClassAttendance.setVisible(false);
         scrollStudentSummary.setVisible(false);
         individualStudentPane.setVisible(false);
         paneDescription.setText("");
+    }
+
+    public void setStudentModel(StudentModel studentModel) {
+        this.studentModel = studentModel;
+        fillStudentsClass();
+       //fillStudentsIndividually(); Needs a fix
+    }
+
+    public void setUser(Teacher user) {
+        this.user = user;
+        userLabel.setText(user.getFirstName() + " " + user.getLastName());
     }
 
     public void showClassAttendance() {
@@ -64,7 +77,6 @@ public class TeacherHomepageViewController implements Initializable {
 
         }
     }
-        
 
     public void showStudentSummary() {
         if(!studentsSummaryVisible){
@@ -79,7 +91,6 @@ public class TeacherHomepageViewController implements Initializable {
     }
 
         private void fillStudentsClass() {
-            attendanceManager = new AttendanceManager();
 
             studentModel.getListOfStudents();
 
