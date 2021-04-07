@@ -3,9 +3,21 @@ package AttendanceProject.Bll;
 import AttendanceProject.Be.Attendance;
 import AttendanceProject.Dal.DAOAttendance;
 import AttendanceProject.Dal.DAOAttendanceDB;
-import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class AttendanceManager {
+    DAOAttendance daoAttendance;
 
-    private final DAOAttendance daoAttendance = new DAOAttendanceDB();
+    public AttendanceManager(){
+        daoAttendance = new DAOAttendanceDB();
+    }
+
+    public List<Attendance> getAttendances(){
+        return daoAttendance.getAttendances();
+    }
+
+    public void addAttendance(Attendance attendance) {
+        daoAttendance.submitAttendance(attendance);
+    }
 }

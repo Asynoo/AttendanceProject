@@ -5,11 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface DAOAttendance {
-    boolean getAttendance(LocalDate date);
+    List<Attendance> getAttendances();
 
-    void submitAttendance(LocalDate date,boolean attendance);
+    void submitAttendance(Attendance attendance);
 
     void queryEditAttendance(LocalDate date,boolean attendance);
 

@@ -50,5 +50,10 @@ public class CalendarManager {
     }
 
     public void setDateToday(){
-        calendar = LocalDate.now(Clock.systemDefaultZone());    }
+        calendar = LocalDate.now(Clock.systemDefaultZone());
+    }
+
+    public LocalDate getLocalDate(){
+        return calendar;
+    }
 }

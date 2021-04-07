@@ -6,15 +6,13 @@ import AttendanceProject.Dal.DAOStudentDB;
 import java.util.List;
 
 public class StudentManager {
-    DAOStudentDB DAOStudentDB;
+    AttendanceProject.Dal.DAOStudent daoStudent;
 
     public StudentManager(){
-        DAOStudentDB = new DAOStudentDB();
+        daoStudent = new DAOStudentDB();
     }
 
     public List<Student> getStudents(){
-        return DAOStudentDB.getStudents();
+        return daoStudent.getStudents();
     }
-
-
 }

@@ -2,9 +2,8 @@ package AttendanceProject.Gui.Controllers;
 
 import AttendanceProject.Be.Student;
 import AttendanceProject.Be.Teacher;
-import AttendanceProject.Bll.AttendanceManager;
+import AttendanceProject.Gui.Models.AttendanceModel;
 import AttendanceProject.Gui.Models.StudentModel;
-import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,15 +11,12 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.EventListener;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class TeacherHomepageViewController implements Initializable {
@@ -43,6 +39,7 @@ public class TeacherHomepageViewController implements Initializable {
     private final int numberOfStudents = 19;
 
     private StudentModel studentModel;
+    private AttendanceModel attendanceModel;
 
     private Teacher user;
 
@@ -58,6 +55,10 @@ public class TeacherHomepageViewController implements Initializable {
         this.studentModel = studentModel;
         fillStudentsClass();
        //fillStudentsIndividually(); Needs a fix
+    }
+
+    public void setAttendanceModel(AttendanceModel attendanceModel) {
+        this.attendanceModel = attendanceModel;
     }
 
     public void setUser(Teacher user) {
@@ -92,9 +93,9 @@ public class TeacherHomepageViewController implements Initializable {
 
         private void fillStudentsClass() {
 
-            studentModel.getListOfStudents();
+            studentModel.getStudentList();
 
-            for (Student student: studentModel.getListOfStudents()) {
+            for (Student student: studentModel.getStudentList()) {
                 ImageView imgView = new ImageView("images/facetry.png");
                 imgView.setFitHeight(75);
                 imgView.setFitWidth(75);
@@ -182,7 +183,4 @@ public class TeacherHomepageViewController implements Initializable {
             individualStudentTiles.getChildren().add(hb);
         }
     }
-
-
-
 }

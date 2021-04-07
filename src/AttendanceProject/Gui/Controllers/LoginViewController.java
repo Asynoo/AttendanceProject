@@ -2,7 +2,7 @@ package AttendanceProject.Gui.Controllers;
 
 import AttendanceProject.Be.Student;
 import AttendanceProject.Be.Teacher;
-import AttendanceProject.Bll.StudentManager;
+import AttendanceProject.Gui.Models.AttendanceModel;
 import AttendanceProject.Gui.Models.StudentModel;
 import AttendanceProject.Gui.Models.TeacherModel;
 import com.jfoenix.controls.JFXPasswordField;
@@ -18,6 +18,7 @@ import java.util.List;
 public class LoginViewController{
     private StudentModel studentModel;
     private TeacherModel teacherModel;
+    private AttendanceModel attendanceModel;
 
     private List<Student> students;
     private List<Teacher> teachers;
@@ -56,10 +57,11 @@ public class LoginViewController{
     }
 
     public void initialize(){
+        attendanceModel = new AttendanceModel();
         studentModel = new StudentModel();
         teacherModel = new TeacherModel();
-        students = studentModel.getListOfStudents();
-        teachers = teacherModel.getListOfTeachers();
+        students = studentModel.getStudentList();
+        teachers = teacherModel.getTeacherList();
     }
 
     public void HomepageStudent(Student student) throws Exception {
@@ -67,7 +69,8 @@ public class LoginViewController{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AttendanceProject/Gui/Views/StudentHomepageView.fxml"));
         Parent root = loader.load();
         ((StudentHomepageViewController)loader.getController()).setUser(student);
-        HomepageViewStage.setTitle(student.getFirstName() + student.getLastName());
+        ((StudentHomepageViewController)loader.getController()).setAttendanceModel(attendanceModel);
+        HomepageViewStage.setTitle(student.getFirstName() + " " + student.getLastName());
         HomepageViewStage.setScene(new Scene(root));
         HomepageViewStage.setResizable(false);
         HomepageViewStage.show();
@@ -78,8 +81,9 @@ public class LoginViewController{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AttendanceProject/Gui/Views/TeacherHomepageView.fxml"));
         Parent root = loader.load();
         ((TeacherHomepageViewController)loader.getController()).setStudentModel(studentModel);
+        ((TeacherHomepageViewController)loader.getController()).setAttendanceModel(attendanceModel);
         ((TeacherHomepageViewController)loader.getController()).setUser(teacher);
-        HomepageViewStage.setTitle(teacher.getFirstName() + teacher.getLastName());
+        HomepageViewStage.setTitle(teacher.getFirstName() + " " + teacher.getLastName());
         HomepageViewStage.setScene(new Scene(root));
         HomepageViewStage.setResizable(true);
         HomepageViewStage.show();

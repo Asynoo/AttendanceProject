@@ -1,18 +1,50 @@
 package AttendanceProject.Be;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import java.time.LocalDate;
 
 public class Attendance {
 
-    private final StringProperty studentName;
+    private LocalDate date;
+    private int studentId;
+    private boolean present;
+    private boolean changeRequest;
 
-    public Attendance(String name) {
-        this.studentName = new SimpleStringProperty(name);
+    public Attendance(LocalDate date,int studentId,boolean presence, boolean changeRequest) {
+        this.date = date;
+        this.studentId = studentId;
+        this.present = presence;
+        this.changeRequest = changeRequest;
     }
 
-    public String getName() {
-        return studentName.get();
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setPresent(boolean present) {
+        this.present = present;
+    }
+
+    public boolean isPresent() {
+        return present;
+    }
+
+    public void setChangeRequest(boolean changeRequest) {
+        this.changeRequest = changeRequest;
+    }
+
+    public boolean hasChangeRequest() {
+        return changeRequest;
+    }
 }

@@ -17,6 +17,10 @@ public class Student {
         this.studyClassId = studyClassId;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
