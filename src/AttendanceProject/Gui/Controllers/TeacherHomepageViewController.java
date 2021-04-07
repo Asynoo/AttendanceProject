@@ -1,9 +1,9 @@
 package AttendanceProject.Gui.Controllers;
 
 import AttendanceProject.Be.Student;
-import AttendanceProject.Bll.AttendanceManager;
+import AttendanceProject.Be.Teacher;
+import AttendanceProject.Gui.Models.AttendanceModel;
 import AttendanceProject.Gui.Models.StudentModel;
-import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,22 +11,20 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.EventListener;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class TeacherHomepageViewController implements Initializable {
     public Label testLabel;
     @FXML
+    private Label userLabel;
+    @FXML
     private VBox individualStudentPane;
-    AttendanceManager attendanceManager;
     @FXML
     private Label paneDescription;
     @FXML
@@ -39,17 +37,33 @@ public class TeacherHomepageViewController implements Initializable {
     private final TilePane tilePaneClass = new TilePane();
     private final TilePane individualStudentTiles = new TilePane();
     private final int numberOfStudents = 19;
-    StudentModel studentModel;
+
+    private StudentModel studentModel;
+    private AttendanceModel attendanceModel;
+
+    private Teacher user;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        studentModel = new StudentModel();
-        fillStudentsClass();
-        fillStudentsIndividually();
         scrollClassAttendance.setVisible(false);
         scrollStudentSummary.setVisible(false);
         individualStudentPane.setVisible(false);
         paneDescription.setText("");
+    }
+
+    public void setStudentModel(StudentModel studentModel) {
+        this.studentModel = studentModel;
+        fillStudentsClass();
+       //fillStudentsIndividually(); Needs a fix
+    }
+
+    public void setAttendanceModel(AttendanceModel attendanceModel) {
+        this.attendanceModel = attendanceModel;
+    }
+
+    public void setUser(Teacher user) {
+        this.user = user;
+        userLabel.setText(user.getFirstName() + " " + user.getLastName());
     }
 
     public void showClassAttendance() {
@@ -64,7 +78,6 @@ public class TeacherHomepageViewController implements Initializable {
 
         }
     }
-        
 
     public void showStudentSummary() {
         if(!studentsSummaryVisible){
@@ -79,11 +92,10 @@ public class TeacherHomepageViewController implements Initializable {
     }
 
         private void fillStudentsClass() {
-            attendanceManager = new AttendanceManager();
 
-            studentModel.getListOfStudents();
+            studentModel.getStudentList();
 
-            for (Student student: studentModel.getListOfStudents()) {
+            for (Student student: studentModel.getStudentList()) {
                 ImageView imgView = new ImageView("images/facetry.png");
                 imgView.setFitHeight(75);
                 imgView.setFitWidth(75);
@@ -171,7 +183,4 @@ public class TeacherHomepageViewController implements Initializable {
             individualStudentTiles.getChildren().add(hb);
         }
     }
-
-
-
 }

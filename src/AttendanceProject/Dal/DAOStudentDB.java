@@ -9,13 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoStudent {
-
-    private static DataAccess dataAccess;
-
-    public DaoStudent(){
-        dataAccess = new DataAccess();
-    }
+public class DAOStudentDB implements DAOStudent{
+    private static DataAccess dataAccess = new DataAccess();
 
     public List<Student> getStudents(){
         ArrayList<Student> students = new ArrayList<>();
@@ -30,10 +25,10 @@ public class DaoStudent {
                 String firstName = rs.getString("FirstName");
                 String lastName = rs.getString("LastName");
                 String username = rs.getString("Username");
+                String password = rs.getString("Password");
                 int studyClassId = rs.getInt("ClassId");
-                Student student = new Student(id, firstName, lastName, username, id);
-                int i = 1;
-                System.out.println("Fetched student number" + i++);
+                Student student = new Student(id, firstName, lastName, username, password, id);
+                System.out.println("Fetched student id: " + id);
                 students.add(student);
             }
         } catch (SQLException ex) {

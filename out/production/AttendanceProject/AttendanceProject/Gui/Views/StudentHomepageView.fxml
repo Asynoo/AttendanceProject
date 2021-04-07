@@ -18,7 +18,7 @@
 
 <BorderPane prefHeight="361.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.StudentHomepageViewController">
    <top>
-      <Label alignment="CENTER" text="Danylo Boshagora" textAlignment="CENTER" textFill="#4390ff" BorderPane.alignment="CENTER">
+      <Label fx:id="userLbl" alignment="CENTER" text="student_name" textAlignment="CENTER" textFill="#4390ff" BorderPane.alignment="CENTER">
          <font>
             <Font size="34.0" />
          </font>

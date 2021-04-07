@@ -2,18 +2,22 @@ package AttendanceProject.Bll;
 
 import AttendanceProject.Be.Attendance;
 import AttendanceProject.Dal.DAOAttendance;
-import javafx.collections.ObservableList;
+import AttendanceProject.Dal.DAOAttendanceDB;
+
+import java.util.List;
 
 public class AttendanceManager {
+    DAOAttendance daoAttendance;
 
-    private final DAOAttendance daoAttendance = new DAOAttendance();
-
-
-    public ObservableList<Attendance> getAllStudents1(){
-        return daoAttendance.getStudentData();
-    }
-    public ObservableList<Attendance> getAllStudentsTwo(){
-        return daoAttendance.getStudentDataTwo();
+    public AttendanceManager(){
+        daoAttendance = new DAOAttendanceDB();
     }
 
+    public List<Attendance> getAttendances(){
+        return daoAttendance.getAttendances();
+    }
+
+    public void addAttendance(Attendance attendance) {
+        daoAttendance.submitAttendance(attendance);
+    }
 }

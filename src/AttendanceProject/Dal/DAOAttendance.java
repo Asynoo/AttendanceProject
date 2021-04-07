@@ -4,39 +4,15 @@ import AttendanceProject.Be.Attendance;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class DAOAttendance {
+import java.time.LocalDate;
+import java.util.List;
 
-    public ObservableList<Attendance> getStudentData(){
+public interface DAOAttendance {
+    List<Attendance> getAttendances();
 
-        return FXCollections.observableArrayList(
+    void submitAttendance(Attendance attendance);
 
-                new Attendance("Marco"),
-                new Attendance("Danylo"),
-                new Attendance("Tomas"),
-                new Attendance("Wojciech"),
-                new Attendance("Oliver"),
-                new Attendance("Rolf"),
-                new Attendance("Jeppe"),
-                new Attendance("Jakub"),
-                new Attendance("Kamila"),
-                new Attendance("Ivan")
-        );
-    }
-    public ObservableList<Attendance> getStudentDataTwo(){
+    void queryEditAttendance(LocalDate date,boolean attendance);
 
-        return FXCollections.observableArrayList(
-
-                new Attendance("Augustin"),
-                new Attendance("Kenneth"),
-                new Attendance("Ricky"),
-                new Attendance("Mikkel"),
-                new Attendance("Kjell"),
-                new Attendance("Faustas"),
-                new Attendance("Adam"),
-                new Attendance("Mantas"),
-                new Attendance("Darius")
-        );
-    }
-
-
+    void confirmEditAttendance(LocalDate date,boolean attendance);
 }

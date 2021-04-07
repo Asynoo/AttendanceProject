@@ -8,13 +8,11 @@ import java.util.List;
 public class StudentModel {
 
     private StudentManager studentManager;
-    private List<Student> listOfStudents;
-    StudentModel studentModel;
-
+    private List<Student> studentList;
 
     public StudentModel(){
         this.studentManager = new StudentManager();
-
+        studentList = studentManager.getStudents();
     }
 
     /**
@@ -27,12 +25,11 @@ public class StudentModel {
     }
      */
 
-    public List<Student> getListOfStudents() {
-        listOfStudents = studentManager.getStudents();
-        return listOfStudents;
+    public List<Student> getStudentList() {
+        return studentList;
     }
 
-    public void setListOfStudents(List<Student> listOfStudents) {
-        this.listOfStudents = listOfStudents;
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
     }
 }

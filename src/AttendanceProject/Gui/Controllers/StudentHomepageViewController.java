@@ -1,7 +1,10 @@
 package AttendanceProject.Gui.Controllers;
 
+import AttendanceProject.Be.Attendance;
 import AttendanceProject.Be.CalendarButton;
+import AttendanceProject.Be.Student;
 import AttendanceProject.Bll.CalendarManager;
+import AttendanceProject.Gui.Models.AttendanceModel;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +19,7 @@ import javafx.scene.text.Font;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +30,13 @@ public class StudentHomepageViewController {
     CalendarManager calendarManager = new CalendarManager();
 
     @FXML
+    private Label userLbl;
+    @FXML
     private BorderPane calendarPane;
     @FXML
     private Label calendarInfoLbl;
     @FXML
     private GridPane calendarGrid;
-
     @FXML
     private HBox chartPane;
     @FXML
@@ -43,6 +48,9 @@ public class StudentHomepageViewController {
     @FXML
     private PieChart chart;
 
+    Student user;
+
+    AttendanceModel attendanceModel;
 
     List<ArrayList<CalendarButton>> columnList;
     Month displayedMonth;
@@ -59,32 +67,45 @@ public class StudentHomepageViewController {
     //Mock data settings
     static int absencePercentage = 90;
 
-    private boolean attendance;
     private boolean attendanceSet;
 
-    LocalDate today;
+    LocalDateTime today;
 
     @FXML
     private void isAttendingAction() {
-        attendance = true;
-        attendanceSet = true;
-        System.out.println("You have been submitted as Attending");
-        isNotAttending.setOpacity(0.6);
-        isAttending.setOpacity(1);
-        calendarFillDates();
+        if (!attendanceSet) {
+            attendanceModel.addAttendance(new Attendance(today.toLocalDate(),user.getId(),true,false));
+            System.out.println("You have been submitted as Attending");
+            updateAttendanceSet();
+            calendarFillDates();
+        }
     }
 
     @FXML
     private void isNotAttendingAction() {
-        attendance = false;
-        attendanceSet = true;
-        System.out.println("You have been submitted as Not Attending");
-        isAttending.setOpacity(0.6);
-        isNotAttending.setOpacity(1);
-        calendarFillDates();
+        if (!attendanceSet) {
+            attendanceModel.addAttendance(new Attendance(today.toLocalDate(),user.getId(),false,false));
+            System.out.println("You have been submitted as Not Attending");
+            updateAttendanceSet();
+            isAttending.setOpacity(0.6);
+            isNotAttending.setOpacity(1);
+            calendarFillDates();
+        }
     }
 
-        public void showStatistics() {
+    public void setUser(Student user) {
+        this.user = user;
+        userLbl.setText(user.getFirstName() + " " + user.getLastName());
+    }
+
+    public void setAttendanceModel(AttendanceModel attendanceModel) {
+        this.attendanceModel = attendanceModel;
+        updateAttendanceSet();
+        calendarFillDates();
+        calendarManager.setDateToday();
+    }
+
+    public void showStatistics() {
         chartPane.setVisible(true);
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
@@ -111,10 +132,8 @@ public class StudentHomepageViewController {
     }
 
     public void initialize() {
-        today = LocalDate.now();
+        today = LocalDate.now().atStartOfDay();
         setupCalendar();
-        calendarFillDates();
-        calendarManager.setDateToday();
     }
 
     public void setupCalendar() {
@@ -122,7 +141,7 @@ public class StudentHomepageViewController {
         for(int y = 0;y < 6;y++){
             columnList.add(new ArrayList<>());
             for(int x=0;x < 7;x++){
-                CalendarButton calendarButton = new CalendarButton(":)",today);
+                CalendarButton calendarButton = new CalendarButton(null);
                 calendarButton.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
                 calendarButton.setAlignment(Pos.CENTER);
                 calendarButton.setFont(Font.font(21));
@@ -138,11 +157,13 @@ public class StudentHomepageViewController {
         calendarManager.dateToFirstWeekMonthDay();
         for (ArrayList<CalendarButton> rowList:columnList) {
             for (CalendarButton calendarButton:rowList) {
-                calendarButton.setText(calendarManager.getCurrentDay() + "");
-                calendarButton.setLocalDate(LocalDate.of(calendarManager.getCurrentYear(),calendarManager.getCurrentMonth(),calendarManager.getCurrentDay()));
-                //Generate mock values for the calendar
-                calendarButton.setPresent(Math.random() * 100 < absencePercentage);
-                setCalendarButtonToday();
+                //Filling the button with relevant Data
+                for (Attendance a:attendanceModel.getStudentAttendances(user)) {
+                    if(a.getDate().atStartOfDay().isEqual(calendarManager.getLocalDate().atStartOfDay())) {
+                        calendarButton.setAttendance(a);
+                    }
+                }
+                calendarButton.setText(Integer.toString(calendarManager.getCurrentDay()));
                 //Opacity for days not in current month
                 if(calendarManager.getCurrentMonth() != displayedMonth){
                     calendarButton.setOpacity(0.7);
@@ -152,8 +173,8 @@ public class StudentHomepageViewController {
                 if(calendarManager.getCurrentWeekday() == DayOfWeek.SATURDAY || calendarManager.getCurrentWeekday() == DayOfWeek.SUNDAY){
                     calendarButton.setStyle("-fx-background-color:"+ weekendBgColor + ";-fx-text-fill:" + weekendTxtColor);
                 }
-                else if(today.compareTo(calendarButton.getLocalDate()) > 0 || (today.compareTo(calendarButton.getLocalDate()) == 0 && attendanceSet)){
-                    if(calendarButton.isPresent()){
+                else if(calendarButton.getAttendance() != null){
+                    if(calendarButton.getAttendance().isPresent()){
                         calendarButton.setStyle("-fx-background-color:"+ weekdayPresentBgColor + ";-fx-text-fill:" + weekdayPresentTxtColor);
                     }
                     else {
@@ -178,12 +199,19 @@ public class StudentHomepageViewController {
         calendarFillDates();
     }
 
-    public void setCalendarButtonToday() {
-        for (ArrayList<CalendarButton> rowList:columnList) {
-            for (CalendarButton calendarButton:rowList) {
-                if(calendarButton.getLocalDate().isEqual(today)){
-                    calendarButton.setPresent(attendance);
+    private void updateAttendanceSet(){
+        for (Attendance a: attendanceModel.getStudentAttendances(user)) {
+            if (a.getDate().atStartOfDay().isEqual(today)){
+                attendanceSet = true;
+                if(a.isPresent()){
+                    isNotAttending.setOpacity(0.6);
+                    isAttending.setOpacity(1);
                 }
+                else {
+                    isNotAttending.setOpacity(1);
+                    isAttending.setOpacity(0.6);
+                }
+                break;
             }
         }
     }

@@ -1,24 +1,20 @@
 package AttendanceProject.Be;
 
-public class Student {
+public class Teacher {
     private int id;
     private String firstName;
     private String lastName;
     private String username;
     private String password;
-    private int studyClassId;
+    private String credentials;
 
-    public Student (int id, String firstName, String lastName, String username, String password, int studyClassId){
+    public Teacher(int id, String firstName, String lastName, String username, String password, String credentials){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
-        this.studyClassId = studyClassId;
-    }
-
-    public int getId() {
-        return id;
+        this.credentials = credentials;
     }
 
     public String getFirstName() {
@@ -49,11 +45,7 @@ public class Student {
         return password;
     }
 
-    public int getStudyClassId() {
-        return studyClassId;
-    }
-
-    public void setStudyClassId(int studyClassId) {
-        this.studyClassId = studyClassId;
+    public String getCredentials() {
+        return credentials;
     }
 }
