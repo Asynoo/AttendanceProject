@@ -190,12 +190,14 @@ public class StudentHomepageViewController {
 
     public void actionMonthForward() {
         if(calendarManager.getCurrentMonth() == displayedMonth)calendarManager.cycleMonthUp();
+        calendarClearDates();
         calendarFillDates();
     }
 
     public void actionMonthBack() {
         if(calendarManager.getCurrentMonth() == displayedMonth.plus(1))calendarManager.cycleMonthDown();
         calendarManager.cycleMonthDown();
+        calendarClearDates();
         calendarFillDates();
     }
 
@@ -212,6 +214,14 @@ public class StudentHomepageViewController {
                     isAttending.setOpacity(0.6);
                 }
                 break;
+            }
+        }
+    }
+
+    private void calendarClearDates(){
+        for (ArrayList<CalendarButton> rowList:columnList) {
+            for (CalendarButton calendarButton:rowList) {
+                calendarButton.setAttendance(null);
             }
         }
     }
