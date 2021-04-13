@@ -101,6 +101,37 @@
                   </ImageView>
                </children>
             </HBox>
+            <HBox fx:id="chartPane" prefHeight="100.0" prefWidth="200.0" visible="false">
+               <children>
+                  <PieChart fx:id="chart" prefHeight="390.0" prefWidth="406.0" stylesheets="@Css/piechart.css">
+                     <styleClass>
+                        <String fx:value="default-color0" />
+                        <String fx:value="default-color1" />
+                     </styleClass></PieChart>
+               </children>
+            </HBox>
+            <HBox fx:id="statusPane" alignment="CENTER" focusTraversable="true" prefHeight="100.0" prefWidth="200.0" spacing="30.0" visible="false">
+               <children>
+                  <JFXButton fx:id="isAttending" onAction="#isAttendingAction" prefHeight="118.0" prefWidth="166.0">
+                     <graphic>
+                        <ImageView fitHeight="110.0" fitWidth="128.0" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/icons/present.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="isNotAttending" onAction="#isNotAttendingAction">
+                     <graphic>
+                        <ImageView fitHeight="115.0" fitWidth="110.0" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/icons/absent.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
             <BorderPane fx:id="calendarPane">
                <bottom>
                   <GridPane fx:id="calendarGrid" alignment="CENTER" prefHeight="333.0" prefWidth="152.0" BorderPane.alignment="CENTER">
@@ -151,37 +182,6 @@
                   </Label>
                </center>
             </BorderPane>
-            <HBox fx:id="chartPane" prefHeight="100.0" prefWidth="200.0" visible="false">
-               <children>
-                  <PieChart fx:id="chart" prefHeight="390.0" prefWidth="406.0" stylesheets="@Css/piechart.css">
-                     <styleClass>
-                        <String fx:value="default-color0" />
-                        <String fx:value="default-color1" />
-                     </styleClass></PieChart>
-               </children>
-            </HBox>
-            <HBox fx:id="statusPane" alignment="CENTER" focusTraversable="true" prefHeight="100.0" prefWidth="200.0" spacing="30.0" visible="false">
-               <children>
-                  <JFXButton fx:id="isAttending" onAction="#isAttendingAction" prefHeight="118.0" prefWidth="166.0">
-                     <graphic>
-                        <ImageView fitHeight="110.0" fitWidth="128.0" preserveRatio="true">
-                           <image>
-                              <Image url="@assets/icons/present.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="isNotAttending" onAction="#isNotAttendingAction">
-                     <graphic>
-                        <ImageView fitHeight="115.0" fitWidth="110.0" preserveRatio="true">
-                           <image>
-                              <Image url="@assets/icons/absent.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-               </children>
-            </HBox>
          </children>
          <padding>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />

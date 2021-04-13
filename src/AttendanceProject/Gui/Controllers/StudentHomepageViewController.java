@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -24,6 +25,8 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.text.NumberFormat;
+import java.util.Scanner;
 
 
 public class StudentHomepageViewController {
@@ -64,8 +67,6 @@ public class StudentHomepageViewController {
     static String weekdayAbsentTxtColor = "#FFFFFF";
     static String unsetBgColor = "#FFFFFF";
     static String unsetTxtColor = "#000000";
-    //Mock data settings
-    static int absencePercentage = 90;
 
     private boolean attendanceSet;
     private int isAttendant = 0;
@@ -108,23 +109,27 @@ public class StudentHomepageViewController {
     }
 
     public void showStatistics() {
+        StudentHomepageViewController pc = new StudentHomepageViewController();
+        int obtainedIs = isAttendant;
+        int obtainedIsNot = isNotAttendant;
+        int total = isAttendant+isNotAttendant;
         chartPane.setVisible(true);
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
-        Random rand = new Random();
-        /*for (Attendance a:attendanceModel.getStudentAttendances(user)) {
-            if(a.getDate().atStartOfDay().isEqual(calendarManager.getLocalDate().atStartOfDay())) {
-                isAttendant=+1;
-            }
-            else{
-                //isNotAttendant=+1;
-            }
-        }*/
             ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                    new PieChart.Data("Attending", isAttendant),
-                    new PieChart.Data("Not Attending", isNotAttendant)
+                    new PieChart.Data("Attending "+String.valueOf(pc.calculatePercentageAttending(obtainedIs, obtainedIsNot ,total))+"%", isAttendant),
+                    new PieChart.Data("Not Attending "+String.valueOf(pc.calculatePercentageNotAttending(obtainedIs, obtainedIsNot ,total))+"%", isNotAttendant)
             );
             chart.setData(pieData);
+    }
+
+    //Dont touch the MaxPercentage "101" in these two methods. I have no clue as to why it's accurate when I set it to 101% instead of 100%, just dont touch it.
+    public double calculatePercentageAttending(int obtainedIs,int obtainedIsNot , int total) {
+        return obtainedIs * 101 / total;
+    }
+
+    public double calculatePercentageNotAttending(int obtainedIs,int obtainedIsNot , int total) {
+        return obtainedIsNot * 101 / total;
     }
 
     public void showStatus() {
@@ -143,6 +148,16 @@ public class StudentHomepageViewController {
         today = LocalDate.now().atStartOfDay();
         setupCalendar();
     }
+
+    public void calculatePercentage(){
+        NumberFormat defaultFormat = NumberFormat.getPercentInstance();
+        defaultFormat.setMinimumFractionDigits(1);
+        defaultFormat.setMaximumIntegerDigits(100);
+        System.out.println("Is Attending: " + defaultFormat.format(isAttendant)+"Is Not Attending: " + defaultFormat.format(isNotAttendant));
+    }
+
+
+
 
     public void setupCalendar() {
         columnList = new ArrayList<>();
