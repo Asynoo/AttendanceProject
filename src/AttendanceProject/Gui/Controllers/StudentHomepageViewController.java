@@ -68,6 +68,8 @@ public class StudentHomepageViewController {
     static int absencePercentage = 90;
 
     private boolean attendanceSet;
+    private int isAttendant = 0;
+    private int isNotAttendant = 0;
 
     LocalDateTime today;
 
@@ -110,11 +112,17 @@ public class StudentHomepageViewController {
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
         Random rand = new Random();
-        int rand_int1 = rand.nextInt(60);
-        int rand_int2 = rand.nextInt(40);
+        /*for (Attendance a:attendanceModel.getStudentAttendances(user)) {
+            if(a.getDate().atStartOfDay().isEqual(calendarManager.getLocalDate().atStartOfDay())) {
+                isAttendant=+1;
+            }
+            else{
+                //isNotAttendant=+1;
+            }
+        }*/
             ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                    new PieChart.Data("Attending", rand_int1),
-                    new PieChart.Data("Not Attending", rand_int2)
+                    new PieChart.Data("Attending", isAttendant),
+                    new PieChart.Data("Not Attending", isNotAttendant)
             );
             chart.setData(pieData);
     }
@@ -176,16 +184,19 @@ public class StudentHomepageViewController {
                 else if(calendarButton.getAttendance() != null){
                     if(calendarButton.getAttendance().isPresent()){
                         calendarButton.setStyle("-fx-background-color:"+ weekdayPresentBgColor + ";-fx-text-fill:" + weekdayPresentTxtColor);
+                        isAttendant=++isAttendant;
                     }
                     else {
                         calendarButton.setStyle("-fx-background-color:" + weekdayAbsentBgColor + ";-fx-text-fill:" + weekdayAbsentTxtColor);
+                        isNotAttendant=++isNotAttendant;
                     }
                 }
                 else calendarButton.setStyle("-fx-background-color:"+ unsetBgColor + ";-fx-text-fill:" + unsetTxtColor);
                 calendarManager.cycleDayUp();
             }
         }
-
+        System.out.println(isAttendant);
+        System.out.println(isNotAttendant);
     }
 
     public void actionMonthForward() {

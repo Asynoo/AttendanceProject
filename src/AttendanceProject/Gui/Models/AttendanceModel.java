@@ -10,7 +10,7 @@ import java.util.List;
 public class AttendanceModel {
 
     private AttendanceManager attendanceManager;
-    private List<Attendance> attendanceList;
+    public List<Attendance> attendanceList;
 
     public AttendanceModel(){
         this.attendanceManager = new AttendanceManager();
