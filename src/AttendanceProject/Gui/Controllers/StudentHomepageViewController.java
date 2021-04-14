@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -24,9 +23,6 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.text.NumberFormat;
-import java.util.Scanner;
 
 
 public class StudentHomepageViewController {
@@ -117,18 +113,18 @@ public class StudentHomepageViewController {
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
             ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                    new PieChart.Data("Attending "+String.valueOf(pc.calculatePercentageAttending(obtainedIs, obtainedIsNot ,total))+"%", isAttendant),
-                    new PieChart.Data("Not Attending "+String.valueOf(pc.calculatePercentageNotAttending(obtainedIs, obtainedIsNot ,total))+"%", isNotAttendant)
+                    new PieChart.Data("Attending "+ pc.calculatePercentageAttending(obtainedIs, total) +"%", isAttendant),
+                    new PieChart.Data("Not Attending "+ pc.calculatePercentageNotAttending(obtainedIsNot, total) +"%", isNotAttendant)
             );
             chart.setData(pieData);
     }
 
-    //Dont touch the MaxPercentage "101" in these two methods. I have no clue as to why it's accurate when I set it to 101% instead of 100%, just dont touch it.
-    public double calculatePercentageAttending(int obtainedIs,int obtainedIsNot , int total) {
+    /**Dont touch the MaxPercentage "101" in these two methods.
+     * I have no clue as to why it's accurate when I set it to 101% instead of 100%, just dont touch it.*/
+    public double calculatePercentageAttending(int obtainedIs, int total) {
         return obtainedIs * 101 / total;
     }
-
-    public double calculatePercentageNotAttending(int obtainedIs,int obtainedIsNot , int total) {
+    public double calculatePercentageNotAttending(int obtainedIsNot, int total) {
         return obtainedIsNot * 101 / total;
     }
 
@@ -148,15 +144,6 @@ public class StudentHomepageViewController {
         today = LocalDate.now().atStartOfDay();
         setupCalendar();
     }
-
-    public void calculatePercentage(){
-        NumberFormat defaultFormat = NumberFormat.getPercentInstance();
-        defaultFormat.setMinimumFractionDigits(1);
-        defaultFormat.setMaximumIntegerDigits(100);
-        System.out.println("Is Attending: " + defaultFormat.format(isAttendant)+"Is Not Attending: " + defaultFormat.format(isNotAttendant));
-    }
-
-
 
 
     public void setupCalendar() {
@@ -178,6 +165,8 @@ public class StudentHomepageViewController {
         displayedMonth = calendarManager.getCurrentMonth();
         calendarInfoLbl.setText(calendarManager.getCurrentMonthName()+ " " + calendarManager.getCurrentYear());
         calendarManager.dateToFirstWeekMonthDay();
+        isAttendant=0;
+        isNotAttendant=0;
         for (ArrayList<CalendarButton> rowList:columnList) {
             for (CalendarButton calendarButton:rowList) {
                 //Filling the button with relevant Data
@@ -210,8 +199,8 @@ public class StudentHomepageViewController {
                 calendarManager.cycleDayUp();
             }
         }
-        System.out.println(isAttendant);
-        System.out.println(isNotAttendant);
+        System.out.println("Days Attending: "+isAttendant);
+        System.out.println("Days Not Attending: "+isNotAttendant);
     }
 
     public void actionMonthForward() {
