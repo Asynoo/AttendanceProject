@@ -3,8 +3,10 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -41,6 +43,15 @@
          <children>
             <VBox prefHeight="330.0" prefWidth="236.0">
                <children>
+                  <HBox alignment="CENTER" prefHeight="69.0" prefWidth="236.0">
+                     <children>
+                        <ChoiceBox fx:id="classChoiceBox" prefHeight="27.0" prefWidth="67.0">
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </ChoiceBox>
+                     </children>
+                  </HBox>
                   <HBox>
                      <VBox.margin>
                         <Insets left="20.0" top="70.0" />

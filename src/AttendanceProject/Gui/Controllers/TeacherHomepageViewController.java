@@ -4,10 +4,12 @@ import AttendanceProject.Be.Student;
 import AttendanceProject.Be.Teacher;
 import AttendanceProject.Gui.Models.AttendanceModel;
 import AttendanceProject.Gui.Models.StudentModel;
+import AttendanceProject.Gui.Models.StudyClassModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
@@ -21,6 +23,8 @@ import java.util.ResourceBundle;
 
 public class TeacherHomepageViewController implements Initializable {
     public Label testLabel;
+    @FXML
+    private ChoiceBox classChoiceBox;
     @FXML
     private Label userLabel;
     @FXML
@@ -40,6 +44,7 @@ public class TeacherHomepageViewController implements Initializable {
 
     private StudentModel studentModel;
     private AttendanceModel attendanceModel;
+    private StudyClassModel studyClassModel;
 
     private Teacher user;
 
@@ -51,9 +56,15 @@ public class TeacherHomepageViewController implements Initializable {
         paneDescription.setText("");
     }
 
+    public void setStudyClassModel(StudyClassModel studyClassModel){
+        this.studyClassModel = studyClassModel;
+        classChoiceBox.getItems().addAll(studyClassModel.getListOfStudyClasses());
+    }
+
     public void setStudentModel(StudentModel studentModel) {
         this.studentModel = studentModel;
         fillStudentsClass();
+        fillStudentsIndividually();
        //fillStudentsIndividually(); Needs a fix
     }
 
@@ -172,6 +183,22 @@ public class TeacherHomepageViewController implements Initializable {
         scrollStudentSummary.setContent(individualStudentTiles);
         scrollStudentSummary.setPannable(false);
 
+        studentModel.getStudentList();
+
+        for(Student student: studentModel.getStudentList()){
+            System.out.println(student.getFirstName());
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudentSummary.fxml"));
+            //((IndividualStudentSummaryController)loader.getController()).setStudent(student);
+            HBox hb = null;
+            try {
+                hb = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            individualStudentTiles.getChildren().add(hb);
+        }
+
+        /**
         for (int i = 0; i <numberOfStudents ; i++) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudentSummary.fxml"));
             HBox hb = null;
@@ -182,5 +209,6 @@ public class TeacherHomepageViewController implements Initializable {
             }
             individualStudentTiles.getChildren().add(hb);
         }
+         */
     }
 }
