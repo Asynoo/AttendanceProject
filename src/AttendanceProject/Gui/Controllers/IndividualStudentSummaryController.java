@@ -29,7 +29,6 @@ public class IndividualStudentSummaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        studentName.setText("Name Name");
         Image imHead = new Image("images/faceYellow.png");
         headPicture.setImage(imHead);
         int tmp = (int) ( Math.random() * 3 + 1);

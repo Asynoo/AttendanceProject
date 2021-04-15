@@ -188,10 +188,11 @@ public class TeacherHomepageViewController implements Initializable {
         for(Student student: studentModel.getStudentList()){
             System.out.println(student.getFirstName());
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudentSummary.fxml"));
-            //((IndividualStudentSummaryController)loader.getController()).setStudent(student);
+
             HBox hb = null;
             try {
                 hb = loader.load();
+                ((IndividualStudentSummaryController)loader.getController()).setStudent(student);
             } catch (IOException e) {
                 e.printStackTrace();
             }
