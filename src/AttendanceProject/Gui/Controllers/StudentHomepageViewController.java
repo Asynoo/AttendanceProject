@@ -17,11 +17,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-
-import java.text.NumberFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +26,10 @@ import java.util.List;
 
 public class StudentHomepageViewController {
 
+    /**Retrives the CalenderManager Class.*/
     CalendarManager calendarManager = new CalendarManager();
 
+    /**Imports all the @FXML data needed from the fxml file.*/
     @FXML
     private Label changeDescLbl;
     @FXML
@@ -59,13 +58,11 @@ public class StudentHomepageViewController {
     private PieChart chart;
 
     Student user;
-
     AttendanceModel attendanceModel;
-
     List<ArrayList<CalendarButton>> columnList;
     Month displayedMonth;
 
-    //Calendar colors
+    /**Set the Calendar Colors.*/
     static String weekendBgColor = "#999999";
     static String weekendTxtColor = "#bfbfbf";
     static String weekdayPresentBgColor = "#85e085";
@@ -76,12 +73,13 @@ public class StudentHomepageViewController {
     static String unsetTxtColor = "#000000";
     static String editTxtColor = "#E6EF34";
 
+    /**Variables.*/
     private boolean attendanceSet;
     private int isAttendant = 0;
     private int isNotAttendant = 0;
-
     LocalDate today;
 
+    /**This method gives the user the ability to toggle the isAttending Function, to signal the database you're attending the current day.*/
     @FXML
     private void isAttendingAction() {
         if (!attendanceSet) {
@@ -100,6 +98,7 @@ public class StudentHomepageViewController {
         calendarFillDates();
     }
 
+    /**This method gives the user the ability to toggle the isNotAttending Function, to signal the database you're not attending the current day.*/
     @FXML
     private void isNotAttendingAction() {
         if (!attendanceSet) {
@@ -119,11 +118,13 @@ public class StudentHomepageViewController {
         calendarFillDates();
     }
 
+    /**This method is used to display the logged in users name at the top of the UI.*/
     public void setUser(Student user) {
         this.user = user;
         userLbl.setText(user.getFirstName() + " " + user.getLastName());
     }
 
+    /**This method sets the AttendanceModel, and activates a few other methods.*/
     public void setAttendanceModel(AttendanceModel attendanceModel) {
         this.attendanceModel = attendanceModel;
         updateAttendanceSet();
@@ -131,6 +132,8 @@ public class StudentHomepageViewController {
         calendarManager.setDateToday();
     }
 
+    /**Here we convert the attendance data into percentages and display them visually utilizing a diagram/piechart.
+     * We use some imports, local variables and a ObservableList to connect and create the piechart.*/
     public void showStatistics() {
         StudentHomepageViewController pc = new StudentHomepageViewController();
         int obtainedIs = isAttendant;
@@ -140,45 +143,42 @@ public class StudentHomepageViewController {
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
             ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                    new PieChart.Data("Attending "+String.valueOf(pc.calculatePercentageAttending(obtainedIs, obtainedIsNot ,total))+"%", isAttendant),
-                    new PieChart.Data("Not Attending "+String.valueOf(pc.calculatePercentageNotAttending(obtainedIs, obtainedIsNot ,total))+"%", isNotAttendant)
+                    new PieChart.Data("Attending "+ pc.calculatePercentageAttending(obtainedIs, total) +"%", isAttendant),
+                    new PieChart.Data("Not Attending "+ pc.calculatePercentageNotAttending(obtainedIsNot, total) +"%", isNotAttendant)
             );
             chart.setData(pieData);
     }
 
-    //Dont touch the MaxPercentage "101" in these two methods. I have no clue as to why it's accurate when I set it to 101% instead of 100%, just dont touch it.
-    public double calculatePercentageAttending(int obtainedIs,int obtainedIsNot , int total) {
+    /**Dont touch the MaxPercentage "101" in these two methods.
+     * I have no clue as to why it's accurate when I set it to 101% instead of 100%, just dont touch it.*/
+    public double calculatePercentageAttending(int obtainedIs, int total) {
         return obtainedIs * 101 / total;
     }
-
-    public double calculatePercentageNotAttending(int obtainedIs,int obtainedIsNot , int total) {
+    public double calculatePercentageNotAttending(int obtainedIsNot, int total) {
         return obtainedIsNot * 101 / total;
     }
 
+    /**opens up the Statistics View/ The diagram for seeing your attendance in percentage.*/
     public void showStatus() {
         chartPane.setVisible(false);
         statusPane.setVisible(true);
         calendarPane.setVisible(false);
     }
 
+    /**Opens up the Attendance history/the calender, and de-toggles the other panes.*/
     public void showHistory() {
         chartPane.setVisible(false);
         statusPane.setVisible(false);
         calendarPane.setVisible(true);
     }
 
+    /**This method initializes some data for the calender.*/
     public void initialize() {
         today = LocalDate.now();
         setupCalendar();
     }
 
-    public void calculatePercentage(){
-        NumberFormat defaultFormat = NumberFormat.getPercentInstance();
-        defaultFormat.setMinimumFractionDigits(1);
-        defaultFormat.setMaximumIntegerDigits(100);
-        System.out.println("Is Attending: " + defaultFormat.format(isAttendant)+"Is Not Attending: " + defaultFormat.format(isNotAttendant));
-    }
-
+    /**This method sets up the the entire calender and the buttons visually, trough the use of ArrayLists onto the calender grid.*/
     public void setupCalendar() {
         columnList = new ArrayList<>();
         for(int y = 0;y < 6;y++){
@@ -194,10 +194,18 @@ public class StudentHomepageViewController {
         }
     }
 
+    /**This long method adds the calenders data onto the buttons, this contains the days, months and such.
+     * It also fills out the appropriate colors for each button depending on if you've been attending or not.
+     * Its very visual so the user can easily navigate throughout the entire calender and get a easy overview.
+     * It utilizes a ArrayList which is located in a for loop, which in turn uses a lot of if/else statements.
+     * In the method there is also the appropriate data and variables in the start.
+     * In the end there is a simple System.out.print for you to see how many days you have/have not been attending for the given month.*/
     public void calendarFillDates(){
         displayedMonth = calendarManager.getCurrentMonth();
         calendarInfoLbl.setText(calendarManager.getCurrentMonthName()+ " " + calendarManager.getCurrentYear());
         calendarManager.dateToFirstWeekMonthDay();
+        isAttendant=0;
+        isNotAttendant=0;
         for (ArrayList<CalendarButton> rowList:columnList) {
             for (CalendarButton calendarButton:rowList) {
                 //Filling the button with relevant Data
@@ -243,16 +251,18 @@ public class StudentHomepageViewController {
                 calendarManager.cycleDayUp();
             }
         }
-        System.out.println(isAttendant);
-        System.out.println(isNotAttendant);
+        System.out.println("Days Attending: "+isAttendant);
+        System.out.println("Days Not Attending: "+isNotAttendant);
     }
 
+    /**This method enables the user to move forward onto the next month in the calender.*/
     public void actionMonthForward() {
         if(calendarManager.getCurrentMonth() == displayedMonth)calendarManager.cycleMonthUp();
         calendarClearDates();
         calendarFillDates();
     }
 
+    /**This method enables the user to move backward onto the last month in the calender.*/
     public void actionMonthBack() {
         if(calendarManager.getCurrentMonth() == displayedMonth.plus(1))calendarManager.cycleMonthDown();
         calendarManager.cycleMonthDown();
@@ -266,6 +276,7 @@ public class StudentHomepageViewController {
         changeBox.setVisible(false);
     }
 
+    /**This method deals with some visuals, for example adjusts the opacity depending on you attendance.*/
     private void updateAttendanceSet(){
         for (Attendance a: attendanceModel.getStudentAttendances(user)) {
             if (a.getDate().isEqual(today)){
@@ -283,6 +294,7 @@ public class StudentHomepageViewController {
         }
     }
 
+    /**This method clears the Calenders days.*/
     private void calendarClearDates(){
         for (ArrayList<CalendarButton> rowList:columnList) {
             for (CalendarButton calendarButton:rowList) {

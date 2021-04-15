@@ -4,6 +4,7 @@ import AttendanceProject.Be.Student;
 import AttendanceProject.Be.Teacher;
 import AttendanceProject.Gui.Models.AttendanceModel;
 import AttendanceProject.Gui.Models.StudentModel;
+import AttendanceProject.Gui.Models.StudyClassModel;
 import AttendanceProject.Gui.Models.TeacherModel;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -19,6 +20,7 @@ public class LoginViewController{
     private StudentModel studentModel;
     private TeacherModel teacherModel;
     private AttendanceModel attendanceModel;
+    private StudyClassModel studyClassModel;
 
     private List<Student> students;
     private List<Teacher> teachers;
@@ -60,6 +62,7 @@ public class LoginViewController{
         attendanceModel = new AttendanceModel();
         studentModel = new StudentModel();
         teacherModel = new TeacherModel();
+        studyClassModel = new StudyClassModel();
         students = studentModel.getStudentList();
         teachers = teacherModel.getTeacherList();
     }
@@ -82,6 +85,8 @@ public class LoginViewController{
         Parent root = loader.load();
         ((TeacherHomepageViewController)loader.getController()).setStudentModel(studentModel);
         ((TeacherHomepageViewController)loader.getController()).setAttendanceModel(attendanceModel);
+        ((TeacherHomepageViewController)loader.getController()).setStudyClassModel(studyClassModel);
+
         ((TeacherHomepageViewController)loader.getController()).setUser(teacher);
         HomepageViewStage.setTitle(teacher.getFirstName() + " " + teacher.getLastName());
         HomepageViewStage.setScene(new Scene(root));
