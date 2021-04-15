@@ -5,7 +5,6 @@ import AttendanceProject.Be.Attendance;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DAOAttendanceDB implements DAOAttendance{
@@ -25,7 +24,7 @@ public class DAOAttendanceDB implements DAOAttendance{
                 int studentId = rs.getInt("StudentID");
                 boolean presence = rs.getBoolean("Presence");
                 boolean change = rs.getBoolean("Change");
-                Attendance attendance = new Attendance(date, studentId, presence, change);
+                Attendance attendance = new Attendance(date, id, studentId, presence, change);
                 System.out.println("Fetched attendance id: " + id);
                 attendances.add(attendance);
             }
@@ -52,12 +51,24 @@ public class DAOAttendanceDB implements DAOAttendance{
     }
 
     @Override
-    public void queryEditAttendance(LocalDate date, boolean attendance) {
+    public void editAttendance(Attendance attendance) {
+        try(Connection con = da.getConnection()){
+            String sql = "UPDATE Attendance SET [StudentID] = ?, [Date] = ?, [Presence] = ?, [Change] = ?  WHERE Id = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, attendance.getStudentId());
+            statement.setDate(2, java.sql.Date.valueOf(attendance.getDate()));
+            statement.setBoolean(3, attendance.isPresent());
+            statement.setBoolean(4, attendance.hasChangeRequest());
+            statement.setInt(5, attendance.getId());
+            statement.executeUpdate();
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public void confirmEditAttendance(LocalDate date, boolean attendance) {
+    public void confirmEditAttendance(Attendance attendance) {
 
     }
 }

@@ -10,11 +10,11 @@ import java.util.List;
 public class AttendanceModel {
 
     private AttendanceManager attendanceManager;
-    public List<Attendance> attendanceList;
+    private List<Attendance> attendanceList;
 
     public AttendanceModel(){
         this.attendanceManager = new AttendanceManager();
-        attendanceList = attendanceManager.getAttendances();
+        updateAttendanceList();
     }
 
     public List<Attendance> getAttendanceList() {
@@ -32,11 +32,14 @@ public class AttendanceModel {
     }
     public void addAttendance(Attendance attendance){
         attendanceManager.addAttendance(attendance);
+        updateAttendanceList();
+    }
+
+    public void updateAttendanceList(){
         attendanceList = attendanceManager.getAttendances();
     }
 
-    public void setAttendanceList(List<Attendance> attendanceList) {
-        this.attendanceList = attendanceList;
-        attendanceList = attendanceManager.getAttendances();
+    public void editAttendance(Attendance attendance){
+        attendanceManager.editAttendance(attendance);
     }
 }

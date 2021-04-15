@@ -17,6 +17,10 @@ public class AttendanceManager {
         return daoAttendance.getAttendances();
     }
 
+    public void editAttendance(Attendance attendance){
+        daoAttendance.editAttendance(attendance);
+    }
+
     public void addAttendance(Attendance attendance) {
         daoAttendance.submitAttendance(attendance);
     }
