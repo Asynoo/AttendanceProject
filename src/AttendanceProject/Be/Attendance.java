@@ -57,4 +57,9 @@ public class Attendance {
     public boolean hasChangeRequest() {
         return changeRequest;
     }
+
+    @Override
+    public String toString() {
+        return "Student with ID: "+studentId+ "   Change on:  " + date;
+    }
 }
