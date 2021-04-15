@@ -5,10 +5,13 @@ import AttendanceProject.Be.Teacher;
 import AttendanceProject.Gui.Models.AttendanceModel;
 import AttendanceProject.Gui.Models.StudentModel;
 import AttendanceProject.Gui.Models.StudyClassModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -16,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -212,5 +216,19 @@ public class TeacherHomepageViewController implements Initializable {
             individualStudentTiles.getChildren().add(hb);
         }
          */
+    }
+
+    public void openIndividualStudent(ActionEvent actionEvent) throws IOException {
+
+        Student student = studentModel.getStudentList().get(1);
+
+        Stage IndividualStudentStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudent.fxml"));
+        Parent root = loader.load();
+        ((IndividualStudentController)loader.getController()).setStudent(student);
+        IndividualStudentStage.setTitle(student.getFirstName() + " " + student.getLastName());
+        IndividualStudentStage.setScene(new Scene(root));
+        IndividualStudentStage.setResizable(true);
+        IndividualStudentStage.show();
     }
 }
