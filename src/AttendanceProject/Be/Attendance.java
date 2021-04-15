@@ -6,7 +6,7 @@ public class Attendance {
 
     private LocalDate date;
     private int studentId;
-    private int id;
+    private Integer id;
     private boolean present;
     private boolean changeRequest;
 

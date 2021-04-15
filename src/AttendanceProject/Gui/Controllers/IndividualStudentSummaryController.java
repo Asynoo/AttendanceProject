@@ -50,5 +50,6 @@ public class IndividualStudentSummaryController implements Initializable {
 
     public void setStudent(Student student) {
        this.student = student;
+        studentName.setText(student.getFirstName());
     }
 }

@@ -196,6 +196,7 @@ public class TeacherHomepageViewController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            //if(individualStudentTiles.getChildren() != null) individualStudentTiles.getChildren().add(hb);
             individualStudentTiles.getChildren().add(hb);
         }
 
