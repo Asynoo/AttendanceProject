@@ -135,7 +135,6 @@ public class StudentHomepageViewController {
     /**Here we convert the attendance data into percentages and display them visually utilizing a diagram/piechart.
      * We use some imports, local variables and a ObservableList to connect and create the piechart.*/
     public void showStatistics() {
-        StudentHomepageViewController pc = new StudentHomepageViewController();
         int obtainedIs = isAttendant;
         int obtainedIsNot = isNotAttendant;
         int total = isAttendant+isNotAttendant;
@@ -143,8 +142,8 @@ public class StudentHomepageViewController {
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
             ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                    new PieChart.Data("Attending "+ pc.calculatePercentageAttending(obtainedIs, total) +"%", isAttendant),
-                    new PieChart.Data("Not Attending "+ pc.calculatePercentageNotAttending(obtainedIsNot, total) +"%", isNotAttendant)
+                    new PieChart.Data("Attending "+ this.calculatePercentageAttending(obtainedIs, total) +"%", isAttendant),
+                    new PieChart.Data("Not Attending "+ this.calculatePercentageNotAttending(obtainedIsNot, total) +"%", isNotAttendant)
             );
             chart.setData(pieData);
     }

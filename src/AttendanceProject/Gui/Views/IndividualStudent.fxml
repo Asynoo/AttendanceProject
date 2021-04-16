@@ -1,6 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.IndividualStudentController"/>
+<BorderPane prefHeight="361.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.IndividualStudentController">
+   <top>
+      <Label fx:id="studentLbl" alignment="CENTER" text="student_name" textAlignment="CENTER" textFill="#4390ff" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+   </top>
+   <left>
+      <VBox prefHeight="471.0" prefWidth="203.0" spacing="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="statisticsBtn" buttonType="RAISED" onAction="#showStatistics" prefHeight="49.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="Statistics" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fx:id="statisticsIcon" fitHeight="40.0" fitWidth="47.0" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/icons/statistics.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="168.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="historyBtn" buttonType="RAISED" onAction="#showHistory" prefHeight="50.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #4390ff;" text="History" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fx:id="historyIcon" fitHeight="40.0" fitWidth="54.0" preserveRatio="true" style="-fx-image: #4390ff;">
+                     <image>
+                        <Image url="@assets/icons/history.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="100.0" top="30.0" />
+         </padding>
+      </VBox>
+   </left>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <center>
+      <StackPane fx:id="stackPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="chartPane" prefHeight="100.0" prefWidth="200.0" visible="false">
+               <children>
+                  <PieChart fx:id="chart" prefHeight="390.0" prefWidth="406.0" stylesheets="@Css/piechart.css">
+                     <styleClass>
+                        <String fx:value="default-color0" />
+                        <String fx:value="default-color1" />
+                     </styleClass>
+                  </PieChart>
+               </children>
+            </HBox>
+            <BorderPane fx:id="calendarPane">
+               <bottom>
+                  <StackPane BorderPane.alignment="CENTER">
+                     <children>
+                        <GridPane fx:id="calendarGrid" alignment="CENTER" prefHeight="333.0" prefWidth="152.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </StackPane>
+               </bottom>
+               <right>
+                  <JFXButton onAction="#actionMonthForward" text="&gt;" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets right="20.0" />
+                     </BorderPane.margin>
+                  </JFXButton>
+               </right>
+               <left>
+                  <JFXButton onAction="#actionMonthBack" text="&lt;" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets left="20.0" />
+                     </BorderPane.margin>
+                  </JFXButton>
+               </left>
+               <center>
+                  <Label fx:id="calendarInfoLbl" alignment="CENTER" prefHeight="35.0" prefWidth="282.0" text="Calendar Overview" textFill="#4390ff" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </center>
+            </BorderPane>
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+      </StackPane>
+   </center>
+</BorderPane>

@@ -249,14 +249,15 @@ public class TeacherHomepageViewController implements Initializable {
         Parent root = null;
         try {
             root = loader.load();
+            ((IndividualStudentController)loader.getController()).setStudent(student);
+            ((IndividualStudentController)loader.getController()).setAttendanceModel(attendanceModel);
+            IndividualStudentStage.setTitle(student.getFirstName() + " " + student.getLastName());
+            IndividualStudentStage.setScene(new Scene(root));
+            IndividualStudentStage.setResizable(true);
+            IndividualStudentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ((IndividualStudentController)loader.getController()).setStudent(student);
-        IndividualStudentStage.setTitle(student.getFirstName() + " " + student.getLastName());
-        IndividualStudentStage.setScene(new Scene(root));
-        IndividualStudentStage.setResizable(true);
-        IndividualStudentStage.show();
     }
 
 
