@@ -247,7 +247,7 @@ public class StudentHomepageViewController {
                         iNA = isNotAttendant;
                     }
                     if(calendarButton.getAttendance().hasChangeRequest()){
-                        calendarButton.setStyle(calendarButton.getStyle() + ";-fx-text-fill:" + editTxtColor);
+                        calendarButton.setStyle(calendarButton.getStyle() + ";-fx-background-color:" + editTxtColor);
                     }
                 }
                 else calendarButton.setStyle("-fx-background-color:"+ unsetBgColor + ";-fx-text-fill:" + unsetTxtColor);
@@ -318,7 +318,7 @@ public class StudentHomepageViewController {
                 calendarButton.getAttendance().setChangeRequest(true);
                 attendanceModel.editAttendance(calendarButton.getAttendance());
                 cancelChangeAction(calendarButton);
-                calendarButton.setStyle(calendarButton.getStyle() + ";-fx-text-fill:" + editTxtColor);
+                calendarButton.setStyle(calendarButton.getStyle() + ";-fx-background-color:" + editTxtColor);
                 cancelChange();
             });
         });
