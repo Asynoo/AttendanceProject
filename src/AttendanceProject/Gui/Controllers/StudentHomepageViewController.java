@@ -77,6 +77,8 @@ public class StudentHomepageViewController {
     private boolean attendanceSet;
     private int isAttendant = 0;
     private int isNotAttendant = 0;
+    private int iA;
+    private int iNA;
     LocalDate today;
 
     /**This method gives the user the ability to toggle the isAttending Function, to signal the database you're attending the current day.*/
@@ -142,8 +144,8 @@ public class StudentHomepageViewController {
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
             ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                    new PieChart.Data("Attending "+ this.calculatePercentageAttending(obtainedIs, total) +"%", isAttendant),
-                    new PieChart.Data("Not Attending "+ this.calculatePercentageNotAttending(obtainedIsNot, total) +"%", isNotAttendant)
+                    new PieChart.Data("Attending :" + iA +" days "+ this.calculatePercentageAttending(obtainedIs, total) +"%", isAttendant),
+                    new PieChart.Data("Absent : " + iNA +" days "+ this.calculatePercentageNotAttending(obtainedIsNot, total) +"%", isNotAttendant)
             );
             chart.setData(pieData);
     }
@@ -237,10 +239,12 @@ public class StudentHomepageViewController {
                     if(calendarButton.getAttendance().isPresent()){
                         calendarButton.setStyle("-fx-background-color:"+ weekdayPresentBgColor + ";-fx-text-fill:" + weekdayPresentTxtColor);
                         isAttendant=++isAttendant;
+                        iA = isAttendant;
                     }
                     else{
                         calendarButton.setStyle("-fx-background-color:" + weekdayAbsentBgColor + ";-fx-text-fill:" + weekdayAbsentTxtColor);
                         isNotAttendant=++isNotAttendant;
+                        iNA = isNotAttendant;
                     }
                     if(calendarButton.getAttendance().hasChangeRequest()){
                         calendarButton.setStyle(calendarButton.getStyle() + ";-fx-text-fill:" + editTxtColor);
