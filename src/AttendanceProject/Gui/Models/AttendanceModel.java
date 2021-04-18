@@ -42,4 +42,6 @@ public class AttendanceModel {
     public void editAttendance(Attendance attendance){
         attendanceManager.editAttendance(attendance);
     }
+
+    public void confirmAttendance(Attendance attendance){attendanceManager.confirmAttendance(attendance);}
 }

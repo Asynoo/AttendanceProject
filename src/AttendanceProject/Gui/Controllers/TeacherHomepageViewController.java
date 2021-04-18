@@ -6,6 +6,8 @@ import AttendanceProject.Be.Teacher;
 import AttendanceProject.Gui.Models.AttendanceModel;
 import AttendanceProject.Gui.Models.StudentModel;
 import AttendanceProject.Gui.Models.StudyClassModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,7 +49,8 @@ public class TeacherHomepageViewController implements Initializable {
     private Boolean pendingSubmissionsVisible = false;
     private final TilePane tilePaneClass = new TilePane();
     private final TilePane individualStudentTiles = new TilePane();
-    private final int numberOfStudents = 19;
+    private ListView<Attendance> listOfSubmissions;
+
 
     private StudentModel studentModel;
     private AttendanceModel attendanceModel;
@@ -61,6 +64,7 @@ public class TeacherHomepageViewController implements Initializable {
         scrollStudentSummary.setVisible(false);
         activeSubmissions.setVisible(false);
         paneDescription.setText("");
+
     }
 
     public void setStudyClassModel(StudyClassModel studyClassModel){
@@ -271,8 +275,43 @@ public class TeacherHomepageViewController implements Initializable {
                 pendingApproval.add(att);
             }
         }
-        ListView listOfSubmissions = new ListView();
+
+        listOfSubmissions = new ListView();
+        listOfSubmissions.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observableValue, Object o, Object t1) {
+                takingActionOnSubmission(listOfSubmissions.getSelectionModel().getSelectedItem());
+            }
+        });
+
         listOfSubmissions.setItems(pendingApproval);
+        listOfSubmissions.getSelectionModel().getSelectedItems();
         activeSubmissions.getChildren().add(listOfSubmissions);
+
+    }
+
+    public void takingActionOnSubmission(Attendance attendanceSelected){
+
+            Label selectionNumber = new Label("Selection  ");
+            HBox buttonsContainer = new HBox();
+            Button acceptBtn = new Button("Accept");
+            Button declineBtn = new Button("Decline");
+            Button submitBtn = new Button("Submit");
+            acceptBtn.setOnAction(e -> {
+                acceptSubmission(listOfSubmissions.getSelectionModel().getSelectedItem());
+            });
+            buttonsContainer.getChildren().add(selectionNumber);
+            buttonsContainer.getChildren().add(acceptBtn);
+            buttonsContainer.getChildren().add(declineBtn);
+            buttonsContainer.getChildren().add(submitBtn);
+            activeSubmissions.getChildren().add(buttonsContainer);
+
+    }
+    public void acceptSubmission(Attendance attendance){
+        attendanceModel.confirmAttendance(attendance);
+    }
+
+    public void declineSubmission(int attendanceId){
+
     }
 }

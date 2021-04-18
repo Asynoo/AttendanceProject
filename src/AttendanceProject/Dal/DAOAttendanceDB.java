@@ -69,6 +69,18 @@ public class DAOAttendanceDB implements DAOAttendance{
 
     @Override
     public void confirmEditAttendance(Attendance attendance) {
+        try(Connection con = da.getConnection()){
+            String sql = "UPDATE Attendance SET [StudentID] = ?, [Date] = ?, [Presence] = ?, [Change] = ?  WHERE Id = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, attendance.getStudentId());
+            statement.setDate(2, java.sql.Date.valueOf(attendance.getDate()));
+            statement.setBoolean(3, attendance.isPresent());
+            statement.setBoolean(4, false);
+            statement.setInt(5, attendance.getId());
+            statement.executeUpdate();
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

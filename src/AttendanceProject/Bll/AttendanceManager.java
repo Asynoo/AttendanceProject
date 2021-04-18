@@ -24,4 +24,6 @@ public class AttendanceManager {
     public void addAttendance(Attendance attendance) {
         daoAttendance.submitAttendance(attendance);
     }
+
+    public void confirmAttendance(Attendance attendance){daoAttendance.confirmEditAttendance(attendance);}
 }
