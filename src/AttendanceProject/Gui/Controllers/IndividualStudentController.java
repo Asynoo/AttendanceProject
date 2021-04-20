@@ -21,8 +21,7 @@ import javafx.scene.text.Font;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class IndividualStudentController {
 
@@ -30,6 +29,13 @@ public class IndividualStudentController {
     CalendarManager calendarManager = new CalendarManager();
 
     /**Imports all the @FXML data needed from the fxml file.*/
+
+    @FXML
+    private Label presentLbl;
+    @FXML
+    private Label weekdayLbl;
+    @FXML
+    private Label absentLbl;
     @FXML
     private Label studentLbl;
     @FXML
@@ -75,6 +81,10 @@ public class IndividualStudentController {
         this.attendanceModel = attendanceModel;
         calendarFillDates();
         calendarManager.setDateToday();
+        countDaysAttendance();
+        presentLbl.setText("Days present: " + isAttendant);
+        absentLbl.setText("Days absent: " + isNotAttendant);
+        weekdayLbl.setText("Most absent weekday:\n" + calculateMostAbsentWeekdays().toString());
     }
 
     /**Here we convert the attendance data into percentages and display them visually utilizing a diagram/piechart.
@@ -107,13 +117,13 @@ public class IndividualStudentController {
         calendarPane.setVisible(true);
     }
 
-    /**This method initializes some data for the calender.*/
+    /**This method initializes some data for the calendar.*/
     public void initialize() {
         today = LocalDate.now();
         setupCalendar();
     }
 
-    /**This method sets up the the entire calender and the buttons visually, trough the use of ArrayLists onto the calender grid.*/
+    /**This method sets up the the entire calendar and the buttons visually, through the use of ArrayLists onto the calender grid.*/
     public void setupCalendar() {
         columnList = new ArrayList<>();
         for(int y = 0;y < 6;y++){
@@ -129,7 +139,7 @@ public class IndividualStudentController {
         }
     }
 
-    /**This long method adds the calenders data onto the buttons, this contains the days, months and such.
+    /**This long method adds the calendar's data onto the buttons, this contains the days, months and such.
      * It also fills out the appropriate colors for each button depending on if you've been attending or not.
      * Its very visual so the user can easily navigate throughout the entire calender and get a easy overview.
      * It utilizes a ArrayList which is located in a for loop, which in turn uses a lot of if/else statements.
@@ -139,8 +149,6 @@ public class IndividualStudentController {
         displayedMonth = calendarManager.getCurrentMonth();
         calendarInfoLbl.setText(calendarManager.getCurrentMonthName()+ " " + calendarManager.getCurrentYear());
         calendarManager.dateToFirstWeekMonthDay();
-        isAttendant=0;
-        isNotAttendant=0;
         for (ArrayList<CalendarButton> rowList:columnList) {
             for (CalendarButton calendarButton:rowList) {
                 //Filling the button with relevant Data
@@ -162,11 +170,9 @@ public class IndividualStudentController {
                 else if(calendarButton.getAttendance() != null){
                     if(calendarButton.getAttendance().isPresent()){
                         calendarButton.setStyle("-fx-background-color:"+ weekdayPresentBgColor + ";-fx-text-fill:" + weekdayPresentTxtColor);
-                        isAttendant=++isAttendant;
                     }
                     else{
                         calendarButton.setStyle("-fx-background-color:" + weekdayAbsentBgColor + ";-fx-text-fill:" + weekdayAbsentTxtColor);
-                        isNotAttendant=++isNotAttendant;
                     }
                     if(calendarButton.getAttendance().hasChangeRequest()){
                         calendarButton.setStyle(calendarButton.getStyle() + ";-fx-text-fill:" + editTxtColor);
@@ -176,8 +182,6 @@ public class IndividualStudentController {
                 calendarManager.cycleDayUp();
             }
         }
-        System.out.println("Days Attending: "+isAttendant);
-        System.out.println("Days Not Attending: "+isNotAttendant);
     }
 
     /**This method enables the user to move forward onto the next month in the calender.*/
@@ -200,7 +204,48 @@ public class IndividualStudentController {
         for (ArrayList<CalendarButton> rowList:columnList) {
             for (CalendarButton calendarButton:rowList) {
                 calendarButton.setAttendance(null);
+                calendarButton.setOnAction(null);
             }
         }
+    }
+
+    private void countDaysAttendance(){
+        for (Attendance a:attendanceModel.getAttendanceList()) {
+            if(a.getStudentId() == student.getId()) {
+                if (a.isPresent()) {
+                    isAttendant++;
+                } else {
+                    isNotAttendant++;
+                }
+            }
+        }
+    }
+
+    private Set<DayOfWeek> calculateMostAbsentWeekdays(){
+        TreeMap<Integer,Set<DayOfWeek>> absentWeekdays = new TreeMap<>();
+        int monday = 0,tuesday = 0,wednesday = 0,thursday = 0,friday = 0;
+        for (Attendance a:attendanceModel.getAttendanceList()) {
+            if(!a.isPresent() && a.getStudentId() == student.getId()) {
+                switch (a.getDate().getDayOfWeek()) {
+                    case MONDAY -> monday++;
+                    case TUESDAY -> tuesday++;
+                    case WEDNESDAY -> wednesday++;
+                    case THURSDAY -> thursday++;
+                    case FRIDAY -> friday++;
+                }
+            }
+        }
+        //This is super yucky but it works
+        absentWeekdays.put(monday,new TreeSet<>());
+        absentWeekdays.get(monday).add(DayOfWeek.MONDAY);
+        if(!absentWeekdays.containsKey(tuesday)) absentWeekdays.put(tuesday,new TreeSet<>());
+        absentWeekdays.get(tuesday).add(DayOfWeek.TUESDAY);
+        if(!absentWeekdays.containsKey(wednesday)) absentWeekdays.put(wednesday,new TreeSet<>());
+        absentWeekdays.get(wednesday).add(DayOfWeek.WEDNESDAY);
+        if(!absentWeekdays.containsKey(thursday)) absentWeekdays.put(thursday,new TreeSet<>());
+        absentWeekdays.get(thursday).add(DayOfWeek.THURSDAY);
+        if(!absentWeekdays.containsKey(friday)) absentWeekdays.put(friday,new TreeSet<>());
+        absentWeekdays.get(friday).add(DayOfWeek.FRIDAY);
+        return absentWeekdays.lastEntry().getValue();
     }
 }
