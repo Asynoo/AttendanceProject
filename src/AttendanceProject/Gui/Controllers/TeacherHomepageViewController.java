@@ -6,6 +6,7 @@ import AttendanceProject.Be.Teacher;
 import AttendanceProject.Gui.Models.AttendanceModel;
 import AttendanceProject.Gui.Models.StudentModel;
 import AttendanceProject.Gui.Models.StudyClassModel;
+import com.jfoenix.controls.JFXButton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,13 +27,21 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class TeacherHomepageViewController implements Initializable {
     public Label testLabel;
     @FXML
-    private ChoiceBox classChoiceBox;
+    private HBox acceptDeclineHbox;
+    @FXML
+    private JFXButton acceptSubmissionBtn;
+    @FXML
+    private JFXButton declineSubmissionBtn;
+    @FXML
+    private JFXButton backToLogin;
     @FXML
     private Label userLabel;
     @FXML
@@ -69,12 +78,11 @@ public class TeacherHomepageViewController implements Initializable {
 
     public void setStudyClassModel(StudyClassModel studyClassModel){
         this.studyClassModel = studyClassModel;
-        classChoiceBox.getItems().addAll(studyClassModel.getListOfStudyClasses());
     }
 
     public void setStudentModel(StudentModel studentModel) {
         this.studentModel = studentModel;
-        fillStudentsClass();
+
     }
 
     public void setAttendanceModel(AttendanceModel attendanceModel) {
@@ -82,6 +90,7 @@ public class TeacherHomepageViewController implements Initializable {
         this.attendanceModel = attendanceModel;
         fillStudentsIndividually();
         fillSubmissions();
+        fillStudentsClass();
     }
 
     public void setUser(Teacher user) {
@@ -129,24 +138,66 @@ public class TeacherHomepageViewController implements Initializable {
         }
     }
 
-        private void fillStudentsClass() {
+    private List<Attendance> studentsAttendanceToday(){
+        LocalDate todaysDate = LocalDate.now();
+        System.out.println(todaysDate);
+
+        List<Attendance> studentStatusToday = new ArrayList<>();
+
+        for (Attendance att: attendanceModel.getAttendanceList()){
+            if (att.getDate().equals(todaysDate)){
+                System.out.println("Todays date added to the list");
+                studentStatusToday.add(att);
+            }
+        }
+        return studentStatusToday;
+    };
+
+    private void fillStudentsClass() {
 
             studentModel.getStudentList();
 
-            for (Student student: studentModel.getStudentList()) {
-                ImageView imgView = new ImageView("images/facetry.png");
-                imgView.setFitHeight(75);
-                imgView.setFitWidth(75);
-                Button headButton = new Button();
-                headButton.setGraphic(imgView);
-                headButton.setStyle("-fx-border-radius: 50; -fx-background-color: null");
-                headButton.setOnAction((e) -> openIndividualStudent(student));
-                Label lblContent = new Label(student.getFirstName() + student.getLastName());
-                VBox vbox = new VBox();
-                vbox.getChildren().add(headButton);
-                vbox.getChildren().add(lblContent);
+            List<Attendance> listToCheck = studentsAttendanceToday();
 
-                tilePaneClass.getChildren().add(vbox);
+
+            for (Student student: studentModel.getStudentList()) {
+
+                for(Attendance att: listToCheck){
+                    if(att.getStudentId() == student.getId()){
+                        //System.out.println("student id   " +att.getStudentId()+ "is present   "+ att.isPresent() );
+                        if(att.isPresent()){
+                            ImageView imgView = new ImageView("images/facetry.png");
+                            imgView.setFitHeight(75);
+                            imgView.setFitWidth(75);
+                            Button headButton = new Button();
+                            headButton.setGraphic(imgView);
+                            headButton.setStyle("-fx-border-radius: 50; -fx-background-color: null");
+                            headButton.setOnAction((e) -> openIndividualStudent(student));
+                            Label lblContent = new Label(student.getFirstName() + student.getLastName());
+                            VBox vbox = new VBox();
+                            vbox.getChildren().add(headButton);
+                            vbox.getChildren().add(lblContent);
+
+                            tilePaneClass.getChildren().add(vbox);
+                        }else if(!att.isPresent()){
+                            ImageView imgView = new ImageView("images/faceRedtry.png");
+                            imgView.setFitHeight(75);
+                            imgView.setFitWidth(75);
+                            Button headButton = new Button();
+                            headButton.setGraphic(imgView);
+                            headButton.setStyle("-fx-border-radius: 50; -fx-background-color: null");
+                            headButton.setOnAction((e) -> openIndividualStudent(student));
+                            Label lblContent = new Label(student.getFirstName() + student.getLastName());
+                            VBox vbox = new VBox();
+                            vbox.getChildren().add(headButton);
+                            vbox.getChildren().add(lblContent);
+
+                            tilePaneClass.getChildren().add(vbox);
+                        }
+                    }
+                }
+
+
             }
 
             tilePaneClass.setPrefTileHeight(110);
@@ -280,7 +331,7 @@ public class TeacherHomepageViewController implements Initializable {
         listOfSubmissions.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
-                takingActionOnSubmission(listOfSubmissions.getSelectionModel().getSelectedItem());
+                acceptDeclineHbox.setVisible(true);
             }
         });
 
@@ -290,6 +341,7 @@ public class TeacherHomepageViewController implements Initializable {
 
     }
 
+    /**
     public void takingActionOnSubmission(Attendance attendanceSelected){
 
             Label selectionNumber = new Label("Selection  ");
@@ -298,7 +350,7 @@ public class TeacherHomepageViewController implements Initializable {
             Button declineBtn = new Button("Decline");
             Button submitBtn = new Button("Submit");
             acceptBtn.setOnAction(e -> {
-                acceptSubmission(listOfSubmissions.getSelectionModel().getSelectedItem());
+                acceptSubmission(listOfSubmissions.getSelectionModel().getSelectedItems());
             });
             buttonsContainer.getChildren().add(selectionNumber);
             buttonsContainer.getChildren().add(acceptBtn);
@@ -307,11 +359,42 @@ public class TeacherHomepageViewController implements Initializable {
             activeSubmissions.getChildren().add(buttonsContainer);
 
     }
-    public void acceptSubmission(Attendance attendance){
-        attendanceModel.confirmAttendance(attendance);
-    }
+     */
 
     public void declineSubmission(int attendanceId){
 
+    }
+
+    public void backToLogin(ActionEvent actionEvent) {
+        Stage LoginView = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AttendanceProject/Gui/Views/LoginView.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+            LoginView.setTitle("Attendance Checker");
+            LoginView.setScene(new Scene(root));
+            LoginView.setResizable(false);
+            LoginView.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        closeButtonAction();
+    }
+
+
+    @FXML
+    private void closeButtonAction(){
+        Stage stage = (Stage) backToLogin.getScene().getWindow();
+        stage.close();
+    }
+
+    public void acceptSubmission(ActionEvent actionEvent) {
+        for (Attendance att: listOfSubmissions.getSelectionModel().getSelectedItems()) {
+            System.out.println(listOfSubmissions.getSelectionModel().getSelectedItems());
+            attendanceModel.confirmAttendance(att);
+        }
+    }
+
+    public void declineSubmission(ActionEvent actionEvent) {
     }
 }
