@@ -5,7 +5,6 @@ import AttendanceProject.Be.CalendarButton;
 import AttendanceProject.Be.Student;
 import AttendanceProject.Bll.CalendarManager;
 import AttendanceProject.Gui.Models.AttendanceModel;
-import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 import java.time.DayOfWeek;
@@ -25,7 +23,7 @@ import java.util.*;
 
 public class IndividualStudentController {
 
-    /**Retrives the CalenderManager Class.*/
+    /**Retrieves the CalenderManager Class.*/
     CalendarManager calendarManager = new CalendarManager();
 
     /**Imports all the @FXML data needed from the fxml file.*/

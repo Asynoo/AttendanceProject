@@ -89,7 +89,7 @@ public class StudentHomepageViewController {
         }
         else {
             for (Attendance a:attendanceModel.getAttendanceList()) {
-                if(a.getDate().isEqual(today)){
+                if(a.getDate().isEqual(today) && a.getStudentId() == user.getId()){
                     a.setPresent(true);
                     attendanceModel.editAttendance(a);
                 }
@@ -105,11 +105,10 @@ public class StudentHomepageViewController {
     private void isNotAttendingAction() {
         if (!attendanceSet) {
             attendanceModel.addAttendance(new Attendance(today,null,user.getId(),false,false));
-
         }
         else {
             for (Attendance a:attendanceModel.getAttendanceList()) {
-                if(a.getDate().isEqual(today)){
+                if(a.getDate().isEqual(today) && a.getStudentId() == user.getId()){
                     a.setPresent(false);
                     attendanceModel.editAttendance(a);
                 }
@@ -302,6 +301,7 @@ public class StudentHomepageViewController {
         for (ArrayList<CalendarButton> rowList:columnList) {
             for (CalendarButton calendarButton:rowList) {
                 calendarButton.setAttendance(null);
+                calendarButton.setOnAction(null);
             }
         }
     }

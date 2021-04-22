@@ -246,8 +246,6 @@ public class TeacherHomepageViewController implements Initializable {
 
     public void openIndividualStudent(Student student) {
 
-        //Student student = studentModel.getStudentList().get(1);
-
         Stage IndividualStudentStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudent.fxml"));
         Parent root = null;
