@@ -3,10 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,6 +12,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AttendanceProject.Gui.Controllers.TeacherHomepageViewController">
@@ -45,11 +46,24 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="69.0" prefWidth="236.0">
                      <children>
-                        <ChoiceBox fx:id="classChoiceBox">
-                           <effect>
-                              <Glow />
-                           </effect>
-                        </ChoiceBox>
+                        <JFXButton fx:id="backToLogin" buttonType="RAISED" onAction="#backToLogin" style="-fx-background-color: #f7a4a1;" text="Back to Login">
+                           <ripplerFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.9700000286102295" green="0.6450499892234802" blue="0.6305000185966492" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.9686274528503418" green="0.6431372761726379" blue="0.6313725709915161" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </ripplerFill>
+                        </JFXButton>
                      </children>
                   </HBox>
                   <HBox>
@@ -148,7 +162,55 @@
                               <Insets bottom="15.0" left="20.0" right="15.0" top="15.0" />
                            </padding>
                         </ScrollPane>
-                        <VBox fx:id="activeSubmissions" prefHeight="200.0" prefWidth="100.0" />
+                        <VBox fx:id="activeSubmissions" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <HBox fx:id="acceptDeclineHbox" alignment="TOP_CENTER" prefHeight="30.0" prefWidth="332.0" visible="false">
+                                 <children>
+                                    <JFXButton fx:id="acceptSubmissionBtn" onAction="#acceptSubmission" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #8fffa7#8fffa7; -fx-background-radius: 10;" text="Accept">
+                                       <ripplerFill>
+                                          <LinearGradient endX="1.0" endY="0.9952038369304557">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="0.9700000286102295" green="0.6450499892234802" blue="0.6305000185966492" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="0.5607843399047852" green="1.0" blue="0.6549019813537598" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </ripplerFill>
+                                    </JFXButton>
+                                    <JFXButton fx:id="declineSubmissionBtn" onAction="#declineSubmission" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ff5b5b#ff5b5b; -fx-background-radius: 10;" text="Decline">
+                                       <ripplerFill>
+                                          <LinearGradient endX="1.0" endY="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color red="0.9700000286102295" green="0.6450499892234802" blue="0.6305000185966492" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="1.0" green="0.35686275362968445" blue="0.35686275362968445" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </ripplerFill>
+                                       <HBox.margin>
+                                          <Insets left="30.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children></VBox>
                      </children>
                   </StackPane>
                </children>
