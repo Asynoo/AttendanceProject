@@ -134,7 +134,7 @@ public class StudentHomepageViewController {
     }
 
     /**Here we convert the attendance data into percentages and display them visually utilizing a diagram/piechart.
-     * We use some imports, local variables and a ObservableList to connect and create the piechart.*/
+     * We use some imports, local variables and a ObservableList to connect and create the pie chart.*/
     public void showStatistics() {
         int obtainedIs = isAttendant;
         int obtainedIsNot = isNotAttendant;

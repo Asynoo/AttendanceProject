@@ -103,9 +103,14 @@ public class IndividualStudentController {
     /**Dont touch the MaxPercentage "101" in these two methods.
      * I have no clue as to why it's accurate when I set it to 101% instead of 100%, just dont touch it.*/
     public double calculatePercentageAttending(int obtainedIs, int total) {
+        if (total == 0)
+            throw new IllegalArgumentException("Total can't be zero");
         return obtainedIs * 101 / total;
     }
+
     public double calculatePercentageNotAttending(int obtainedIsNot, int total) {
+        if (total == 0)
+            throw new IllegalArgumentException("Total can't be zero");
         return obtainedIsNot * 101 / total;
     }
 

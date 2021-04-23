@@ -37,7 +37,7 @@
             <Insets top="20.0" />
          </VBox.margin>
       </BorderPane>
-      <HBox prefHeight="360.0" prefWidth="600.0">
+      <HBox prefHeight="360.0" prefWidth="691.0">
          <opaqueInsets>
             <Insets top="30.0" />
          </opaqueInsets>
@@ -138,7 +138,7 @@
                <children>
                   <BorderPane prefHeight="60.0" prefWidth="382.0">
                      <center>
-                        <Label fx:id="paneDescription" prefHeight="23.0" prefWidth="136.0" text="Class summary" textFill="#4390ff" BorderPane.alignment="CENTER">
+                        <Label fx:id="paneDescription" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="323.0" text="Class summary" textAlignment="CENTER" textFill="#4390ff" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>

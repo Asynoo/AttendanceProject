@@ -38,6 +38,7 @@ public class CalendarManager {
     public void cycleDayUp() {
         calendar = calendar.plusDays(1);
     }
+
     public void cycleDayDown(){
         calendar = calendar.minusDays(1);
     }
