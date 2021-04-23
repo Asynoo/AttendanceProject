@@ -44,4 +44,6 @@ public class AttendanceModel {
     }
 
     public void confirmAttendance(Attendance attendance){attendanceManager.confirmAttendance(attendance);}
+
+    public void cancelSubmission(Attendance attendance){attendanceManager.cancelSubmission(attendance);}
 }
