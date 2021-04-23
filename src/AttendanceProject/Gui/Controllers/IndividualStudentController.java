@@ -156,7 +156,7 @@ public class IndividualStudentController {
             for (CalendarButton calendarButton:rowList) {
                 //Filling the button with relevant Data
                 for (Attendance a:attendanceModel.getStudentAttendances(student)) {
-                    if(a.getDate().atStartOfDay().isEqual(calendarManager.getLocalDate().atStartOfDay())) {
+                    if(a.getDate().isEqual(calendarManager.getLocalDate())) {
                         calendarButton.setAttendance(a);
                     }
                 }
@@ -238,7 +238,7 @@ public class IndividualStudentController {
                 }
             }
         }
-        //This is super yucky but it works
+        //This is super stinky but it works, a TreeMultimap() from Guava would be better, or maybe a different solution
         absentWeekdays.put(monday,new TreeSet<>());
         absentWeekdays.get(monday).add(DayOfWeek.MONDAY);
         if(!absentWeekdays.containsKey(tuesday)) absentWeekdays.put(tuesday,new TreeSet<>());

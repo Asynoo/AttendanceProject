@@ -1,4 +1,4 @@
-package attendanceTest;
+package AttendanceProject.Bll;
 
 import AttendanceProject.Gui.Controllers.IndividualStudentController;
 import org.junit.jupiter.api.Assertions;
