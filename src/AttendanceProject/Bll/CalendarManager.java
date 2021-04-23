@@ -33,11 +33,13 @@ public class CalendarManager {
     public void dateToFirstWeekMonthDay(){
         calendar = calendar.minusDays(getCurrentDay());
         calendar = calendar.minusDays(getCurrentWeekday().getValue()-1);
+        System.out.println(calendar);
     }
 
     public void cycleDayUp() {
         calendar = calendar.plusDays(1);
     }
+
     public void cycleDayDown(){
         calendar = calendar.minusDays(1);
     }
@@ -55,5 +57,10 @@ public class CalendarManager {
 
     public LocalDate getLocalDate(){
         return calendar;
+    }
+
+    //Only used for testing
+    public void setLocalDate(LocalDate localDate){
+        calendar = localDate;
     }
 }

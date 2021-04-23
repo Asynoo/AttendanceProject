@@ -2,8 +2,6 @@ package AttendanceProject.Be;
 
 import com.jfoenix.controls.JFXButton;
 
-import java.time.LocalDate;
-
 public class CalendarButton extends JFXButton {
     Attendance attendance;
 

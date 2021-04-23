@@ -103,9 +103,14 @@ public class IndividualStudentController {
     /**Dont touch the MaxPercentage "101" in these two methods.
      * I have no clue as to why it's accurate when I set it to 101% instead of 100%, just dont touch it.*/
     public double calculatePercentageAttending(int obtainedIs, int total) {
+        if (total == 0)
+            throw new IllegalArgumentException("Total can't be zero");
         return obtainedIs * 101 / total;
     }
+
     public double calculatePercentageNotAttending(int obtainedIsNot, int total) {
+        if (total == 0)
+            throw new IllegalArgumentException("Total can't be zero");
         return obtainedIsNot * 101 / total;
     }
 
@@ -151,7 +156,7 @@ public class IndividualStudentController {
             for (CalendarButton calendarButton:rowList) {
                 //Filling the button with relevant Data
                 for (Attendance a:attendanceModel.getStudentAttendances(student)) {
-                    if(a.getDate().atStartOfDay().isEqual(calendarManager.getLocalDate().atStartOfDay())) {
+                    if(a.getDate().isEqual(calendarManager.getLocalDate())) {
                         calendarButton.setAttendance(a);
                     }
                 }
@@ -233,7 +238,7 @@ public class IndividualStudentController {
                 }
             }
         }
-        //This is super yucky but it works
+        //This is super stinky but it works, a TreeMultimap() from Guava would be better, or maybe a different solution
         absentWeekdays.put(monday,new TreeSet<>());
         absentWeekdays.get(monday).add(DayOfWeek.MONDAY);
         if(!absentWeekdays.containsKey(tuesday)) absentWeekdays.put(tuesday,new TreeSet<>());
