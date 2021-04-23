@@ -85,7 +85,6 @@ public class LoginViewController{
         Parent root = loader.load();
         ((TeacherHomepageViewController)loader.getController()).setStudentModel(studentModel);
         ((TeacherHomepageViewController)loader.getController()).setAttendanceModel(attendanceModel);
-        ((TeacherHomepageViewController)loader.getController()).setStudyClassModel(studyClassModel);
 
         ((TeacherHomepageViewController)loader.getController()).setUser(teacher);
         HomepageViewStage.setTitle(teacher.getFirstName() + " " + teacher.getLastName());
