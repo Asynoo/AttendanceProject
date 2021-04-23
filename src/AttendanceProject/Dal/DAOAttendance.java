@@ -12,4 +12,6 @@ public interface DAOAttendance {
     void editAttendance(Attendance attendance);
 
     void confirmEditAttendance(Attendance attendance);
+
+    void cancelSubmission(Attendance attendance);
 }

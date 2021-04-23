@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -265,7 +266,7 @@ public class TeacherHomepageViewController implements Initializable {
         scrollStudentSummary.setContent(individualStudentTiles);
         scrollStudentSummary.setPannable(false);
 
-        studentModel.getStudentList();
+        List<Student> sortedList = sortListStudents(studentModel.getStudentList());
         for(Student student: studentModel.getStudentList()){
             System.out.println(student.getFirstName());
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudentSummary.fxml"));
@@ -280,19 +281,20 @@ public class TeacherHomepageViewController implements Initializable {
             }
             individualStudentTiles.getChildren().add(hb);
         }
+    }
 
-        /**
-        for (int i = 0; i <numberOfStudents ; i++) {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudentSummary.fxml"));
-            HBox hb = null;
-            try {
-                hb = loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            individualStudentTiles.getChildren().add(hb);
+    private List<Student> sortListStudents(List<Student> unsortedList) {
+
+        List<Student> descendingOrder = new ArrayList<>();
+
+        int maxValue = 0;
+        int attending = 0;
+        int notAttending = 0;
+
+        for (Student student: unsortedList) {
+
         }
-         */
+        return descendingOrder;
     }
 
     public void openIndividualStudent(Student student) {
@@ -339,30 +341,6 @@ public class TeacherHomepageViewController implements Initializable {
 
     }
 
-    /**
-    public void takingActionOnSubmission(Attendance attendanceSelected){
-
-            Label selectionNumber = new Label("Selection  ");
-            HBox buttonsContainer = new HBox();
-            Button acceptBtn = new Button("Accept");
-            Button declineBtn = new Button("Decline");
-            Button submitBtn = new Button("Submit");
-            acceptBtn.setOnAction(e -> {
-                acceptSubmission(listOfSubmissions.getSelectionModel().getSelectedItems());
-            });
-            buttonsContainer.getChildren().add(selectionNumber);
-            buttonsContainer.getChildren().add(acceptBtn);
-            buttonsContainer.getChildren().add(declineBtn);
-            buttonsContainer.getChildren().add(submitBtn);
-            activeSubmissions.getChildren().add(buttonsContainer);
-
-    }
-     */
-
-    public void declineSubmission(int attendanceId){
-
-    }
-
     public void backToLogin(ActionEvent actionEvent) {
         Stage LoginView = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AttendanceProject/Gui/Views/LoginView.fxml"));
@@ -389,10 +367,14 @@ public class TeacherHomepageViewController implements Initializable {
     public void acceptSubmission(ActionEvent actionEvent) {
         for (Attendance att: listOfSubmissions.getSelectionModel().getSelectedItems()) {
             System.out.println(listOfSubmissions.getSelectionModel().getSelectedItems());
+            listOfSubmissions.getItems().remove(listOfSubmissions.getSelectionModel().getSelectedItem());
             attendanceModel.confirmAttendance(att);
         }
     }
 
     public void declineSubmission(ActionEvent actionEvent) {
+        attendanceModel.cancelSubmission(listOfSubmissions.getSelectionModel().getSelectedItem());
+        listOfSubmissions.getItems().remove(listOfSubmissions.getSelectionModel().getSelectedItem());
+
     }
 }
