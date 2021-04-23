@@ -94,24 +94,18 @@ public class IndividualStudentController {
         chartPane.setVisible(true);
         calendarPane.setVisible(false);
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                new PieChart.Data("Attending "+ this.calculatePercentageAttending(obtainedIs, total) +"%", isAttendant),
-                new PieChart.Data("Not Attending "+ this.calculatePercentageNotAttending(obtainedIsNot, total) +"%", isNotAttendant)
+                new PieChart.Data("Attending "+ this.calculatePercentage(obtainedIs, total) +"%", isAttendant),
+                new PieChart.Data("Not Attending "+ this.calculatePercentage(obtainedIsNot, total) +"%", isNotAttendant)
         );
         chart.setData(pieData);
     }
 
     /**Dont touch the MaxPercentage "101" in these two methods.
      * I have no clue as to why it's accurate when I set it to 101% instead of 100%, just dont touch it.*/
-    public double calculatePercentageAttending(int obtainedIs, int total) {
+    public double calculatePercentage(int count, int total) {
         if (total == 0)
             throw new IllegalArgumentException("Total can't be zero");
-        return obtainedIs * 101 / total;
-    }
-
-    public double calculatePercentageNotAttending(int obtainedIsNot, int total) {
-        if (total == 0)
-            throw new IllegalArgumentException("Total can't be zero");
-        return obtainedIsNot * 101 / total;
+        return count * 101 / total;
     }
 
     /**Opens up the Attendance history/the calender, and de-toggles the other panes.*/

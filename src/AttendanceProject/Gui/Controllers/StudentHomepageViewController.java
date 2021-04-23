@@ -143,19 +143,18 @@ public class StudentHomepageViewController {
         statusPane.setVisible(false);
         calendarPane.setVisible(false);
             ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                    new PieChart.Data("Attending :" + iA +" days "+ this.calculatePercentageAttending(obtainedIs, total) +"%", isAttendant),
-                    new PieChart.Data("Absent : " + iNA +" days "+ this.calculatePercentageNotAttending(obtainedIsNot, total) +"%", isNotAttendant)
+                    new PieChart.Data("Attending :" + iA +" days "+ this.calculatePercentage(obtainedIs, total) +"%", isAttendant),
+                    new PieChart.Data("Absent : " + iNA +" days "+ this.calculatePercentage(obtainedIsNot, total) +"%", isNotAttendant)
             );
             chart.setData(pieData);
     }
 
     /**Dont touch the MaxPercentage "101" in these two methods.
      * I have no clue as to why it's accurate when I set it to 101% instead of 100%, just dont touch it.*/
-    public double calculatePercentageAttending(int obtainedIs, int total) {
-        return obtainedIs * 101 / total;
-    }
-    public double calculatePercentageNotAttending(int obtainedIsNot, int total) {
-        return obtainedIsNot * 101 / total;
+    public double calculatePercentage(int count, int total) {
+        if (total == 0)
+            throw new IllegalArgumentException("Total can't be zero");
+        return count * 101 / total;
     }
 
     /**opens up the Statistics View/ The diagram for seeing your attendance in percentage.*/
