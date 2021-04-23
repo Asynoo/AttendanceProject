@@ -3,6 +3,7 @@ package AttendanceProject.Gui.Controllers;
 import AttendanceProject.Be.Attendance;
 import AttendanceProject.Be.Student;
 import AttendanceProject.Be.Teacher;
+import AttendanceProject.Bll.SortByAbsence;
 import AttendanceProject.Gui.Models.AttendanceModel;
 import AttendanceProject.Gui.Models.StudentModel;
 import AttendanceProject.Gui.Models.StudyClassModel;
@@ -28,10 +29,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TeacherHomepageViewController implements Initializable {
     public Label testLabel;
@@ -266,8 +264,9 @@ public class TeacherHomepageViewController implements Initializable {
         scrollStudentSummary.setContent(individualStudentTiles);
         scrollStudentSummary.setPannable(false);
 
-        List<Student> sortedList = sortListStudents(studentModel.getStudentList());
-        for(Student student: studentModel.getStudentList()){
+        List<Student> orderedList = studentModel.getStudentList();
+        Collections.sort(orderedList,new SortByAbsence());
+        for(Student student: orderedList){
             System.out.println(student.getFirstName());
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudentSummary.fxml"));
 
@@ -283,19 +282,6 @@ public class TeacherHomepageViewController implements Initializable {
         }
     }
 
-    private List<Student> sortListStudents(List<Student> unsortedList) {
-
-        List<Student> descendingOrder = new ArrayList<>();
-
-        int maxValue = 0;
-        int attending = 0;
-        int notAttending = 0;
-
-        for (Student student: unsortedList) {
-
-        }
-        return descendingOrder;
-    }
 
     public void openIndividualStudent(Student student) {
 
