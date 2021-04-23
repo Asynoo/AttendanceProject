@@ -29,7 +29,6 @@ public class DAOTeacherDB implements DAOTeacher{
                 String password = rs.getString("Password");
                 String credentials = rs.getString("Credentials");
                 Teacher teacher = new Teacher(id, firstName, lastName, username, password, credentials);
-                System.out.println("Fetched teacher id: " + id);
                 teachers.add(teacher);
             }
         } catch (SQLException ex) {

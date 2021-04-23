@@ -25,7 +25,6 @@ public class DAOAttendanceDB implements DAOAttendance{
                 boolean presence = rs.getBoolean("Presence");
                 boolean change = rs.getBoolean("Change");
                 Attendance attendance = new Attendance(date, id, studentId, presence, change);
-                System.out.println("Fetched attendance id: " + id);
                 attendances.add(attendance);
             }
         } catch (SQLException ex) {
@@ -85,9 +84,6 @@ public class DAOAttendanceDB implements DAOAttendance{
     }
 
     public void cancelSubmission(Attendance attendance) {
-
-        System.out.println(attendance.toString());
-
         try(Connection con = da.getConnection()){
             String sql = "UPDATE Attendance SET [StudentID] = ?, [Date] = ?, [Presence] = ?, [Change] = ?  WHERE Id = ?";
             PreparedStatement statement = con.prepareStatement(sql);

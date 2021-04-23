@@ -95,7 +95,6 @@ public class StudentHomepageViewController {
                 }
             }
         }
-        System.out.println("You have been submitted as Attending");
         updateAttendanceSet();
         calendarFillDates();
     }
@@ -114,7 +113,6 @@ public class StudentHomepageViewController {
                 }
             }
         }
-        System.out.println("You have been submitted as Not Attending");
         updateAttendanceSet();
         calendarFillDates();
     }
@@ -197,8 +195,7 @@ public class StudentHomepageViewController {
      * It also fills out the appropriate colors for each button depending on if you've been attending or not.
      * Its very visual so the user can easily navigate throughout the entire calender and get a easy overview.
      * It utilizes a ArrayList which is located in a for loop, which in turn uses a lot of if/else statements.
-     * In the method there is also the appropriate data and variables in the start.
-     * In the end there is a simple System.out.print for you to see how many days you have/have not been attending for the given month.*/
+     * In the method there is also the appropriate data and variables in the start.*/
     public void calendarFillDates(){
         displayedMonth = calendarManager.getCurrentMonth();
         calendarInfoLbl.setText(calendarManager.getCurrentMonthName()+ " " + calendarManager.getCurrentYear());
@@ -252,8 +249,7 @@ public class StudentHomepageViewController {
                 calendarManager.cycleDayUp();
             }
         }
-        System.out.println("Days Attending: "+isAttendant);
-        System.out.println("Days Not Attending: "+isNotAttendant);
+
     }
 
     /**This method enables the user to move forward onto the next month in the calender.*/

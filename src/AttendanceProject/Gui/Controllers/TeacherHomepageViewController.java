@@ -32,7 +32,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class TeacherHomepageViewController implements Initializable {
-    public Label testLabel;
+    @FXML
+    private Label testLabel;
     @FXML
     private HBox acceptDeclineHbox;
     @FXML
@@ -58,13 +59,13 @@ public class TeacherHomepageViewController implements Initializable {
     private final TilePane tilePaneClass = new TilePane();
     private final TilePane individualStudentTiles = new TilePane();
     private ListView<Attendance> listOfSubmissions;
+    private Teacher user;
 
 
     private StudentModel studentModel;
     private AttendanceModel attendanceModel;
     private StudyClassModel studyClassModel;
 
-    private Teacher user;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,13 +80,9 @@ public class TeacherHomepageViewController implements Initializable {
         this.studyClassModel = studyClassModel;
     }
 
-    public void setStudentModel(StudentModel studentModel) {
-        this.studentModel = studentModel;
-
-    }
+    public void setStudentModel(StudentModel studentModel) { this.studentModel = studentModel; }
 
     public void setAttendanceModel(AttendanceModel attendanceModel) {
-        System.out.println(attendanceModel);
         this.attendanceModel = attendanceModel;
         fillStudentsIndividually();
         fillSubmissions();
@@ -139,13 +136,9 @@ public class TeacherHomepageViewController implements Initializable {
 
     private List<Attendance> studentsAttendanceToday(){
         LocalDate todaysDate = LocalDate.now();
-        System.out.println(todaysDate);
-
         List<Attendance> studentStatusToday = new ArrayList<>();
-
         for (Attendance att: attendanceModel.getAttendanceList()){
             if (att.getDate().equals(todaysDate)){
-                System.out.println("Todays date added to the list");
                 studentStatusToday.add(att);
             }
         }
@@ -153,17 +146,11 @@ public class TeacherHomepageViewController implements Initializable {
     };
 
     private void fillStudentsClass() {
-
             studentModel.getStudentList();
-
             List<Attendance> listToCheck = studentsAttendanceToday();
-
-
             for (Student student: studentModel.getStudentList()) {
-
                 for(Attendance att: listToCheck){
                     if(att.getStudentId() == student.getId()){
-                        //System.out.println("student id   " +att.getStudentId()+ "is present   "+ att.isPresent() );
                         if(att.isPresent()){
                             ImageView imgView = new ImageView("images/facetry.png");
                             imgView.setFitHeight(75);
@@ -176,7 +163,6 @@ public class TeacherHomepageViewController implements Initializable {
                             VBox vbox = new VBox();
                             vbox.getChildren().add(headButton);
                             vbox.getChildren().add(lblContent);
-
                             tilePaneClass.getChildren().add(vbox);
                         }else if(!att.isPresent()){
                             ImageView imgView = new ImageView("images/faceRedtry.png");
@@ -195,66 +181,11 @@ public class TeacherHomepageViewController implements Initializable {
                         }
                     }
                 }
-
-
             }
-
             tilePaneClass.setPrefTileHeight(110);
             tilePaneClass.setPrefTileWidth(110);
             tilePaneClass.setPrefSize(351, 253);
-
-
-
-            /** Here is logic for adding students randomly with randomly assigned attendance resembled by different color of icon */
-
-//            for (int i = 0; i < numberOfStudents; i++) {
-//
-//                int tmp = (int) ( Math.random() * 2 + 1);
-//
-//                if (tmp == 1){
-//
-//                    ImageView imgView = new ImageView("images/facetry.png");
-//                    imgView.setFitHeight(75);
-//                    imgView.setFitWidth(75);
-//                    Label lblContent = new Label(attendanceManager.getAllStudents1().get(new Random().nextInt(10)).getName());
-//                    VBox vbox = new VBox();
-//                    vbox.getChildren().add(imgView);
-//                    vbox.getChildren().add(lblContent);
-//
-//                    tilePaneClass.getChildren().add(vbox);
-//
-//                }else {
-//
-//                    ImageView imgView = new ImageView("images/faceRedtry.png");
-//                    imgView.setFitHeight(75);
-//                    imgView.setFitWidth(75);
-//
-//                    Label lblContent = new Label(attendanceManager.getAllStudentsTwo().get(new Random().nextInt(9)).getName());
-//
-//                    VBox vbox = new VBox();
-//                    vbox.getChildren().add(imgView);
-//                    vbox.getChildren().add(lblContent);
-//
-//                    tilePaneClass.getChildren().add(vbox);
-//                    String random = "bruh";
-//                    imgView.setOnMouseClicked(e -> showInividualStudent(random));
-//
-//                }
-//
-//            }
             scrollClassAttendance.setContent(tilePaneClass);
-
-
-    }
-
-    private void showInividualStudent(String s){
-        System.out.println("called it");
-        scrollClassAttendance.setVisible(false);
-        scrollStudentSummary.setVisible(false);
-        testLabel.setVisible(true);
-        Label studentName = new Label(s);
-        activeSubmissions.getChildren().add(studentName);
-
     }
 
     private void fillStudentsIndividually() {
@@ -267,9 +198,7 @@ public class TeacherHomepageViewController implements Initializable {
         List<Student> orderedList = studentModel.getStudentList();
         Collections.sort(orderedList,new SortByAbsence());
         for(Student student: orderedList){
-            System.out.println(student.getFirstName());
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudentSummary.fxml"));
-
             HBox hb = null;
             try {
                 hb = loader.load();
@@ -282,9 +211,7 @@ public class TeacherHomepageViewController implements Initializable {
         }
     }
 
-
     public void openIndividualStudent(Student student) {
-
         Stage IndividualStudentStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AttendanceProject/Gui/Views/IndividualStudent.fxml"));
         Parent root = null;
@@ -305,14 +232,12 @@ public class TeacherHomepageViewController implements Initializable {
     public void fillSubmissions(){
         ObservableList<Attendance> pendingApproval;
         pendingApproval = FXCollections.observableArrayList();
-
         List<Attendance> listAttendance = attendanceModel.getAttendanceList();
         for (Attendance att: listAttendance) {
             if (att.hasChangeRequest()){
                 pendingApproval.add(att);
             }
         }
-
         listOfSubmissions = new ListView();
         listOfSubmissions.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
@@ -320,11 +245,9 @@ public class TeacherHomepageViewController implements Initializable {
                 acceptDeclineHbox.setVisible(true);
             }
         });
-
         listOfSubmissions.setItems(pendingApproval);
         listOfSubmissions.getSelectionModel().getSelectedItems();
         activeSubmissions.getChildren().add(listOfSubmissions);
-
     }
 
     public void backToLogin(ActionEvent actionEvent) {
@@ -352,7 +275,6 @@ public class TeacherHomepageViewController implements Initializable {
 
     public void acceptSubmission(ActionEvent actionEvent) {
         for (Attendance att: listOfSubmissions.getSelectionModel().getSelectedItems()) {
-            System.out.println(listOfSubmissions.getSelectionModel().getSelectedItems());
             listOfSubmissions.getItems().remove(listOfSubmissions.getSelectionModel().getSelectedItem());
             attendanceModel.confirmAttendance(att);
         }

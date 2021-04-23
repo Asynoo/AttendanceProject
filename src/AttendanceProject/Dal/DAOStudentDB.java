@@ -28,7 +28,6 @@ public class DAOStudentDB implements DAOStudent{
                 String password = rs.getString("Password");
                 int studyClassId = rs.getInt("ClassId");
                 Student student = new Student(id, firstName, lastName, username, password, id);
-                System.out.println("Fetched student id: " + id);
                 students.add(student);
             }
         } catch (SQLException ex) {
