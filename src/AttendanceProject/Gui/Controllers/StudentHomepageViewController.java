@@ -311,7 +311,12 @@ public class StudentHomepageViewController {
             calendarGrid.setDisable(true);
             calendarGrid.setOpacity(.3);
             changeBox.setVisible(true);
-            changeTitleLbl.setText("Change attendance to present?");
+            if(calendarButton.getAttendance().isPresent()) {
+                changeTitleLbl.setText("Change attendance to absent?");
+            }
+            else{
+                changeTitleLbl.setText("Change attendance to present?");
+            }
             changeDescLbl.setText("The request will be sent to your class teacher");
             submitBtn.setText("Submit");
             submitBtn.setOnAction(ae -> {
